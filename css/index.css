@@ -1,0 +1,51 @@
+html,body{
+    margin: 0;
+    padding:0;
+    text-decoration: none;
+    font-family: 'Segoe UI';
+}
+
+body{
+    align-items: center;
+    justify-content:center ;
+    background-color: rgb(200, 221, 150);
+}
+.container{
+    border: 1em solid rgb(43, 41, 68);
+    padding:3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    
+}
+input{
+    margin-bottom: 2em;
+    border: 0.1em solid rgb(43, 41, 68);
+
+}
+form{
+    width: 30%;
+    border: 0.7em solid rgb(24, 116, 119);
+    text-align: left;
+    padding-left: 1em;
+    background-color:blanchedalmond
+}
+
+.textfield{
+    width:60%;
+    height: 1.8em;
+    border-radius: 3%;
+}
+label,span{
+    font-weight: bold;
+}
+.button{
+    width: 27%;
+    height: 3.2em;
+    margin: 1em 0em 2em 9.3em;
+    border:hidden;
+    border-radius: 6%;
+    font-size: 1.2em;
+    background-color: rgb(235, 200, 1);
+}
