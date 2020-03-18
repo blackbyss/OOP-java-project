@@ -5,23 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>[Piletimüüja nimi]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="">
+
+    <!-- Main css -->
     <link rel="stylesheet" href="css\index.css">
 </head>
 
 <body>
-    
     <div class="container">
         
-        <form action="leht">
+        <form action="confirmation.html">
             <h1>OSTA PILET SIIT</h1>
 
             <label for="eesnimi">Eesnimi:</label><br>
-            <input type="text" id="eesnimi" name="eesnimi" class="textfield"><br>
+            <input type="text" id="eesnimi" name="eesnimi" class="textfield" required><br>
 
-            <label for="perekonnanimi">Perekonnanimi:</label><br>
+            <label for="perenimi">Perekonnanimi:</label><br>
             <input type="text" id="perenimi" name="perenimi"class="textfield"><br>
 
-            <label for="sugu">Sugu:</label><br>
+            <label for="mees">Sugu:</label><br>
 
             <span>Mees</span><input type="checkbox" id="mees" name="sugu" value="mees">
             <span>Naine</span><input type="checkbox" id="naine" name="sugu" value="naine"><br>
@@ -43,10 +46,10 @@
             <label for="indeks">Postiindeks:</label><br>
             <input type="text" id="indeks" name="indeks"class="textfield"><br>
 
-            <label for="kasEmail">Kas soovid saada piletit e-kirjana?</label><br>
+            <label for="yes-email">Kas soovid saada piletit e-kirjana?</label><br>
             <span>Soovin!</span><input type="checkbox" id="yes-email" name="yes-email" value="yes"><br>
 
-            <input type="submit" value="Osta pilet" id="submit-button" class="button"><br>
+            <input type="submit" value="Osta pilet" id="submit-button" class="button" ><br>
         </form>
     </div>
 </body>

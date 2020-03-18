@@ -3,39 +3,55 @@ html,body{
     padding:0;
     text-decoration: none;
     font-family: 'Segoe UI';
+    color: rgb(4, 32, 92);
+    
 }
 
 body{
+
     align-items: center;
     justify-content:center ;
-    background-color: rgb(200, 221, 150);
+    background-image: url("bgimage.jpg");
+    height: 100%;
+
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .container{
-    border: 1em solid rgb(43, 41, 68);
-    padding:3em;
+    
+    margin-top:2em;
+    margin-bottom: 2em;
+    width:90%;
+    max-width: 50em;
     display: flex;
     align-items: center;
     justify-content: center;
-    
-    
+
+
 }
 input{
-    margin-bottom: 2em;
-    border: 0.1em solid rgb(43, 41, 68);
+    margin-bottom: 1em;
+    border: 0.07em solid rgba(43, 41, 68,1);
 
 }
 form{
-    width: 30%;
-    border: 0.7em solid rgb(24, 116, 119);
+    width: inherit;
+    border: none;
+    border-radius: 3%;
     text-align: left;
     padding-left: 1em;
-    background-color:blanchedalmond
+    background-color:rgba(194, 187, 126, 0.363);
+    padding:3em;
+    
 }
 
 .textfield{
-    width:60%;
+    width:90%;
     height: 1.8em;
     border-radius: 3%;
+    
 }
 label,span{
     font-weight: bold;
@@ -48,4 +64,9 @@ label,span{
     border-radius: 6%;
     font-size: 1.2em;
     background-color: rgb(235, 200, 1);
+    
+}
+
+h1{
+    color: rgb(4, 34, 97);
 }
