@@ -14,8 +14,7 @@ public class Servlet1 extends HttpServlet {
         String asukoht = req.getParameter("maakond");
         String postiindeks = req.getParameter("indeks");
         String kasEmail = req.getParameter("yes-email");
-        System.out.println(eesnimi);
-        System.out.println(sugu);
         res.getWriter().println(eesnimi);
+        res.getWriter().println(sugu);
     }
 }

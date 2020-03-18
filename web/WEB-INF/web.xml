@@ -10,7 +10,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>1</servlet-name>
-        <url-pattern>/#</url-pattern>
+        <url-pattern>/leht</url-pattern>
     </servlet-mapping>
 </web-app>
 
