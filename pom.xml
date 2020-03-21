@@ -30,7 +30,6 @@
       <groupId>commons-httpclient</groupId>
       <artifactId>commons-httpclient</artifactId>
       <version>3.1</version>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -45,8 +44,27 @@
       <version>4.0.1</version>
       <scope>provided</scope>
     </dependency>
-  </dependencies>
+    <!-- https://mvnrepository.com/artifact/net.glxn/qrgen -->
+    <dependency>
+      <groupId>net.glxn</groupId>
+      <artifactId>qrgen</artifactId>
+      <version>1.4</version>
+    </dependency>
 
+    <!-- https://mvnrepository.com/artifact/com.google.zxing/javase -->
+    <dependency>
+      <groupId>com.google.zxing</groupId>
+      <artifactId>javase</artifactId>
+      <version>1.7</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.google.zxing/core -->
+    <dependency>
+      <groupId>com.google.zxing</groupId>
+      <artifactId>core</artifactId>
+      <version>1.7</version>
+    </dependency>
+
+  </dependencies>
   <build>
     <finalName>TicketServer</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
