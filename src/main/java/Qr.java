@@ -1,33 +1,17 @@
 import net.glxn.qrgen.QRCode;
 import net.glxn.qrgen.image.ImageType;
-
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Qr {
 
-    public static void qrGenereerija(List<String> infoList){
+    public static void qrGenereerija() throws Exception {
 
-        String pilet = infoList.toString();
-        ByteArrayOutputStream out = QRCode.from(pilet).to(ImageType.PNG).stream();
-        File fail = new File("pilet.png");
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(fail);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        String pilet = "Pileti info";//Pileti info
+        ByteArrayOutputStream out = QRCode.from(pilet).to(ImageType.PNG).stream();//Loob visuaalse QR koodi, peks .JPG töötama aga mul millegi pärast ei töödanud
+        File fail = new File("pilet.jpg");//Fail kuhu QR kood salvestatakse
+        FileOutputStream fos = new FileOutputStream(fail);
 
-        try {
-            fos.write(out.toByteArray());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            fos.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        fos.write(out.toByteArray());
+        fos.flush();
     }
 }
