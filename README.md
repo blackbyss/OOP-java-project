@@ -14,3 +14,5 @@ Current project plan:
   Open TicketProject as a Maven project in your IDE ----> Add Tomcat 9.0.33 as Configuration ----> Run
 
   In HTML form make sure to fill all fields before submit, the "required" tag only works with Chrome atm.
+
+  Use class-logic branch to test inheritance between classes.
