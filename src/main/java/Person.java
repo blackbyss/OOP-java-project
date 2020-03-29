@@ -1,39 +1,57 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Person {
-    private String eesnimi;
-    private String perenimi;
-    private String sugu;
-    private String email;
-    private long telefon;
-    private String aadress;
-    private String maakond;
-    private long indeks;
-    boolean yes_mail;
 
-    public Person(String eesnimi, String perenimi, String sugu, String email, long telefon, String aadress, String maakond, long indeks, boolean yes_mail) {
-        this.eesnimi = eesnimi;
-        this.perenimi = perenimi;
-        this.sugu = sugu;
+        private String name;
+        private String familyName;
+        private String gender;
+        private int age;
+        private String email;
+        private long phone;
+        private String address;
+        private String county;
+        private long index;
+        private List<String> history;
+
+
+    public Person(String name, String familyName, String gender, int age, String email, long phone, String address, String county, long index) {
+        this.name = name;
+        this.familyName = familyName;
+        this.gender = gender;
+        this.age = age;
         this.email = email;
-        this.telefon = telefon;
-        this.aadress = aadress;
-        this.maakond = maakond;
-        this.indeks = indeks;
-        this.yes_mail = yes_mail;
+        this.phone = phone;
+        this.address = address;
+        this.county = county;
+        this.index = index;
+        history = new ArrayList<String>();
     }
 
-    public String getEesnimi() {
-        return eesnimi;
+    public String getName() {
+        return name;
     }
 
-    public String getPerenimi() {
-        return perenimi;
+    public String getFamilyName() {
+        return familyName;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public long getTelefon() {
-        return telefon;
+    public long getPhone() {
+        return phone;
     }
+
+    public List<String> getHistory() {
+        return history;
+    }
+
+    public void addLog(String newLog){
+            history.add(newLog);
+        }
+
+
 }
+
