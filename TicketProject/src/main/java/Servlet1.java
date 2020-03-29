@@ -22,7 +22,7 @@ public class Servlet1 extends HttpServlet {
         if(kasEmail.equals("1")){
             kasMeil = true;
         }
-        Person person = new Person(eesnimi,perenimi,sugu,email,Long.parseLong(telefon),aadress,asukoht,Long.parseLong(postiindeks),kasMeil);
+        Person person = new Person(eesnimi,perenimi,"tuleb HTMLi muuta",20,email,Long.parseLong(telefon),aadress,asukoht,Long.parseLong(postiindeks));
 
         res.setContentType("text/html");
         PrintWriter out = res.getWriter();
