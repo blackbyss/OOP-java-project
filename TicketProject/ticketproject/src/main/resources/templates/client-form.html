@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>[Piletimüüja nimi]</title>
+    <link rel="stylesheet" href="../static/bootstrap.css" th:href="@{/bootstrap.css}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="../static/index.css" th:href="@{/index.css}">
+
+</head>
+
+<body>
+    <div class="container">
+        
+        <form action="#" th:action="@{/client-form}" th:object="${form}" method="post">
+            <h1>OSTA PILET SIIT</h1>
+
+            <label for="eesnimi">Eesnimi:</label><br>
+            <input type="text" th:field="*{name}" id="eesnimi" name="eesnimi" class="textfield"  required><br>
+
+            <label for="perenimi">Perekonnanimi:</label><br>
+            <input type="text" id="perenimi" name="perenimi"class="textfield" th:field="*{familyName}"><br>
+
+            <label for="mees">Sugu:</label><br>
+
+            <span>Mees</span><input type="checkbox" id="mees" name="sugu" value="mees">
+            <span>Naine</span><input type="checkbox" id="naine" name="sugu" value="naine"><br>
+        
+
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" class="textfield" th:field="*{email}"><br>
+
+            <label for="telefon">Telefon:</label><br>
+            <input type="text" id="telefon" name="telefon"class="textfield" th:field="*{phone}"><br>
+
+            <label for="aadress">Aadress:</label><br>
+            <input type="text" id="aadress" name="aadress"class="textfield" th:field="*{address}"><br>
+
+            <label for="Maakond">Maakond/Linn:</label><br>
+            <input type="text" id="maakond" name="maakond"class="textfield" th:field="*{county}"><br>
+            
+
+            <label for="indeks">Postiindeks:</label><br>
+            <input type="text" id="indeks" name="indeks"class="textfield" th:field="*{index}"><br>
+
+            <label for="yes-email">Kas soovid saada piletit e-kirjana?</label><br>
+            <span>Soovin!</span><input type="checkbox" id="yes-email" name="yes-email" value="yes"><br>
+
+            <input type="submit" value="Osta pilet" id="submit-button" class="button" ><br>
+        </form>
+    </div>
+</body>
+
+</html>
