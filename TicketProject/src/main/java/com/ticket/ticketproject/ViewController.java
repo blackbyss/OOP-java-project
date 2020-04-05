@@ -5,13 +5,28 @@ package com.ticket.ticketproject;
         import org.springframework.web.bind.annotation.GetMapping;
         import org.springframework.web.bind.annotation.ModelAttribute;
         import org.springframework.web.bind.annotation.PostMapping;
+        import org.springframework.web.bind.annotation.RequestMapping;
+
+
+        import java.util.Date;
+        import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
 public class ViewController {
 
+
+    @RequestMapping("/")
+            public String index(){
+        return "index";
+    }
+
+    AtomicInteger counter = new AtomicInteger(0);
+
     @GetMapping("/client-form")
     public String LoadForm(Model model) {
         model.addAttribute("form", new FormData());
+        model.addAttribute("datetime", new Date());
+        model.addAttribute("counter",counter.incrementAndGet());
         return "client-form";
     }
 

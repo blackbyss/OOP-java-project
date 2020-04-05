@@ -32,9 +32,10 @@ a{
 }
 
 a:hover 
-{   
-    background-color:rgb(36, 89, 138);
-     color:#00A0C6; 
-     text-decoration:none; 
+{
+    color: rgb(4, 32, 92);
+    background-color: #F4925A;
+     text-decoration:none;
      cursor:pointer;  
 }
+

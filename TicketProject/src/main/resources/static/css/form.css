@@ -11,16 +11,15 @@ body{
 
     align-items: center;
     justify-content:center ;
-    background-image: url("css/bgimage.jpg");
     height: 100%;
-
+    background-color: rgb(42, 36, 138);
     width: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 .container{
-    
+
     margin-top:2em;
     margin-bottom: 2em;
     width:90%;
@@ -34,6 +33,7 @@ body{
 input{
     margin-bottom: 1em;
     border: 0.07em solid rgba(43, 41, 68,1);
+    background-color:rgba(244, 147, 90, 0.5)
 
 }
 form{
@@ -41,8 +41,7 @@ form{
     border: none;
     border-radius: 3%;
     text-align: left;
-    padding-left: 1em;
-    background-color:rgba(194, 187, 126, 0.363);
+    background-color:white;
     padding:3em;
 
 }
@@ -53,9 +52,11 @@ form{
     border-radius: 3%;
     
 }
-label,span{
+label,span {
     font-weight: bold;
 }
+
+
 .button{
     width: 27%;
     height: 3.2em;
@@ -63,10 +64,17 @@ label,span{
     border:hidden;
     border-radius: 6%;
     font-size: 1.2em;
-    background-color: rgb(235, 200, 1);
-    
+    background-color: #F4925A;
 }
 
-h1{
+.button:hover{
+    color:white;
+    background-color:rgba(42, 36, 138, 1.0);
+    text-decoration:none;
+    cursor:pointer;
+}
+
+h1 {
     color: rgb(4, 34, 97);
+
 }
