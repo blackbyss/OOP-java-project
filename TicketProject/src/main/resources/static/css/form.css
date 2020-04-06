@@ -1,0 +1,80 @@
+html,body{
+    margin: 0;
+    padding:0;
+    text-decoration: none;
+    font-family: 'Segoe UI', serif;
+    color: rgb(4, 32, 92);
+    
+}
+
+body{
+
+    align-items: center;
+    justify-content:center ;
+    height: 100%;
+    background-color: rgb(42, 36, 138);
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container{
+
+    margin-top:2em;
+    margin-bottom: 2em;
+    width:90%;
+    max-width: 50em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+input{
+    margin-bottom: 1em;
+    border: 0.07em solid rgba(43, 41, 68,1);
+    background-color:rgba(244, 147, 90, 0.5)
+
+}
+form{
+    width: inherit;
+    border: none;
+    border-radius: 3%;
+    text-align: left;
+    background-color:white;
+    padding:3em;
+
+}
+
+.textfield{
+    width:90%;
+    height: 1.8em;
+    border-radius: 3%;
+    
+}
+label,span {
+    font-weight: bold;
+}
+
+
+.button{
+    width: 27%;
+    height: 3.2em;
+    margin: 1em 0em 2em 9.3em;
+    border:hidden;
+    border-radius: 6%;
+    font-size: 1.2em;
+    background-color: #F4925A;
+}
+
+.button:hover{
+    color:white;
+    background-color:rgba(42, 36, 138, 1.0);
+    text-decoration:none;
+    cursor:pointer;
+}
+
+h1 {
+    color: rgb(4, 34, 97);
+
+}

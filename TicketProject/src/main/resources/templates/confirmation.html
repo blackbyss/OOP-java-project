@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Thank you!</title>
+
+    <link rel="stylesheet" href="../static/bootstrap.css" th:href="@{/bootstrap.css}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="../static/css/confirmation.css" th:href="@{/css/confirmation.css}">
+</head>
+<body>
+    <div class="container">
+        <h1>Aitäh, et kasutasite meie piletiteenust!</h1>
+        <h3 th:text="'Kiri saadeti aadressile: '+${form.email}" >Kiri saadeti aadressile: replacethis@gmail.com</h3>
+        <a href="client-form.html" th:href="@{/}">Tagasi</a>
+    </div>
+</body>
+</html>
