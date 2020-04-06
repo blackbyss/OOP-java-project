@@ -1,24 +1,25 @@
 package com.ticket.ticketproject.Classes;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfStamper;
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.graphics.xobject.PDPixelMap;
 import org.apache.pdfbox.pdmodel.graphics.xobject.PDXObjectImage;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import com.itextpdf.text.pdf.BaseFont;
-import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfStamper;
+
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 class pdfloomine {
-    public static void pildigaPdf() throws IOException, COSVisitorException {
+    public static void pildigaPdf(long piletikood) throws IOException, COSVisitorException {
 
         PDDocument pilet = null;
         try {
@@ -26,12 +27,12 @@ class pdfloomine {
             PDPage lk = new PDPage();//loob lehekülje
             pilet.addPage(lk);//lisab dokumendile lehekkülje
             PDXObjectImage ximage = null;
-            BufferedImage awtImage = ImageIO.read(new File("pilet.jpg"));//QR  kood mida soovitakse lisada
+            BufferedImage awtImage = ImageIO.read(new File("pilet"+piletikood+".jpg"));//QR  kood mida soovitakse lisada
             ximage = new PDPixelMap(pilet, awtImage);//lisab failile QR koodi
             PDPageContentStream contentStream = new PDPageContentStream(pilet, lk);//lisab leheküljele QR koodi
             contentStream.drawXObject(ximage, 450, 600, ximage.getWidth() , ximage.getHeight());//qr koodi koordinaadid
             contentStream.close();
-            pilet.save("pilet.pdf");
+            pilet.save("pilet"+piletikood+".pdf");
         } finally {
             if (pilet != null) {
                 pilet.close();
@@ -39,9 +40,9 @@ class pdfloomine {
         }
     }
 
-    public static void tekst() throws Exception {
-        String algnePilet = "pilet.pdf"; // Fail millesse soovin teksti kirjutada
-        String tekstigaPilet = "pilet2.pdf"; // Uus fail, millesse tuleb lisatud tekst
+    public static void tekst(long piletikood) throws Exception {
+        String algnePilet = "pilet"+piletikood+".pdf"; // Fail millesse soovin teksti kirjutada
+        String tekstigaPilet = piletikood+".pdf"; // Uus fail, millesse tuleb lisatud tekst
 
         OutputStream fos = new FileOutputStream(new File(tekstigaPilet));
 
@@ -64,7 +65,7 @@ class pdfloomine {
                         BaseFont.CP1257,
                         BaseFont.EMBEDDED), 12); // Font-i suurus
         pdfContentByte.setTextMatrix(35, 675);
-        pdfContentByte.showText("Kuupäev: " + "kuupäev");//Pärast vaja muuta, sisestatud/tegelikeks andmeteks
+        pdfContentByte.showText("Kuupäev: " + "kuupäev");//TODO Pärast vaja muuta, sisestatud/tegelikeks andmeteks
         pdfContentByte.setTextMatrix(35, 650);
         pdfContentByte.showText("Ostja eesnimi: " + "eesnimi");
         pdfContentByte.setTextMatrix(35, 625);

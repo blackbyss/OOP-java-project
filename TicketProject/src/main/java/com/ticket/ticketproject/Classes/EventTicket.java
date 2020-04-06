@@ -2,12 +2,12 @@ package com.ticket.ticketproject.Classes;
 
 public class EventTicket extends Ticket  {
 
-    String ticketType; //seisukoht või istekoht
+    Enum ticketType; //seisukoht või istekoht
     String place; //loož, rida, koht
     Event event; //piletile vastav üritus
 
 
-    public EventTicket(String name, double price, String ticketType, Event event) {
+    public EventTicket(String name, double price, Enum ticketType, Event event) {
         super(name, price);
         this.ticketType = ticketType;
         this.event=event;
