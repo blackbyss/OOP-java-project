@@ -62,9 +62,11 @@ public class Client extends Person {
             addLog("Ostmine õnnestus: " + cartSum);
             return true;
         } else {
-            // Ei tohiks saada buyAll() peale üldse vajutada kui pole midagi cartis ma arvan
-            // Võin siia midagi lisada kui vaja.
-            addLog("Ostmine ebaõnnestus: Kontol pole piisavalt raha!");
+            if(cart.isEmpty())
+                addLog("Ostmine ebaõnnestus: Ostukäru on tühi!");
+            else {
+                addLog("Ostmine ebaõnnestus: Kontol pole piisavalt raha!");
+            }
             return false;
         }
     }
