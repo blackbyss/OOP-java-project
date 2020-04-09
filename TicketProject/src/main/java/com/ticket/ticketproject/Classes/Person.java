@@ -1,20 +1,24 @@
 package com.ticket.ticketproject.Classes;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Person {
 
-        private String name;
-        private String familyName;
-        private String gender;
-        private int age;
-        private String email;
-        private long phone;
-        private String address;
-        private String county;
-        private long index;
-        private List<String> history;
+
+    private String name;
+    private String familyName;
+    private String gender;
+    private int age;
+    private String email;
+    private long phone;
+    private String address;
+    private String county;
+    private long index;
+    private List<String> history;
 
 
     public Person(String name, String familyName, String gender, int age, String email, long phone, String address, String county, long index) {
@@ -50,10 +54,10 @@ public class Person {
         return history;
     }
 
-    public void addLog(String newLog){
-            history.add(newLog);
-        }
+    public void addLog(String newLog) {
+        history.add(newLog);
 
 
+    }
 }
 

@@ -18,17 +18,18 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 public class Email {
-    public static void Email() {
-        String to = "saaja@gmail.com";//Saaja meil
+    public static void email() {
+        String to = "are.mathias@gmail.com";//Saaja meil
 
-        String from = "saatja@gmail.com";//Saatja meil
+        String from = "piletikuller@gmail.com";//Saatja meil
 
-        final String username = "saatja@gmail.com";//Saatja meil
-        final String password = "parool";//Saatja parool
+        final String username = from;//Saatja meil
+        final String password = "saadauusp1let";//Saatja parool
 
         String host = "smtp.gmail.com";
 
         Properties props = new Properties();
+        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", host);

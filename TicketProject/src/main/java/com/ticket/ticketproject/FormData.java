@@ -1,8 +1,12 @@
 package com.ticket.ticketproject;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.concurrent.atomic.AtomicInteger;
-
+@Entity
 public class FormData {
+@Id
+    int id;
     private String name;
     private String familyName;
    // private String gender;
