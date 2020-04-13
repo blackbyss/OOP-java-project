@@ -10,13 +10,9 @@ public class Client extends Person {
     private double cartPrice;
     private List<Ticket>purchased; //FIXME: Ei tea veel kas läheb tarvis.
 
-    public Client(String eesnimi, String perenimi, String sugu, int vanus, String email, long telefon, String aadress, String maakond, long indeks, boolean yes_mail,double accountBalance) {
-        super(eesnimi, perenimi, sugu, vanus, email, telefon, aadress, maakond, indeks);
-        this.yes_mail = yes_mail;
-        this.accountBalance=accountBalance;
-        cart=new ArrayList<Ticket>();
-        purchased=new ArrayList<Ticket>();
-    }
+
+
+
     public void addToList(Ticket ticket) {
         cartPrice += ticket.getPrice();
         cart.add(ticket);
@@ -33,11 +29,11 @@ public class Client extends Person {
         if(accountBalance >= sum){
             accountBalance -= sum;
 
-            Owner thisOwner = ticket.getOwner();
+            Owner thisOwner = ticket.getOwner(); //FIXME: Lihtsalt ajutine asendus, et H2 tabelid luua.
             thisOwner.addToAccount(sum);
             thisOwner.addLog(getName()+" "+getFamilyName()+" ostis: " +ticket.getName()+ " hinna eest: "+sum);
 
-            purchased.add(ticket); //FIXME: Ei tea veel kas läheb tarvis.
+            purchased.add(ticket);
             addLog("Ostmine õnnestus: " +ticket.getName());
 
             return true;
@@ -48,7 +44,7 @@ public class Client extends Person {
         }
     }
 
-    public boolean buyAll(){   //TODO!: Cartist ostmine, carti täishinna arvutamine.
+    public boolean buyAll(){
         if (accountBalance >= cartPrice && !cart.isEmpty()) {
             Owner thisOwner = cart.get(0).getOwner();
             accountBalance -= cartPrice;
@@ -56,7 +52,7 @@ public class Client extends Person {
             StringBuilder cartSum = new StringBuilder();
             for (int i = 0; i < cart.size(); i++) {
                 cartSum.append(cart.get(i).getName()).append("\t");
-                purchased.add(cart.get(i)); //FIXME: Ei tea veel kas läheb tarvis.
+                purchased.add(cart.get(i));
             }
             thisOwner.addLog(getName() + " " + getFamilyName() + " ostis: " + cartSum + " hinna eest: " + cartPrice);
             addLog("Ostmine õnnestus: " + cartSum);

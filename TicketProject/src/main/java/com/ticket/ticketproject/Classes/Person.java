@@ -1,63 +1,113 @@
 package com.ticket.ticketproject.Classes;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Person {
 
-
+    //Variables
     private String name;
     private String familyName;
     private String gender;
     private int age;
     private String email;
-    private long phone;
+    private String iban;
     private String address;
     private String county;
     private long index;
-    private List<String> history;
+    private List<String> history = new ArrayList<String>();
 
 
-    public Person(String name, String familyName, String gender, int age, String email, long phone, String address, String county, long index) {
-        this.name = name;
-        this.familyName = familyName;
-        this.gender = gender;
-        this.age = age;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-        this.county = county;
-        this.index = index;
-        history = new ArrayList<String>();
+    //Methods
+    public void addLog(String newLog) {
+        history.add(newLog);
+
+
     }
 
+    //Getters and Setters
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getFamilyName() {
         return familyName;
     }
 
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     public String getEmail() {
         return email;
     }
 
-    public long getPhone() {
-        return phone;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getIban() {
+        return iban;
+    }
+
+    public void setIban(String iban) {
+        this.iban = iban;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCounty() {
+        return county;
+    }
+
+    public void setCounty(String county) {
+        this.county = county;
+    }
+
+    public long getIndex() {
+        return index;
+    }
+
+    public void setIndex(long index) {
+        this.index = index;
     }
 
     public List<String> getHistory() {
         return history;
     }
 
-    public void addLog(String newLog) {
-        history.add(newLog);
-
-
+    public void setHistory(List<String> history) {
+        this.history = history;
     }
+
+
+
 }
 

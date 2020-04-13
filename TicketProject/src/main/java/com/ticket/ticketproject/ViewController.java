@@ -32,6 +32,7 @@ public class ViewController {
 
     @PostMapping("/client-form")
     public String submitForm(@ModelAttribute("form") FormData form) {
+        form.setUser_type("client");
         return "confirmation";
     }
 }

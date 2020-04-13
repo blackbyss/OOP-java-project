@@ -2,10 +2,13 @@ package com.ticket.ticketproject;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.concurrent.atomic.AtomicInteger;
 @Entity
 public class FormData {
 @Id
+
     int id;
     private String name;
     private String familyName;
@@ -15,7 +18,18 @@ public class FormData {
     private String phone;
     private String address;
     private String county;
-    private String index;
+    private String user_type;
+    @Transient private String index;
+
+    public String getUser_type() {
+        return user_type;
+    }
+
+    public void setUser_type(String user_type) {
+        this.user_type = user_type;
+    }
+
+
 
 
 
