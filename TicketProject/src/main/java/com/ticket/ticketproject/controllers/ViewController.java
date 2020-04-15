@@ -1,7 +1,8 @@
-package com.ticket.controllers;
+package com.ticket.ticketproject.controllers;
 
-        import com.ticket.dataStorage.Client;
-        import com.ticket.dataStorage.FormData;
+
+        import com.ticket.ticketproject.dataStorage.Client;
+        import com.ticket.ticketproject.dataStorage.FormData;
         import org.springframework.stereotype.Controller;
         import org.springframework.ui.Model;
         import org.springframework.web.bind.annotation.*;

@@ -1,14 +1,15 @@
-package com.ticket.actions;
+package com.ticket.ticketproject.actions;
 
-import com.ticket.dataStorage.Storage;
+
+import com.ticket.ticketproject.dataStorage.Storage;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-@Repository
+
 public class DbaRequestHandler {
-    @PersistenceContext
+
     private EntityManager em;
 
     //Andmebaasi lisamine

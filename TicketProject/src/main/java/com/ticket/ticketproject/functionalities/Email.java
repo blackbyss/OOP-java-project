@@ -1,4 +1,4 @@
-package com.ticket.functionalities;
+package com.ticket.ticketproject.functionalities;
 
 import java.util.Properties;
 

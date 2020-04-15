@@ -1,4 +1,4 @@
-package com.ticket.dataStorage;
+package com.ticket.ticketproject.dataStorage;
 
 import javax.persistence.Entity;
 import javax.persistence.Transient;

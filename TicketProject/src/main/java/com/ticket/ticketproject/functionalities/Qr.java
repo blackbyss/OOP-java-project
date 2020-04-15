@@ -1,4 +1,4 @@
-package com.ticket.functionalities;
+package com.ticket.ticketproject.functionalities;
 
 import net.glxn.qrgen.QRCode;
 import net.glxn.qrgen.image.ImageType;

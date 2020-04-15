@@ -1,10 +1,10 @@
-package com.ticket.dataStorage;
+package com.ticket.ticketproject.dataStorage;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-public class Event implements Storage{
+public class Event implements  Storage{
 
     @Id
     @GeneratedValue

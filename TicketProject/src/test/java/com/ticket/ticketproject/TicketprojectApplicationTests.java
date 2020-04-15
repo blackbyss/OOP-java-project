@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
 @SpringBootTest
-@EnableJpaRepositories(basePackages = {"com.ticket.controllers", "com.ticket.dataStorage","com.ticket.functionalities"})
-@ComponentScan(basePackages = {"com.ticket.controllers", "com.ticket.dataStorage","com.ticket.functionalities"})
+@EnableJpaRepositories(basePackages = {"com.ticket.controllers", "com.ticket.dataStorage", "com.ticket.ticketproject.functionalities"})
+@ComponentScan(basePackages = {"com.ticket.controllers", "com.ticket.dataStorage", "com.ticket.ticketproject.functionalities"})
 class TicketprojectApplicationTests {
 
 	@Test

@@ -1,4 +1,4 @@
-package com.ticket.functionalities;
+package com.ticket.ticketproject.functionalities;
 
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfContentByte;

@@ -1,7 +1,8 @@
-package com.ticket.dataStorage;
+package com.ticket.ticketproject.dataStorage;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
@@ -106,5 +107,11 @@ public class FormData {
         this.index = index;
     }
 
+    public String getGender() {
+        return gender;
+    }
 
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 }

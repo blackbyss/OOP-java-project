@@ -1,7 +1,10 @@
-package com.ticket.controllers;
+package com.ticket.ticketproject.controllers;
 
-import com.ticket.dataStorage.Client;
 
+
+
+
+import com.ticket.ticketproject.dataStorage.Client;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableAutoConfiguration
 @RequestMapping("/client")
 public class TicketController {
+
 
 
 

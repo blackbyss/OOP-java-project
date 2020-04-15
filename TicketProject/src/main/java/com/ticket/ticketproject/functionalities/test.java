@@ -1,6 +1,5 @@
-package com.ticket.functionalities;
+package com.ticket.ticketproject.functionalities;
 
-import com.ticket.dataStorage.Email;
 
 public class test {
     public static void main(String[] args) {

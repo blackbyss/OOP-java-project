@@ -1,5 +1,4 @@
-package com.ticket.controllers;
-
+package com.ticket.ticketproject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

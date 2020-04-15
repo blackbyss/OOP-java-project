@@ -1,4 +1,4 @@
-package com.ticket.dataStorage;
+package com.ticket.ticketproject.dataStorage;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
