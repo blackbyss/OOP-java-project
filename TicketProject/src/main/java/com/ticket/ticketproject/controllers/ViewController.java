@@ -1,8 +1,10 @@
 package com.ticket.ticketproject.controllers;
 
 
+        import com.ticket.ticketproject.actions.ClientService;
         import com.ticket.ticketproject.dataStorage.Client;
         import com.ticket.ticketproject.dataStorage.FormData;
+        import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.stereotype.Controller;
         import org.springframework.ui.Model;
         import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,9 @@ package com.ticket.ticketproject.controllers;
 @Controller
 @SessionAttributes("client")
 public class ViewController {
+
+    @Autowired
+    ClientService service;
 
 @ModelAttribute("client")
 
@@ -45,13 +50,9 @@ public Client createClient(){
     public String submitForm(@ModelAttribute("client") Client client,@ModelAttribute("form") FormData form, HttpServletRequest req) {
         form.setUser_type("client");
         client = new Client(form.getName(),form.getFamilyName(),"mees",Integer.parseInt(form.getAge()),form.getEmail(),form.getIban(),form.getAddress(),form.getCounty(),Long.parseLong(form.getIndex()),form.isYes_mail(),1000);
-
+        service.saveThis(form);
         return "confirmation";
     }
-
-
-
-
 
 
 }
