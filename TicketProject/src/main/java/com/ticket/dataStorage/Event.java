@@ -4,7 +4,8 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-public class Event {
+public class Event implements Storage{
+
     @Id
     @GeneratedValue
     private long id;
@@ -23,9 +24,22 @@ public class Event {
    @Transient
    private Owner owner;
 
+
+    public Event(String name,String location, int capacity/*, Date aeg */, Owner owner) {
+        this.name=name;
+        this.location = location;
+        this.capacity = capacity;
+        // this.aeg = aeg;
+        this.owner = owner;
+    }
+    public Event(){
+
+    }
+
     public long getId() {
         return id;
     }
+
 
     public void setId(long id) {
         this.id = id;

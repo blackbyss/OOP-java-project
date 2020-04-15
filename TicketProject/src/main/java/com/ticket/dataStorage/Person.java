@@ -1,13 +1,24 @@
 package com.ticket.dataStorage;
 
 
-import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-public class Person {
+public class Person implements Storage{
+public Person(){}
+
+    public Person(String name, String familyName, String gender, int age, String email, String iban, String address, String county, long index) {
+        this.name = name;
+        this.familyName = familyName;
+        this.gender = gender;
+        this.age = age;
+        this.email = email;
+        this.iban = iban;
+        this.address = address;
+        this.county = county;
+        this.index = index;
+        history = new ArrayList<>();
+    }
 
     //Variables
     private String name;
@@ -110,7 +121,20 @@ public class Person {
         this.history = history;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", familyName='" + familyName + '\'' +
+                ", gender='" + gender + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                ", iban='" + iban + '\'' +
+                ", address='" + address + '\'' +
+                ", county='" + county + '\'' +
+                ", index=" + index +
+                ", history=" + history +
+                '}';
+    }
 }
 

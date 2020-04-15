@@ -14,7 +14,7 @@
 <body>
     <div class="container">
 
-        <form action="#" th:action="@{/client-form}" th:object="${form}" method="post">
+        <form action="#" th:action="@{/confirmed}" th:object="${form}" method="post">
             <div class ="formheader"><h1>OSTA PILET SIIT</h1></div>
 
             <label for="eesnimi">Eesnimi:</label><br>
@@ -22,6 +22,9 @@
 
             <label for="perenimi">Perekonnanimi:</label><br>
             <input type="text" id="perenimi" name="perenimi"class="textfield" th:field="*{familyName}"><br>
+
+            <label for="age">Vanus:</label><br>
+            <input type="text" id="age" name="age"class="textfield" th:field="*{age}"><br>
 
             <label for="mees">Sugu:</label><br>
 
@@ -32,8 +35,8 @@
             <label for="email">Email:</label><br>
             <input type="email" id="email" name="email" class="textfield" th:field="*{email}"><br>
 
-            <label for="telefon">Telefon:</label><br>
-            <input type="text" id="telefon" name="telefon"class="textfield" th:field="*{phone}"><br>
+            <label for="iban">IBAN kood:</label><br>
+            <input type="text" id="iban" name="iban"class="textfield" th:field="*{iban}"><br>
 
             <label for="aadress">Aadress:</label><br>
             <input type="text" id="aadress" name="aadress"class="textfield" th:field="*{address}"><br>
@@ -46,7 +49,7 @@
             <input type="text" id="indeks" name="indeks"class="textfield" th:field="*{index}"><br>
 
             <label for="yes-email">Kas soovid saada piletit e-kirjana?</label><br>
-            <span>Soovin!</span><input type="checkbox" id="yes-email" name="yes-email" value="yes"><br>
+            <span>Soovin!</span><input type="checkbox" id="yes-email" name="yes-email" value="yes" th:checked="*{yes_mail}"><br>
 
             <input type="submit" value="Osta pilet" id="submit-button" class="button" ><br>
 

@@ -1,16 +1,25 @@
 package com.ticket.controllers;
 
-import com.ticket.dataStorage.FormData;
+import com.ticket.dataStorage.Client;
+
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-
-
-import java.util.Date;
-import java.util.concurrent.atomic.AtomicInteger;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@EnableAutoConfiguration
+@RequestMapping("/client")
 public class TicketController {
+
+
+
+@GetMapping("/info")
+public String clientInfo(@SessionAttribute("client") Client client) {
+
+
+    return client.clientToString();
+}
 
 }

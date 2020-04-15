@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Transient;
 
 @Entity
-public class EventTicket extends Ticket {
+public class EventTicket extends Ticket implements Storage {
 
     Enum ticketType; //seisukoht või istekoht
     String place; //loož, rida, koht
@@ -14,13 +14,26 @@ public class EventTicket extends Ticket {
 
     @Transient
     Event event; //piletile vastav üritus
-    @Transient
-    Owner owner;
 
+
+
+
+    public EventTicket( double price, Event event) {
+        super(price);
+        this.event=event;
+    }
+
+    public EventTicket() {
+    }
+
+    @Override
+    public String getName() {
+        return event.getName();
+    }
 
     @Override
     public Owner getOwner() {
-        return owner;
+        return event.getOwner();
     }
 
     @Override

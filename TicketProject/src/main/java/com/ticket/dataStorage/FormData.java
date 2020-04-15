@@ -1,12 +1,8 @@
 package com.ticket.dataStorage;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.Transient;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Entity
 public class FormData {
@@ -15,12 +11,22 @@ public class FormData {
     int id;
     private String name;
     private String familyName;
-   // private String gender;
     private String age;
+    private String gender;
     private String email;
-    private String phone;
+    private String iban;
     private String address;
     private String county;
+    private boolean yes_mail;
+
+    public boolean isYes_mail() {
+        return yes_mail;
+    }
+
+    public void setYes_mail(boolean yes_mail) {
+        this.yes_mail = yes_mail;
+    }
+
     private String user_type;
     @Transient private String index;
 
@@ -68,12 +74,12 @@ public class FormData {
         this.email = email;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getIban() {
+        return iban;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setIban(String iban) {
+        this.iban = iban;
     }
 
     public String getAddress() {
@@ -99,4 +105,6 @@ public class FormData {
     public void setIndex(String index) {
         this.index = index;
     }
+
+
 }
