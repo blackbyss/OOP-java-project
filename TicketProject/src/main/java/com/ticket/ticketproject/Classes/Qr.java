@@ -10,7 +10,6 @@ public class Qr {
 
     public static ByteArrayOutputStream qrGenereerija(long piletiKood) throws IOException {
         String pilet = "Pileti info";//Pileti info
-        System.out.println(piletiKood);
         ByteArrayOutputStream out = QRCode.from(pilet).to(ImageType.JPG).stream();
         return out;
     }
