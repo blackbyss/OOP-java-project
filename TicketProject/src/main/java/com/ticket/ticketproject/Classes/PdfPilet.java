@@ -1,5 +1,6 @@
 package com.ticket.ticketproject.Classes;
 
+import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfReader;
@@ -13,13 +14,25 @@ import org.apache.pdfbox.pdmodel.graphics.xobject.PDXObjectImage;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 
-class pdfloomine {
-    public static void pildigaPdf(long piletikood) throws IOException, COSVisitorException {
+public class PdfPilet {
+    static BufferedImage bImg(long piletikood) {
+        try {
+            ByteArrayOutputStream os = Qr.qrGenereerija(piletikood);
+            InputStream in = new ByteArrayInputStream(os.toByteArray());
+            BufferedImage bImage = ImageIO.read(in);
+            in.close();
+            os.close();
+            return bImage;
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public static void pildigaPdf(long piletikood) throws IOException, COSVisitorException, DocumentException {
 
         PDDocument pilet = null;
         try {
@@ -27,12 +40,12 @@ class pdfloomine {
             PDPage lk = new PDPage();//loob lehekülje
             pilet.addPage(lk);//lisab dokumendile lehekkülje
             PDXObjectImage ximage = null;
-            BufferedImage awtImage = ImageIO.read(new File("pilet"+piletikood+".jpg"));//QR  kood mida soovitakse lisada
+            BufferedImage awtImage = bImg(piletikood);//QR  kood mida soovitakse lisada
             ximage = new PDPixelMap(pilet, awtImage);//lisab failile QR koodi
             PDPageContentStream contentStream = new PDPageContentStream(pilet, lk);//lisab leheküljele QR koodi
-            contentStream.drawXObject(ximage, 450, 600, ximage.getWidth() , ximage.getHeight());//qr koodi koordinaadid
+            contentStream.drawXObject(ximage, 450, 600, ximage.getWidth(), ximage.getHeight());//qr koodi koordinaadid
             contentStream.close();
-            pilet.save("pilet"+piletikood+".pdf");
+            pilet.save("pilet" + piletikood + ".pdf");
         } finally {
             if (pilet != null) {
                 pilet.close();
@@ -41,8 +54,9 @@ class pdfloomine {
     }
 
     public static void tekst(long piletikood) throws Exception {
-        String algnePilet = "pilet"+piletikood+".pdf"; // Fail millesse soovin teksti kirjutada
-        String tekstigaPilet = piletikood+".pdf"; // Uus fail, millesse tuleb lisatud tekst
+        pildigaPdf(piletikood);
+        String algnePilet = "pilet" + piletikood + ".pdf"; // Fail millesse soovin teksti kirjutada
+        String tekstigaPilet = piletikood + ".pdf"; // Uus fail, millesse tuleb lisatud tekst
 
         OutputStream fos = new FileOutputStream(new File(tekstigaPilet));
 
@@ -72,9 +86,17 @@ class pdfloomine {
         pdfContentByte.showText("Ostja perekonnanimi: " + "perekonnanimi");
         pdfContentByte.setTextMatrix(35, 600);
         pdfContentByte.showText("Lähtekoht: " + "lähtekoht" + " -> Sihtkoht: " + "sihtkoht");
+        pdfContentByte.setCMYKColorStroke(0, 17, 32, 0);
+        pdfContentByte.moveTo(10,690);
+        pdfContentByte.lineTo(450,690);
+        pdfContentByte.stroke();
+
 
         pdfContentByte.endText();
 
         pdfStamper.close();
+    }
+    public static void main(String[] args) throws Exception {//testimiseks
+        tekst(9999999L);
     }
 }

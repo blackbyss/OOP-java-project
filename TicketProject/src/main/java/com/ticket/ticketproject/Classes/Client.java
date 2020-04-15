@@ -47,9 +47,9 @@ public class Client extends Person {
             return false;
         }
     }
-
+    static int eventMinAge = 13;
     public boolean buyAll(){   //TODO!: Cartist ostmine, carti täishinna arvutamine.
-        if (accountBalance >= cartPrice && !cart.isEmpty()) {
+        if (accountBalance >= cartPrice && !cart.isEmpty() && getAge() >= eventMinAge) {
             Owner thisOwner = cart.get(0).getOwner();
             accountBalance -= cartPrice;
             thisOwner.addToAccount(cartPrice);

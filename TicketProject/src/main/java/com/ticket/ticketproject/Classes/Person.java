@@ -53,6 +53,7 @@ public class Person {
     public List<String> getHistory() {
         return history;
     }
+    public int getAge(){return age;}
 
     public void addLog(String newLog) {
         history.add(newLog);
