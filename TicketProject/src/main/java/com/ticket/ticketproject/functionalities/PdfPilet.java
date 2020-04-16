@@ -1,80 +1,61 @@
 package com.ticket.ticketproject.functionalities;
 
-import com.itextpdf.text.pdf.BaseFont;
-import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfStamper;
-import org.apache.pdfbox.exceptions.COSVisitorException;
+import java.io.File;
+
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.graphics.xobject.PDPixelMap;
-import org.apache.pdfbox.pdmodel.graphics.xobject.PDXObjectImage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+public class PdfPilet {
+    public static void pdf(long piletikood) throws Exception {
 
-class pdfloomine {
-    public static void pildigaPdf(long piletikood) throws IOException, COSVisitorException {
+        File file = new File("pilet"+piletikood+".pdf");
+        PDDocument doc = new PDDocument();
 
-        PDDocument pilet = null;
-        try {
-            pilet = new PDDocument();//loob dokumendi
-            PDPage lk = new PDPage();//loob lehekülje
-            pilet.addPage(lk);//lisab dokumendile lehekkülje
-            PDXObjectImage ximage = null;
-            BufferedImage awtImage = ImageIO.read(new File("pilet"+piletikood+".jpg"));//QR  kood mida soovitakse lisada
-            ximage = new PDPixelMap(pilet, awtImage);//lisab failile QR koodi
-            PDPageContentStream contentStream = new PDPageContentStream(pilet, lk);//lisab leheküljele QR koodi
-            contentStream.drawXObject(ximage, 450, 600, ximage.getWidth() , ximage.getHeight());//qr koodi koordinaadid
-            contentStream.close();
-            pilet.save("pilet"+piletikood+".pdf");
-        } finally {
-            if (pilet != null) {
-                pilet.close();
-            }
-        }
-    }
+        PDPage page = new PDPage();
+        doc.addPage(page);
+        page = doc.getPage(0);
 
-    public static void tekst(long piletikood) throws Exception {
-        String algnePilet = "pilet"+piletikood+".pdf"; // Fail millesse soovin teksti kirjutada
-        String tekstigaPilet = piletikood+".pdf"; // Uus fail, millesse tuleb lisatud tekst
+        PDImageXObject pdImage = PDImageXObject.createFromByteArray(doc, Qr.qrGenereerija(piletikood).toByteArray(),"pdftest.pdf");
 
-        OutputStream fos = new FileOutputStream(new File(tekstigaPilet));
+        PDPageContentStream contents = new PDPageContentStream(doc, page);
 
-        PdfReader pdfReader = new PdfReader(algnePilet);
-        PdfStamper pdfStamper = new PdfStamper(pdfReader, fos);
+        //Pildi ja teksti lisamine
+        contents.setLeading(25f);
+        contents.drawImage(pdImage, 450, 600);
+        contents.moveTo(35,690);
+        contents.lineTo(400,690);
+        contents.stroke();
+        contents.beginText();
+        contents.newLineAtOffset(35, 700);
+        contents.setFont(PDType1Font.TIMES_BOLD, 20);
+        contents.showText("Sõidupilet");
 
-        PdfContentByte pdfContentByte = pdfStamper.getOverContent(1);//lehekülje nr millele lisatakse muutused
+        contents.newLine();
+        contents.setFont(PDType1Font.TIMES_ROMAN, 14);
+        contents.showText("Kuupäev");
+        contents.newLine();
+        contents.showText("Pileti ID");
+        contents.newLine();
+        contents.showText("Ürituse nimi");
+        contents.newLine();
+        contents.showText("Pileti tüüp");
+        contents.newLine();
+        contents.showText("Pileti hind");
 
-        // Teksti lisamine
-        pdfContentByte.beginText();
-        pdfContentByte.setFontAndSize(BaseFont.createFont
-                (BaseFont.TIMES_BOLD, //Font
-                        BaseFont.CP1257,
-                        BaseFont.EMBEDDED), 20); // Font-i suurus
-        pdfContentByte.setTextMatrix(35, 700); // teksti asukoha x ja y koordinaadid
+        contents.newLineAtOffset(35, 700);
+        contents.setFont(PDType1Font.TIMES_ROMAN, 14);
+        contents.showText("Kuupäev");
 
-        pdfContentByte.showText("Sõidupilet"); // Soovitud teksti lisamine
-        pdfContentByte.setFontAndSize(BaseFont.createFont
-                (BaseFont.TIMES_ROMAN, //Font
-                        BaseFont.CP1257,
-                        BaseFont.EMBEDDED), 12); // Font-i suurus
-        pdfContentByte.setTextMatrix(35, 675);
-        pdfContentByte.showText("Kuupäev: " + "kuupäev");//TODO Pärast vaja muuta, sisestatud/tegelikeks andmeteks
-        pdfContentByte.setTextMatrix(35, 650);
-        pdfContentByte.showText("Ostja eesnimi: " + "eesnimi");
-        pdfContentByte.setTextMatrix(35, 625);
-        pdfContentByte.showText("Ostja perekonnanimi: " + "perekonnanimi");
-        pdfContentByte.setTextMatrix(35, 600);
-        pdfContentByte.showText("Lähtekoht: " + "lähtekoht" + " -> Sihtkoht: " + "sihtkoht");
+        contents.endText();
 
-        pdfContentByte.endText();
+        contents.close();
 
-        pdfStamper.close();
+        doc.save("pilet"+piletikood+".pdf");//Salvestab dokumendi
+
+        doc.close();//suleb dokumendi
+
     }
 }
