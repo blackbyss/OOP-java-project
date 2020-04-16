@@ -3,9 +3,14 @@ package com.ticket.ticketproject.dataStorage;
 
 import org.springframework.stereotype.Component;
 
+import javax.annotation.processing.Generated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
-@Component
+@MappedSuperclass
 public class Person implements Storage{
 public Person(){}
 
@@ -23,6 +28,9 @@ public Person(){}
     }
 
     //Variables
+    @Id
+    @GeneratedValue
+    private long id;
     private String name;
     private String familyName;
     private String gender;
@@ -32,6 +40,7 @@ public Person(){}
     private String address;
     private String county;
     private long index;
+    @Transient
     private List<String> history = new ArrayList<String>();
 
 

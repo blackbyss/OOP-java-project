@@ -1,13 +1,19 @@
 package com.ticket.ticketproject.dataStorage;
 
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Client extends Person {
+@Entity
+public class Client extends Person implements Storage {
     boolean yes_mail; //Kas soovib emailiga piletit?
     private double accountBalance; //Konto
+    @Transient
     private List<Ticket> cart; //Ostukorv
+    @Transient
     private List<Ticket>purchased; //FIXME: Ei tea veel kas läheb tarvis.
+    @Transient
     private double cartPrice;
 
     public Client(String eesnimi, String perenimi, String sugu, int vanus, String email, String iban, String aadress, String maakond, long indeks, boolean yes_mail,double accountBalance) {

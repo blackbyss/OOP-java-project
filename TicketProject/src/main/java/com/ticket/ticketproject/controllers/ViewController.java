@@ -37,8 +37,8 @@ public Client createClient(){
     AtomicInteger counter = new AtomicInteger(0);
 
 //Form
-    @RequestMapping(value="/client-form", method = RequestMethod.GET)
-    public String LoadForm(Model model, HttpSession session) {
+    @RequestMapping(value="/client-form/{eventID}", method = RequestMethod.GET)
+    public String LoadForm(Model model, HttpSession session, @PathVariable String eventID) {
         model.addAttribute("form", new FormData());
         model.addAttribute("datetime", new Date());
         model.addAttribute("counter",counter.incrementAndGet());
@@ -50,7 +50,7 @@ public Client createClient(){
     public String submitForm(@ModelAttribute("client") Client client,@ModelAttribute("form") FormData form, HttpServletRequest req) {
         form.setUser_type("client");
         client = new Client(form.getName(),form.getFamilyName(),"mees",Integer.parseInt(form.getAge()),form.getEmail(),form.getIban(),form.getAddress(),form.getCounty(),Long.parseLong(form.getIndex()),form.isYes_mail(),1000);
-        service.saveThis(form);
+        service.saveThis(client);
         return "confirmation";
     }
 

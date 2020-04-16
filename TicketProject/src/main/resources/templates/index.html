@@ -7,13 +7,15 @@
     <link rel="stylesheet" href="../static/bootstrap.css" th:href="@{/bootstrap.css}">
 
     <!-- Main css -->
-    <link rel="stylesheet" href="../static/css/confirmation.css" th:href="@{/css/confirmation.css}">
+    <link rel="stylesheet" href="../static/css/index.css" th:href="@{/css/index.css}">
 </head>
 <body>
 <div class="container">
     <h1>Valige pilet</h1>
-    <h3>Üritus #1</h3>
-    <a href="client-form.html" th:href="@{client-form}">Osta siit!</a>
+    <a href="client-form.html" class="selection"th:href="@{client-form/1}">Üritus 1</a>
+    <a href="client-form.html"class="selection"th:href="@{client-form/2}">Üritus 2</a>
+    <a href="client-form.html"class="selection"th:href="@{client-form/3}">Üritus 3</a>
+    <a href="client-form.html" class="selection" th:href="@{client-form/4}">Üritus 4</a>
 </div>
 </body>
 </html>
