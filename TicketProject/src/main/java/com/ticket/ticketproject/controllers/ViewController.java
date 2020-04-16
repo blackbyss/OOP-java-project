@@ -33,12 +33,17 @@ public Client createClient(){
             public String index(){
         return "index";
     }
+    @RequestMapping("/selection/{eventID}")
+     public String selectTicket(@PathVariable String eventID){
+
+    return "select-ticket";
+    }
 
     AtomicInteger counter = new AtomicInteger(0);
 
 //Form
-    @RequestMapping(value="/client-form/{eventID}", method = RequestMethod.GET)
-    public String LoadForm(Model model, HttpSession session, @PathVariable String eventID) {
+    @RequestMapping(value="client-form/{eventID}/{ticketType}", method = RequestMethod.GET)
+    public String LoadForm(Model model, HttpSession session, @PathVariable String eventID, @PathVariable String ticketType) {
         model.addAttribute("form", new FormData());
         model.addAttribute("datetime", new Date());
         model.addAttribute("counter",counter.incrementAndGet());
