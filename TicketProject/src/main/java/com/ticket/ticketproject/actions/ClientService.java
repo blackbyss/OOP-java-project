@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class ClientService {
     @Autowired ClientRepository repo;
 
-    public void saveThis(FormData fd){
-        repo.save(fd);
+    public void saveThis(Client client){
+        repo.save(client);
     }
 }

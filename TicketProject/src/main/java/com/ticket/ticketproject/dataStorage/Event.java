@@ -11,7 +11,7 @@ public class Event implements  Storage{
     private long id;
     private String name;
     private String location;
-    private LocalDate date;
+    private LocalDate happeningTime;
     private long capacity; // mitu inimest mahub kokku
     private int ageLimit;
     private long owner_id;
@@ -61,12 +61,12 @@ public class Event implements  Storage{
         this.location = location;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDate getHappeningTime() {
+        return happeningTime;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setHappeningTime(LocalDate happeningTime) {
+        this.happeningTime = happeningTime;
     }
 
     public long getCapacity() {

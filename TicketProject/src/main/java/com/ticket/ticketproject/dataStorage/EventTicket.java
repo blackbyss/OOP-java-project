@@ -6,11 +6,9 @@ import javax.persistence.Transient;
 @Entity
 public class EventTicket extends Ticket implements Storage {
 
-    Enum ticketType; //seisukoht või istekoht
+    long ticketType; //seisukoht või istekoht
     String place; //loož, rida, koht
-    long event_id;
-    String buyer;
-    long amount;
+    long eventID;
 
     @Transient
     Event event; //piletile vastav üritus
@@ -26,10 +24,6 @@ public class EventTicket extends Ticket implements Storage {
     public EventTicket() {
     }
 
-    @Override
-    public String getName() {
-        return event.getName();
-    }
 
     @Override
     public Owner getOwner() {
@@ -44,11 +38,11 @@ public class EventTicket extends Ticket implements Storage {
 
     //Getters and Setters
 
-    public Enum getTicketType() {
+    public long getTicketType() {
         return ticketType;
     }
 
-    public void setTicketType(Enum ticketType) {
+    public void setTicketType(long ticketType) {
         this.ticketType = ticketType;
     }
 
@@ -60,29 +54,14 @@ public class EventTicket extends Ticket implements Storage {
         this.place = place;
     }
 
-    public long getEvent_id() {
-        return event_id;
+    public long getEventID() {
+        return eventID;
     }
 
-    public void setEvent_id(long event_id) {
-        this.event_id = event_id;
+    public void setEventID(long eventID) {
+        this.eventID = eventID;
     }
 
-    public String getBuyer() {
-        return buyer;
-    }
-
-    public void setBuyer(String buyer) {
-        this.buyer = buyer;
-    }
-
-    public long getAmount() {
-        return amount;
-    }
-
-    public void setAmount(long amount) {
-        this.amount = amount;
-    }
 
     public Event getEvent() {
         return event;

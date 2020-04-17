@@ -6,6 +6,7 @@ package com.ticket.ticketproject.controllers;
 
 import com.ticket.ticketproject.actions.ClientRepository;
 import com.ticket.ticketproject.dataStorage.Client;
+import com.ticket.ticketproject.dataStorage.EventTicket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -23,7 +24,8 @@ import org.springframework.web.servlet.function.ServerResponse;
 public class TicketController {
 
 @GetMapping("/info")
-public String saveClient(@SessionAttribute("client") Client client) {
+public String saveClient(@SessionAttribute("client") Client client, @SessionAttribute("ticket")EventTicket ticket) {
+
     return client.clientToString();
 }
 

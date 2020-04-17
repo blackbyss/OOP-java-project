@@ -11,11 +11,8 @@
 </head>
 <body>
 <div class="container">
-    <h1>Valige pilet</h1>
-    <a href="client-form.html" class="selection"th:href="@{selection/1}">Üritus 1</a>
-    <a href="client-form.html" class="selection"th:href="@{selection/2}">Üritus 2</a>
-    <a href="client-form.html" class="selection"th:href="@{selection/3}">Üritus 3</a>
-    <a href="client-form.html" class="selection" th:href="@{selection/4}">Üritus 4</a>
+    <h1>Valige pileti tüüp</h1>
+    <a href="client-form.html" class="selection" th:each="t: ${ticketList}" th:text="${t.getName()} + '  ' + ${t.getPrice()}" th:href="@{~/client-form/{event}/{type}(event=${eventID},type=${t.getTicketType()})}"></a>
 </div>
 </body>
 </html>
