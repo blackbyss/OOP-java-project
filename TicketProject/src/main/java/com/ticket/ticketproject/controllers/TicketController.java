@@ -26,7 +26,7 @@ public class TicketController {
 @GetMapping("/info")
 public String saveClient(@SessionAttribute("client") Client client, @SessionAttribute("ticket")EventTicket ticket) {
 
-    return client.clientToString()+ticket.getBuyer();
+    return client.clientToString();
 }
 
 }

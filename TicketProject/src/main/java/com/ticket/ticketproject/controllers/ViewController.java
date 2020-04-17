@@ -18,6 +18,7 @@ package com.ticket.ticketproject.controllers;
         import javax.servlet.http.HttpServletRequest;
         import javax.servlet.http.HttpSession;
         import java.util.Date;
+        import java.util.List;
         import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
@@ -41,11 +42,17 @@ public EventTicket createEventTicket(){return new EventTicket();}
 
 //Index leht
     @RequestMapping("/")
-            public String index(){
-        return "index";
+    public String index(){
+    return "index";
     }
+
+
+
     @RequestMapping("/selection/{eventID}")
-     public String selectTicket(@PathVariable String eventID){
+     public String selectTicket(Model model,@PathVariable String eventID){
+    List<EventTicket> ticketList = ticketService.getAllByEventId(Integer.parseInt(eventID));
+    model.addAttribute("ticketList",ticketList);
+
     return "select-ticket";
     }
 

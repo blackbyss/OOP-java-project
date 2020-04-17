@@ -11,6 +11,7 @@ public abstract class Ticket implements Storage {
     @Id
     @GeneratedValue
     private long id;
+    private String name;
    private double price;
 
     public Ticket(double price) {
@@ -25,7 +26,14 @@ public abstract class Ticket implements Storage {
         return price;
     }
 
-    public abstract String getName();
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public abstract Owner getOwner();
     public abstract void give();
 }

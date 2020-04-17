@@ -9,8 +9,6 @@ public class EventTicket extends Ticket implements Storage {
     long ticketType; //seisukoht või istekoht
     String place; //loož, rida, koht
     long eventID;
-    String buyer;
-    long amount;
 
     @Transient
     Event event; //piletile vastav üritus
@@ -26,10 +24,6 @@ public class EventTicket extends Ticket implements Storage {
     public EventTicket() {
     }
 
-    @Override
-    public String getName() {
-        return event.getName();
-    }
 
     @Override
     public Owner getOwner() {
@@ -68,21 +62,6 @@ public class EventTicket extends Ticket implements Storage {
         this.eventID = eventID;
     }
 
-    public String getBuyer() {
-        return buyer;
-    }
-
-    public void setBuyer(String buyer) {
-        this.buyer = buyer;
-    }
-
-    public long getAmount() {
-        return amount;
-    }
-
-    public void setAmount(long amount) {
-        this.amount = amount;
-    }
 
     public Event getEvent() {
         return event;
