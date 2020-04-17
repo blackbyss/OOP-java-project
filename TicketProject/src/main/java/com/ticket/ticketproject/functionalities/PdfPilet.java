@@ -9,9 +9,9 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
 public class PdfPilet {
-    public static void pdf(long piletikood) throws Exception {
-
-        File file = new File("pilet"+piletikood+".pdf");
+    public String pdf(long piletikood, String[] info) throws Exception {
+        String fileName = "pilet"+piletikood+".pdf";
+        File file = new File(fileName);
         PDDocument doc = new PDDocument();
 
         PDPage page = new PDPage();
@@ -35,15 +35,20 @@ public class PdfPilet {
 
         contents.newLine();
         contents.setFont(PDType1Font.TIMES_ROMAN, 14);
-        contents.showText("Kuupäev");
+        // Kuupäev
+        contents.showText(info[0]);
         contents.newLine();
-        contents.showText("Pileti ID");
+        // Pileti ID
+        contents.showText(info[1]);
         contents.newLine();
-        contents.showText("Ürituse nimi");
+        // ürituse nimi
+        contents.showText(info[2]);
         contents.newLine();
-        contents.showText("Pileti tüüp");
+        // pileti tüüp
+        contents.showText(info[3]);
         contents.newLine();
-        contents.showText("Pileti hind");
+        // pileti hind
+        contents.showText(info[4]);
 
         contents.newLineAtOffset(35, 700);
         contents.setFont(PDType1Font.TIMES_ROMAN, 14);
@@ -56,6 +61,6 @@ public class PdfPilet {
         doc.save("pilet"+piletikood+".pdf");//Salvestab dokumendi
 
         doc.close();//suleb dokumendi
-
+        return fileName;
     }
 }
