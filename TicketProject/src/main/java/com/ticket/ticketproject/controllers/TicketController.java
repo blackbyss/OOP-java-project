@@ -31,12 +31,12 @@ import java.util.concurrent.ThreadLocalRandom;
 public class TicketController {
     PdfPilet pilet = new PdfPilet();
     Email emailKlass = new Email();
-    TestTicket ticket = new TestTicket(123, "Testimispilet", "Standard", 12.34);
+    // TestTicket ticket = new TestTicket(123, "Testimispilet", "Standard", 12.34);
 
 @GetMapping("/info")
-public String saveClient(@SessionAttribute("client") Client client) throws Exception {
+public String saveClient(@SessionAttribute("client") Client client, @SessionAttribute("ticket")EventTicket ticket) throws Exception {
     Long kood = Long.parseLong(client.getIban()) + ThreadLocalRandom.current().nextInt(0, 999999);
-    String[] info = {"Kuupäev: 17.04.2020", "ID: "+ ticket.getId(), "Nimi: "+ticket.getName(), "Piletitüüp: "+ticket.getType(), "Hind: "+ ticket.getPrice()};
+    String[] info = {String.valueOf(java.time.LocalDate.now()), "ID: "+ ticket.getEventID(), "Nimi: "+ticket.getName(), "Piletitüüp: "+ticket.getTicketType(), "Hind: "+ ticket.getPrice()};
     String file = pilet.pdf(kood, info);
     emailKlass.email(client.getEmail(), file);
     return client.clientToString();
