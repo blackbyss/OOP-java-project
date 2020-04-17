@@ -18,8 +18,8 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 public class Email {
-    public static void email() {
-        String to = "are.mathias@gmail.com";//Saaja meil
+    public void email(String to, String file) {
+        // String to = "are.mathias@gmail.com";//Saaja meil
 
         String from = "piletikuller@gmail.com";//Saatja meil
 
@@ -70,7 +70,7 @@ public class Email {
 
             // Faili lisamine
             messageBodyPart = new MimeBodyPart();
-            String file = "pom.xml";
+            // String file = "pom.xml";
             DataSource src = new FileDataSource(file);
             messageBodyPart.setDataHandler(new DataHandler(src));
             messageBodyPart.setFileName(file);

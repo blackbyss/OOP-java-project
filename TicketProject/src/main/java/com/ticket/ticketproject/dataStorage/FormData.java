@@ -39,10 +39,6 @@ public class FormData {
         this.user_type = user_type;
     }
 
-
-
-
-
     public String getName() {
         return name;
     }
