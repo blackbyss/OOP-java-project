@@ -31,7 +31,7 @@ public class PdfPilet {
         contents.beginText();
         contents.newLineAtOffset(35, 700);
         contents.setFont(PDType1Font.TIMES_BOLD, 20);
-        contents.showText("Sõidupilet");
+        contents.showText("Pilet");
 
         contents.newLine();
         contents.setFont(PDType1Font.TIMES_ROMAN, 14);
