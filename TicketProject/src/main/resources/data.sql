@@ -32,3 +32,10 @@ VALUES (7,'seeniorpilet',59.99,2,'main',3);
 
 INSERT INTO EVENT_TICKET (id,name,price,eventid,place,ticket_type)
 VALUES (8,'early bird',79.99,2,'main',4);
+
+INSERT INTO OWNER
+VALUES (123,
+'Jüri','Õun',
+'Raju Reede',
+'jüri.õun@event.ee',
+'55555555')
