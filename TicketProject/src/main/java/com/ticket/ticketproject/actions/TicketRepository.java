@@ -11,4 +11,6 @@ public interface TicketRepository extends CrudRepository<EventTicket,Long> {
    public EventTicket findByTicketTypeAndEventID(long a, long b);
 
    public ArrayList<EventTicket> findAllByEventID(long id);
+
+
 }
