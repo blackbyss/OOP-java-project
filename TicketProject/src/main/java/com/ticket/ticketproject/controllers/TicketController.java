@@ -2,6 +2,7 @@ package com.ticket.ticketproject.controllers;
 
 
 
+import com.ticket.ticketproject.actions.TicketService;
 import com.ticket.ticketproject.dataStorage.Event;
 import com.ticket.ticketproject.dataStorage.EventTicket;
 import com.ticket.ticketproject.functionalities.PdfPilet;
@@ -31,14 +32,17 @@ import java.util.concurrent.ThreadLocalRandom;
 public class TicketController {
     PdfPilet pilet = new PdfPilet();
     Email emailKlass = new Email();
-    // TestTicket ticket = new TestTicket(123, "Testimispilet", "Standard", 12.34);
+    @Autowired
+    TicketService ticketService;
 
 @GetMapping("/info")
 public String saveClient(@SessionAttribute("client") Client client, @SessionAttribute("ticket")EventTicket ticket) throws Exception {
-    Long kood = Long.parseLong(client.getIban()) + ThreadLocalRandom.current().nextInt(0, 999999);
-    String[] info = {String.valueOf(java.time.LocalDate.now()), "ID: "+ ticket.getEventID(), "Nimi: "+ticket.getName(), "Piletitüüp: "+ticket.getTicketType(), "Hind: "+ ticket.getPrice()};
+    long kood = ticket.getEventID() + ThreadLocalRandom.current().nextInt(0, 999999);
+    // Event uusEvent = ticket.getEvent();
+    String[] info = {String.valueOf(java.time.LocalDate.now()), "ID: "+ ticket.getEventID(), "Nimi: (event nimi)", "Piletitüüp: "+ticket.getName(), "Hind: "+ ticket.getPrice()};
     String file = pilet.pdf(kood, info);
     emailKlass.email(client.getEmail(), file);
+    // ticketService.saveThis(ticket);
     return client.clientToString();
 }
 }

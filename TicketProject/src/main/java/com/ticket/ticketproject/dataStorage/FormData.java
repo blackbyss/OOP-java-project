@@ -5,9 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-@Entity
 public class FormData {
-@Id
 
     int id;
     private String name;

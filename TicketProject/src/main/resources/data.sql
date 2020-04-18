@@ -35,3 +35,4 @@ VALUES (8,'early bird',79.99,2,'main',4);
 
 INSERT INTO Owner_table (id,name,email,iban,event_id)
 VALUES (10,'Peeter Moos','peeter.moos@gmail.com','ee2345234',234);
+
