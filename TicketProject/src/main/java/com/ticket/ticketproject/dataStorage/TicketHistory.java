@@ -6,21 +6,12 @@ import javax.persistence.Id;
 @Entity
 public class TicketHistory {
     @Id
-    long id;
     String name;
     String last_name;
     double price;
     String time;
     long ticket_id;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
+    
     public String getName() {
         return name;
     }
