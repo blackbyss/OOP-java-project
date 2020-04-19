@@ -10,7 +10,7 @@ Current project plan:
 
   # Quick-Setup
 
-  Open TicketProject as a Maven project in your IDE ---->Wait for dependecies to reslove ----> 
-  ---->Run TicketProjectApplication----->Open browser at localhost:8080.
+  Open TicketProject as a Maven project in your IDE ----> Wait for dependecies to reslove ----> 
+  Run TicketProjectApplication ----> Open browser at localhost:8080.
 
   In HTML form make sure to fill all fields before submit, the "required" tag only works with Chrome atm.
