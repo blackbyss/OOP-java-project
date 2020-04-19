@@ -16,8 +16,8 @@ public class Client extends Person implements Storage {
     @Transient
     private double cartPrice;
 
-    public Client(String eesnimi, String perenimi, String sugu, int vanus, String email, String iban, String aadress, String maakond, long indeks, boolean yes_mail,double accountBalance) {
-        super(eesnimi, perenimi, sugu, vanus, email, iban, aadress, maakond, indeks);
+    public Client(String eesnimi, String perenimi, int vanus, String email, String iban, String aadress, String maakond, long indeks, boolean yes_mail,double accountBalance) {
+        super(eesnimi, perenimi, vanus, email, iban, aadress, maakond, indeks);
         this.yes_mail = yes_mail;
         this.accountBalance=accountBalance;
         cart=new ArrayList<Ticket>();

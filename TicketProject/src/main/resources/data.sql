@@ -34,7 +34,7 @@ INSERT INTO EVENT_TICKET (id,name,price,eventid,place,ticket_type)
 VALUES (8,'early bird',79.99,2,'main',4);
 
 ALTER TABLE Owner
-DROP COLUMN ADDRESS,AGE,COUNTY,GENDER,INDEX;
+DROP COLUMN ADDRESS,AGE,COUNTY,"INDEX";
 
 
 INSERT INTO Owner (id,name,email,iban,event_id,family_name)

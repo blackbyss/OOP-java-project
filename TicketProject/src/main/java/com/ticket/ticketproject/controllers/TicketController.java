@@ -12,6 +12,9 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Controller
@@ -27,6 +30,7 @@ public class TicketController {
 @RequestMapping("/send")
 public String saveClient(@SessionAttribute("client") Client client, @SessionAttribute("ticket")EventTicket ticket) throws Exception {
     long kood = ticket.getEventID() + ThreadLocalRandom.current().nextInt(0, 999999);
+    Date date = new Date();
     Event uusEvent = eventService.getByID(ticket.getEventID());
     String[] info = {String.valueOf(java.time.LocalDate.now()), "ID: "+ ticket.getEventID(), "Nimi: "+uusEvent.getName(), "Piletitüüp: "+ticket.getName(), "Hind: "+ ticket.getPrice()};
     String file = pilet.pdf(kood, info);
