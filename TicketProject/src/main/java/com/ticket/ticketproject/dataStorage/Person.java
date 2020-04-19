@@ -14,10 +14,9 @@ import java.util.List;
 public class Person implements Storage{
 public Person(){}
 
-    public Person(String name, String familyName, String gender, int age, String email, String iban, String address, String county, long index) {
+    public Person(String name, String familyName, int age, String email, String iban, String address, String county, long index) {
         this.name = name;
         this.familyName = familyName;
-        this.gender = gender;
         this.age = age;
         this.email = email;
         this.iban = iban;
@@ -33,7 +32,6 @@ public Person(){}
     private long id;
     private String name;
     private String familyName;
-    private String gender;
     private int age;
     private String email;
     private String iban;
@@ -68,13 +66,6 @@ public Person(){}
         this.familyName = familyName;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
 
     public int getAge() {
         return age;
@@ -137,7 +128,6 @@ public Person(){}
         return "Person{" +
                 "name='" + name + '\'' +
                 ", familyName='" + familyName + '\'' +
-                ", gender='" + gender + '\'' +
                 ", age=" + age +
                 ", email='" + email + '\'' +
                 ", iban='" + iban + '\'' +
