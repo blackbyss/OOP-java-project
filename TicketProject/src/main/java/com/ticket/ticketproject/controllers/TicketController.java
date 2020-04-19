@@ -22,6 +22,7 @@ import java.util.concurrent.ThreadLocalRandom;
 @Controller
 @EnableAutoConfiguration
 public class TicketController {
+    //Andmebaasi Service isendid ja pileti ning emaili objektid.
     PdfPilet pilet = new PdfPilet();
     Email emailKlass = new Email();
     @Autowired
@@ -31,16 +32,18 @@ public class TicketController {
     @Autowired
     TicketHistoryService ticketHistoryService;
 
+    //Vaheleht, mis saab ViewControllerilt vajalikud isendid ning koostab nende abil PDF-i,TicketHistory isendi.
+    //tickethistory salvestatakse andmebaasi ja email saadetakse kliendi poolt sisestatud meilile.
 @RequestMapping("/send")
-public String saveClient(@SessionAttribute("client") Client client, @SessionAttribute("ticket")EventTicket ticket) throws Exception {
+public String sendEmailandSaveEntities(@SessionAttribute("client") Client client, @SessionAttribute("ticket")EventTicket ticket) throws Exception {
     long kood = ticket.getEventID() + ThreadLocalRandom.current().nextInt(0, 999999);
-    TicketHistory history = new TicketHistory(kood,client.getName(), client.getFamilyName(), ticket.getPrice());
-    Date date = new Date();
+
     Event uusEvent = eventService.getByID(ticket.getEventID());
     String[] info = {String.valueOf(java.time.LocalDate.now()), "ID: "+ ticket.getEventID(), "Nimi: "+uusEvent.getName(), "Piletitüüp: "+ticket.getName(), "Hind: "+ ticket.getPrice()};
     String file = pilet.pdf(kood, info);
     emailKlass.email(client.getEmail(), file);
 
+    TicketHistory history = new TicketHistory(kood,client.getName(), client.getFamilyName(), ticket.getPrice());
     ticketHistoryService.saveThis(history);
     return "redirect:confirmed";
 }

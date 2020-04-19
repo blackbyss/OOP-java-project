@@ -9,7 +9,6 @@ public class EventTicket extends Ticket implements Storage {
     long ticketType; //seisukoht või istekoht
     String place; //loož, rida, koht
     long eventID;
-
     @Transient
     Event event; //piletile vastav üritus
 
