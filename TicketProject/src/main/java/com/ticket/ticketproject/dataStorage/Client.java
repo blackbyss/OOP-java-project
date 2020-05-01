@@ -17,7 +17,7 @@ public class Client extends Person implements Storage {
     private double cartPrice;
 
     public Client(String eesnimi, String perenimi, int vanus, String email, String iban, String aadress, String maakond, long indeks, boolean yes_mail,double accountBalance) {
-        super(eesnimi, perenimi, vanus, email, iban, aadress, maakond, indeks);
+        super(eesnimi, perenimi, vanus, email, iban, aadress, maakond, indeks,yes_mail);
         this.yes_mail = yes_mail;
         this.accountBalance=accountBalance;
         cart=new ArrayList<Ticket>();
@@ -25,6 +25,16 @@ public class Client extends Person implements Storage {
     }
     public Client(){
     }
+
+    @Override
+    public boolean isYes_mail() {
+        return yes_mail;
+    }
+
+    public void setYes_mail(boolean yes_mail) {
+        this.yes_mail = yes_mail;
+    }
+
     public void addToList(Ticket ticket) {
         cartPrice += ticket.getPrice();
         cart.add(ticket);

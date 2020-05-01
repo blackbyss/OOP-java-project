@@ -14,7 +14,7 @@ import java.util.List;
 public class Person implements Storage{
 public Person(){}
 
-    public Person(String name, String familyName, int age, String email, String iban, String address, String county, long index) {
+    public Person(String name, String familyName, int age, String email, String iban, String address, String county, long index, boolean yes_mail) {
         this.name = name;
         this.familyName = familyName;
         this.age = age;
@@ -23,6 +23,7 @@ public Person(){}
         this.address = address;
         this.county = county;
         this.index = index;
+        this.yes_mail = yes_mail;
         history = new ArrayList<>();
     }
 
@@ -38,6 +39,7 @@ public Person(){}
     private String address;
     private String county;
     private long index;
+    private boolean yes_mail;
     @Transient
     private List<String> history = new ArrayList<String>();
 
@@ -50,6 +52,11 @@ public Person(){}
     }
 
     //Getters and Setters
+
+    public boolean isYes_mail() {
+        return yes_mail;
+    }
+
     public String getName() {
         return name;
     }

@@ -41,7 +41,7 @@ public String sendEmailandSaveEntities(@SessionAttribute("client") Client client
     Event uusEvent = eventService.getByID(ticket.getEventID());
     String[] info = {String.valueOf(java.time.LocalDate.now()), "ID: "+ ticket.getEventID(), "Nimi: "+uusEvent.getName(), "Piletitüüp: "+ticket.getName(), "Hind: "+ ticket.getPrice()};
     String file = pilet.pdf(kood, info);
-    emailKlass.email(client.getEmail(), file);
+    emailKlass.email(client.getEmail(), file, client.isYes_mail());
 
     TicketHistory history = new TicketHistory(kood,client.getName(), client.getFamilyName(), ticket.getPrice());
     ticketHistoryService.saveThis(history);

@@ -93,5 +93,4 @@ public EventTicket createEventTicket(){return new EventTicket();}
         return "confirmation";
     }
 
-
 }

@@ -14,10 +14,6 @@ public class EventService {
 
     public Event getByID(long id){
         Optional<Event> optional=  eventRepo.findById(id);
-        if(optional.isPresent()){
-            return optional.get();
-        }else{
-            return null;
-        }
+        return Optional.of(optional.get()).orElse(null);
     }
 }

@@ -37,6 +37,6 @@ ALTER TABLE Owner
 DROP COLUMN ADDRESS,AGE,COUNTY,"INDEX";
 
 
-INSERT INTO Owner (id,name,email,iban,event_id,family_name)
-VALUES (10,'Peeter','peeter.moos@gmail.com','ee2345234',234,'Moos');
+/*INSERT INTO Owner (id,name,email,iban,event_id,family_name)
+VALUES (10,'Peeter','peeter.moos@gmail.com','ee2345234',234,'Moos');*/
 
