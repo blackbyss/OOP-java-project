@@ -1,5 +1,5 @@
 INSERT INTO EVENT (id,age_limit,capacity,happening_time,location,name,owner_ID,save_user_data)
-VALUES ( 1,18,50000,'2022-03-14','Saku Suurhall','Raju Reede',33,1 );
+VALUES ( 1,18,50000,'2022-03-14','Saku Suurhall','Raju Reede',10,1 );
 
 INSERT INTO EVENT (id,age_limit,capacity,happening_time,location,name,owner_ID,save_user_data)
 VALUES ( 2,16,20000,'2022-04-24','Lauluväljak','RockEvent2022',14,0 );
@@ -37,6 +37,6 @@ ALTER TABLE Owner
 DROP COLUMN ADDRESS,AGE,COUNTY,"INDEX";
 
 
-/*INSERT INTO Owner (id,name,email,iban,event_id,family_name)
-VALUES (10,'Peeter','peeter.moos@gmail.com','ee2345234',234,'Moos');*/
+INSERT INTO Owner (id,name,email,iban,event_id,family_name)
+VALUES (10,'Peeter','peeter.moos@gmail.com','ee2345234',1,'Moos');
 
