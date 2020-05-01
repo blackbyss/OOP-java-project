@@ -37,13 +37,13 @@
 
             <label for="Maakond">Maakond/Linn:</label><br>
             <input type="text" id="maakond" name="maakond"class="textfield" th:field="*{county}"><br>
-            
+
 
             <label for="indeks">Postiindeks:</label><br>
             <input type="text" id="indeks" name="indeks"class="textfield" th:field="*{index}"><br>
 
             <label for="yes-email">Kas soovid saada piletit e-kirjana?</label><br>
-            <span>Soovin!</span><input type="checkbox" id="yes-email" name="yes-email" value="yes" th:checked="*{yes_mail}"><br>
+            <span>Soovin!</span><input type="checkbox" id="yes-email" name="yes-email" th:field="*{yes_mail}" th:value="true"><br>
 
             <input type="submit" value="Osta pilet" id="submit-button" class="button" ><br>
 

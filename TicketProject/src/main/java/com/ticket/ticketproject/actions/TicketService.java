@@ -19,11 +19,7 @@ public class TicketService {
 
     public EventTicket getByID(long id){
         Optional<EventTicket> optional=  repo.findById(id);
-        if(optional.isPresent()){
-            return optional.get();
-        }else{
-            return null;
-        }
+        return Optional.of(optional.get()).orElse(null);
     }
 
     public EventTicket getByEventIdAndTicketType(long eventID,long ticketType){

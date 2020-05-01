@@ -39,7 +39,7 @@ public String saveClient(@SessionAttribute("client") Client client, @SessionAttr
     Event uusEvent = eventService.getByID(ticket.getEventID());
     String[] info = {String.valueOf(java.time.LocalDate.now()), "ID: "+ ticket.getEventID(), "Nimi: "+uusEvent.getName(), "Piletitüüp: "+ticket.getName(), "Hind: "+ ticket.getPrice()};
     String file = pilet.pdf(kood, info);
-    emailKlass.email(client.getEmail(), file);
+    emailKlass.email(client.getEmail(), file, client.isYes_mail());
 
     ticketHistoryService.saveThis(history);
     return "redirect:confirmed";

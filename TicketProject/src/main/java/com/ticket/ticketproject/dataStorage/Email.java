@@ -17,7 +17,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-public class Email {
+public class Email{
     public static void email() {
         String to = "are.mathias@gmail.com";//Saaja meil
 
