@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ClientService {
-    @Autowired ClientRepository repo;
+    @Autowired
+    ClientRepository repo;
 
-    public void saveThis(Client client){
+    public void saveThis(Client client) {
         repo.save(client);
     }
 }

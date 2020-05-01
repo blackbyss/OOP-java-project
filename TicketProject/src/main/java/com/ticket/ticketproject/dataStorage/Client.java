@@ -2,12 +2,14 @@ package com.ticket.ticketproject.dataStorage;
 
 import javax.persistence.Entity;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Client extends Person implements Storage {
-    boolean yes_mail; //Kas soovib emailiga piletit?
+    private boolean yes_mail; //Kas soovib emailiga piletit?
+    @NotNull
     private double accountBalance; //Konto
     @Transient
     private List<Ticket> cart; //Ostukorv
