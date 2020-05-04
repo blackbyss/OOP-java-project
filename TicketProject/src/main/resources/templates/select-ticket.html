@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Thank you!</title>
+
+    <link rel="stylesheet" href="../static/bootstrap.css" th:href="@{/bootstrap.css}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="../static/css/index.css" th:href="@{/css/index.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Valige pileti tüüp</h1>
+    <a href="client-form.html" class="selection" th:each="t: ${ticketList}" th:text="${t.getName()} + '  ' + ${t.getPrice()}" th:href="@{~/client-form/{event}/{type}(event=${eventID},type=${t.getTicketType()})}"></a>
+</div>
+</body>
+</html>
