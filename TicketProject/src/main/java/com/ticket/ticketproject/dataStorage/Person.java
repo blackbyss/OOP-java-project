@@ -8,13 +8,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 @MappedSuperclass
 public class Person implements Storage{
     public Person(){}
 
-    public Person(String name, String familyName, int age, String email, String iban, String address, String county, long index) {
+    public Person(String name, String familyName, int age, String email, String iban, String address, String county, long index,double accountBalance) {
         this.name = name;
         this.familyName = familyName;
         this.age = age;
@@ -24,6 +25,7 @@ public class Person implements Storage{
         this.county = county;
         this.index = index;
         history = new ArrayList<>();
+        this.accountBalance=accountBalance;
     }
 
     //Variables
@@ -38,6 +40,8 @@ public class Person implements Storage{
     private String address;
     private String county;
     private long index;
+    @NotNull
+    private double accountBalance;
     @Transient
     private List<String> history = new ArrayList<String>();
 
@@ -123,6 +127,14 @@ public class Person implements Storage{
 
     public void setHistory(List<String> history) {
         this.history = history;
+    }
+
+    public double getAccountBalance() {
+        return accountBalance;
+    }
+
+    public void setAccountBalance(double accountBalance) {
+        this.accountBalance = accountBalance;
     }
 
     @Override

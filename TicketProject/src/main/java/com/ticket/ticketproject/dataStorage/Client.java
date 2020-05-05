@@ -9,17 +9,14 @@ import java.util.List;
 @Entity
 public class Client extends Person implements Storage {
     boolean yes_mail; //Kas soovib emailiga piletit?
-    @NotNull
-    private double accountBalance; //Konto
     @Transient
     private List<EventTicket> cart; //Ostukorv
     @Transient
     private List<EventTicket>purchased; //FIXME: Ei tea veel kas läheb tarvis.
 
     public Client(String eesnimi, String perenimi, int vanus, String email, String iban, String aadress, String maakond, long indeks, boolean yes_mail,double accountBalance) {
-        super(eesnimi, perenimi, vanus, email, iban, aadress, maakond, indeks);
+        super(eesnimi, perenimi, vanus, email, iban, aadress, maakond, indeks,accountBalance);
         this.yes_mail = yes_mail;
-        this.accountBalance=accountBalance;
         cart=new ArrayList<EventTicket>();
         purchased=new ArrayList<EventTicket>();
     }
@@ -40,13 +37,6 @@ public class Client extends Person implements Storage {
         this.yes_mail = yes_mail;
     }
 
-    public double getAccountBalance() {
-        return accountBalance;
-    }
-
-    public void setAccountBalance(double accountBalance) {
-        this.accountBalance = accountBalance;
-    }
 
     public List<EventTicket> getCart() {
         return cart;

@@ -9,15 +9,13 @@ public class Owner extends Person implements Storage {
     private long eventID;
 
 
-    public Owner(String name, String familyName, int age, String email, String iban, String address, String county, long index, long eventID) {
-        super(name, familyName, age, email, iban, address, county, index);
-        account = new ArrayList<>();
+    public Owner(String name, String familyName, int age, String email, String iban, String address, String county, long index, long eventID,double accountBalance) {
+        super(name, familyName, age, email, iban, address, county, index,accountBalance);
     }
     public Owner() {
     }
 
-    @Transient
-    private List<Double> account;
+
 
 
     public long getEventID() {
@@ -28,15 +26,4 @@ public class Owner extends Person implements Storage {
         this.eventID = event_id;
     }
 
-    public List<Double> getAccount() {
-        return account;
-    }
-
-    public void setAccount(List<Double> account) {
-        this.account = account;
-    }
-
-    public void addToAccount(double sum){
-        account.add(sum);
-    }
 }
