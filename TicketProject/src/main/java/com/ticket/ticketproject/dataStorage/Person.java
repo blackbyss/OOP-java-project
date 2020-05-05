@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 @MappedSuperclass
 public class Person implements Storage{
-public Person(){}
+    public Person(){}
 
     public Person(String name, String familyName, int age, String email, String iban, String address, String county, long index) {
         this.name = name;
@@ -140,4 +140,3 @@ public Person(){}
                 '}';
     }
 }
-
