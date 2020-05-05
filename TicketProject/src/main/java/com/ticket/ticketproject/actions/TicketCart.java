@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 public class TicketCart {
-    @Autowired
-    OwnerService ownerService;
 
     private List<EventTicket> cart; //Ostukorv
     private List<EventTicket>purchased; //FIXME: Ei tea veel kas läheb tarvis.
@@ -19,12 +17,12 @@ public class TicketCart {
         this.cart = client.getCart();
         this.purchased = client.getPurchased();
     }
-    public void addToList(EventTicket ticket) {
+    public void addToCart(EventTicket ticket) {
         cartPrice += ticket.getPrice();
         cart.add(ticket);
         client.setCart(cart);
     }
-    public void removeFromList(EventTicket ticket){
+    public void removeFromCart(EventTicket ticket){
         cartPrice-= ticket.getPrice();
         cart.remove(ticket);
         client.setCart(cart);
@@ -42,10 +40,11 @@ public class TicketCart {
         if(accountBalance >= sum){
             accountBalance -= sum;
             // Owner thisOwner = ownerService.getByEventID(ticket.getEventID()); //FIXME: Lihtsalt ajutine asendus, et H2 tabelid luua.
-            thisOwner.addToAccount(sum);
+            // thisOwner.addToAccount(sum);
             thisOwner.addLog(client.getName()+" "+client.getFamilyName()+" ostis: " +ticket.getName()+ " hinna eest: "+sum);
 
-            purchased.add(ticket);
+            // purchased.add(ticket);
+            // addToCart(ticket);
             client.setAccountBalance(accountBalance);
             client.addLog("Ostmine õnnestus: " +ticket.getName());
             return true;
@@ -61,7 +60,7 @@ public class TicketCart {
             // Owner thisOwner = ownerService.getByEventID(cart.get(0).getEventID());
             accountBalance -= cartPrice;
             client.setAccountBalance(accountBalance);
-            thisOwner.addToAccount(cartPrice);
+            // thisOwner.addToAccount(cartPrice);
             StringBuilder cartSum = new StringBuilder();
             for (int i = 0; i < cart.size(); i++) {
                 cartSum.append(cart.get(i).getName()).append("\t");

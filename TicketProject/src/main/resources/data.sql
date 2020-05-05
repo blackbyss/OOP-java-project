@@ -33,10 +33,6 @@ VALUES (7,'seeniorpilet',59.99,2,'main',3);
 INSERT INTO EVENT_TICKET (id,name,price,eventid,place,ticket_type)
 VALUES (8,'early bird',79.99,2,'main',4);
 
-ALTER TABLE Owner
-DROP COLUMN ADDRESS,AGE,COUNTY,"INDEX";
-
-
-INSERT INTO Owner (id,name,email,iban,event_id,family_name)
-VALUES (10,'Peeter','peeter.moos@gmail.com','ee2345234',1,'Moos');
+INSERT INTO Owner (id,name,email,iban,eventID,family_name, address, age, county, index)
+VALUES (10,'Peeter','peeter.moos@gmail.com','ee2345234',1,'Moos','address',18, 'county', '12345');
 
