@@ -10,8 +10,8 @@ public class Owner extends Person implements Storage {
 
     private long event_id;
 
-    public Owner(String name, String familyName, String gender, int age, String email, String iban, String address, String county, long index,boolean yes_mail, long event_id) {
-        super(name, familyName, age, email, iban, address, county, index,yes_mail);
+    public Owner(String name, String familyName, String gender, int age, String email, String iban, String address, String county, long index, long event_id) {
+        super(name, familyName, age, email, iban, address, county, index);
         account = new ArrayList<>();
     }
     public Owner() {
