@@ -18,9 +18,11 @@ package com.ticket.ticketproject.controllers;
         import org.springframework.stereotype.Controller;
         import org.springframework.ui.Model;
         import org.springframework.web.bind.annotation.*;
+        import org.springframework.web.servlet.ModelAndView;
 
 
         import javax.servlet.http.HttpServletRequest;
+        import javax.servlet.http.HttpServletResponse;
         import javax.servlet.http.HttpSession;
         import java.io.File;
         import java.io.FileInputStream;
@@ -107,8 +109,9 @@ public EventTicket createEventTicket(){return new EventTicket();}
         return "confirmation";
     }
 
-    @RequestMapping(value = "/download", method = RequestMethod.GET)
-    public ResponseEntity<Object> downloadFile() throws IOException
+    @RequestMapping(value = "confirmed/download", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Object>  downloadFile() throws IOException
     {
         String filename = "DownloadTestimiseks.pdf";
         File file = new File(filename);
@@ -124,6 +127,7 @@ public EventTicket createEventTicket(){return new EventTicket();}
         ResponseEntity<Object> responseEntity = ResponseEntity.ok().headers(headers)
                 .contentLength(file.length())
                 .contentType(MediaType.parseMediaType("application/txt")).body(resource);
+
 
         return responseEntity;
     }

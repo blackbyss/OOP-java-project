@@ -1,7 +1,6 @@
 package com.ticket.ticketproject.controllers;
 
 import com.ticket.ticketproject.actions.*;
-import com.ticket.ticketproject.dataStorage.Event;
 import com.ticket.ticketproject.dataStorage.EventTicket;
 import com.ticket.ticketproject.dataStorage.TicketHistory;
 import com.ticket.ticketproject.functionalities.PdfPilet;
@@ -61,7 +60,7 @@ public class TicketController {
 
         }
         else{
-            mav.setViewName("error");
+            mav.setViewName("error123");
         }
         return mav;
     }
