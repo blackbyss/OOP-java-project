@@ -11,8 +11,6 @@ import java.util.List;
 @Component
 public class TicketCart {
 
-
-
     private List<EventTicket> cart; //Ostukorv
     private List<EventTicket>purchased; //FIXME: Ei tea veel kas läheb tarvis.
     private double cartPrice;
