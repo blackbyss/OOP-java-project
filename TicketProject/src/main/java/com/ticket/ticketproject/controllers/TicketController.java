@@ -52,7 +52,7 @@ public class TicketController {
             boolean toMail = client.isYes_mail();
             mav.addObject("toMail", toMail);
             if(toMail){
-                emailKlass.email(client.getEmail(), file,toMail);
+                emailKlass.email(client.getEmail(), file,true);
 
 
             }else{
