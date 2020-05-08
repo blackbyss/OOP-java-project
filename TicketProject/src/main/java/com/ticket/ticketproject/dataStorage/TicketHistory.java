@@ -8,25 +8,24 @@ import java.time.LocalDate;
 public class TicketHistory {
     @Id
     long ticket_id;
-    String name;
-    String last_name;
-    double price;
+    long buyer_id; //Refers to: Client id
+    long ticketType; //Refers to: EventTicket id
     LocalDate time;
 
-    public String getName() {
-        return name;
+    public long getBuyer_id() {
+        return buyer_id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBuyer_id(long buyer_id) {
+        this.buyer_id = buyer_id;
     }
 
-    public double getPrice() {
-        return price;
+    public long getTicketType() {
+        return ticketType;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setTicketType(long ticketType) {
+        this.ticketType = ticketType;
     }
 
     public LocalDate getTime() {
@@ -45,21 +44,11 @@ public class TicketHistory {
         this.ticket_id = ticket_id;
     }
 
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
 
     public TicketHistory() {
     }
-    public  TicketHistory(long ticket_id, String name, String last_name, double price){
+    public  TicketHistory(long ticket_id){
       this.ticket_id = ticket_id;
-      this.name = name;
-      this.last_name = last_name;
-      this.price = price;
       time = LocalDate.now();
     }
 

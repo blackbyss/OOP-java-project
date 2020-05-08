@@ -10,12 +10,17 @@
     <link rel="stylesheet" href="../static/css/index.css" th:href="@{/css/index.css}">
 </head>
 <body>
+
 <div class="container">
     <h1>Valige pilet</h1>
-    <a href="client-form.html" class="selection"th:href="@{selection/1}">Üritus 1</a>
-    <a href="client-form.html" class="selection"th:href="@{selection/2}">Üritus 2</a>
-    <a href="client-form.html" class="selection"th:href="@{selection/3}">Üritus 3</a>
-    <a href="client-form.html" class="selection" th:href="@{selection/4}">Üritus 4</a>
-</div>
-</body>
-</html>
+    <div class="event-box" th:each="e: ${eventList}" >
+        <h2 th:text="${e.getName()}">Nimi </h2>
+        <p th:text="${e.getHappeningTime()} +'      ' +${e.getLocation()}">2020-04-24</p>
+        <p th:text="'Vanusepiirang:  '+${e.getAgeLimit()}+'+'">18+</p>
+         <a href="select-ticket.html" class="button" th:href="@{~/selection/{event}(event=${e.getId()})}" th:text="'Lisa korvi'">Lisa korvi</a>
+
+     </div>
+
+ </div>
+ </body>
+ </html>

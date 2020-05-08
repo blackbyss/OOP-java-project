@@ -1,7 +1,6 @@
 html,body{
     margin: 0;
     padding:0;
-    text-decoration: none;
     font-family: 'Segoe UI', sans-serif;
     background-color: rgb(42, 36, 138);
 }
@@ -20,7 +19,7 @@ html,body{
     white-space:nowrap;
 }
 
-a{
+.button{
     margin-top: 5em;
     display: block;
     background-color:  rgb(42, 36, 138);
@@ -34,7 +33,7 @@ a{
 }
 
 
-a:hover 
+.button:hover
 {
     color: rgb(4, 32, 92);
     background-color: #F4925A;
@@ -44,7 +43,22 @@ a:hover
 
 h1{
     font-size: 300%;
+    margin-bottom: 2em;
 }
 h2,h3{
     margin:1em;
+}
+.no-tickets{
+    text-align: center;
+    margin:0;
+}
+.event-box{
+    margin:1em;
+    text-align: center;
+    background-color: #70FCAA;
+    width: 50%;
+
+}
+p{
+font-size: 1.6rem;
 }

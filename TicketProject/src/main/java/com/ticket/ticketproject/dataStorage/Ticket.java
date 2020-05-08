@@ -14,9 +14,6 @@ public abstract class Ticket implements Storage {
     private String name;
    private double price;
 
-    public Ticket(double price) {
-        this.price=price;
-    }
 
     public Ticket() {
     }
@@ -33,7 +30,4 @@ public abstract class Ticket implements Storage {
     public String getName() {
         return name;
     }
-
-    public abstract Owner getOwner();
-    public abstract void give();
 }

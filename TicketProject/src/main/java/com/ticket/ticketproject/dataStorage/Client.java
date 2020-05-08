@@ -1,5 +1,8 @@
 package com.ticket.ticketproject.dataStorage;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
 import javax.validation.constraints.NotNull;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
@@ -7,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Component
 public class Client extends Person implements Storage {
     boolean yes_mail; //Kas soovib emailiga piletit?
     @Transient

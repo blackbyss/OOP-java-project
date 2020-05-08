@@ -24,7 +24,6 @@ public class Person implements Storage{
         this.address = address;
         this.county = county;
         this.index = index;
-        history = new ArrayList<>();
         this.accountBalance=accountBalance;
     }
 
@@ -42,16 +41,8 @@ public class Person implements Storage{
     private long index;
     @NotNull
     private double accountBalance;
-    @Transient
-    private List<String> history = new ArrayList<String>();
 
 
-    //Methods
-    public void addLog(String newLog) {
-        history.add(newLog);
-
-
-    }
 
     //Getters and Setters
 
@@ -121,13 +112,6 @@ public class Person implements Storage{
         this.index = index;
     }
 
-    public List<String> getHistory() {
-        return history;
-    }
-
-    public void setHistory(List<String> history) {
-        this.history = history;
-    }
 
     public double getAccountBalance() {
         return accountBalance;
@@ -148,7 +132,6 @@ public class Person implements Storage{
                 ", address='" + address + '\'' +
                 ", county='" + county + '\'' +
                 ", index=" + index +
-                ", history=" + history +
                 '}';
     }
 }

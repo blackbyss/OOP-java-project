@@ -12,6 +12,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 @Controller
@@ -30,24 +32,39 @@ public class TicketController {
 
 
     @RequestMapping("/send")
-    public String sendEmailandSaveEntities(@SessionAttribute("client") Client client, @SessionAttribute("ticket")EventTicket ticket) throws Exception {
+    public ModelAndView sendEmailandSaveEntities(@SessionAttribute("client") Client client, @SessionAttribute("ticket")EventTicket ticket) throws Exception {
         client.setAccountBalance(1000);
-        TicketCart ticketCart = new TicketCart(client);
-        boolean ost = ticketCart.buy(ticket, ownerService.getByEventID(ticket.getEventID()));
+        TicketCart ticketCart = new TicketCart(client,ownerService);
+        boolean ost = ticketCart.buy(ticket);
+        ModelAndView mav = new ModelAndView();
         if (ost) {
             long kood = ticket.getEventID() + ThreadLocalRandom.current().nextInt(0, 999999);
             String[] info = {String.valueOf(java.time.LocalDate.now()), "ID: " + ticket.getEventID(), "Nimi: " + eventService.getByID(ticket.getEventID()).getName(), "Piletitüüp: " + ticket.getName(), "Hind: " + ticket.getPrice()};
             String file = pilet.pdf(kood, info);
-            emailKlass.email(client.getEmail(), file,client.isYes_mail());
-            TicketHistory history = new TicketHistory(kood,client.getName(), client.getFamilyName(), ticket.getPrice());
+
+            TicketHistory history = new TicketHistory(kood);
             ticketHistoryService.saveThis(history);
-            System.out.println(client.getAccountBalance());
-            System.out.println(client.getHistory());
-            return "redirect:confirmed";
+
+
+            mav.setViewName("redirect:confirmed");
+
+
+            boolean toMail = client.isYes_mail();
+            mav.addObject("toMail", toMail);
+            if(toMail){
+                emailKlass.email(client.getEmail(), file,toMail);
+
+
+            }else{
+               //TODO: Download funktsioon siia.
+            }
+
         }
         else{
-            System.out.println(client.getHistory());
-            return "index";
+            mav.setViewName("error");
         }
+        return mav;
     }
+
+
 }

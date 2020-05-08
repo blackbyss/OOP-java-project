@@ -2,6 +2,7 @@ package com.ticket.ticketproject.controllers;
 
 
         import com.ticket.ticketproject.actions.ClientService;
+        import com.ticket.ticketproject.actions.EventService;
         import com.ticket.ticketproject.actions.TicketService;
         import com.ticket.ticketproject.dataStorage.Client;
         import com.ticket.ticketproject.dataStorage.Event;
@@ -18,6 +19,7 @@ package com.ticket.ticketproject.controllers;
         import javax.servlet.http.HttpServletRequest;
         import javax.servlet.http.HttpSession;
         import java.util.Date;
+        import java.util.Iterator;
         import java.util.List;
         import java.util.concurrent.atomic.AtomicInteger;
 
@@ -32,6 +34,9 @@ public class ViewController {
     @Autowired
     TicketService ticketService;
 
+    @Autowired
+    EventService eventService;
+
 
 //isendite loomine sessionisse panemiseks
 @ModelAttribute("client")
@@ -44,7 +49,9 @@ public EventTicket createEventTicket(){return new EventTicket();}
 
 //Index leht ja pileti valimine
     @RequestMapping("/")
-    public String index(){
+    public String index(Model model){
+        List<Event> events = eventService.getAll();
+        model.addAttribute("eventList",events);
     return "index";
     }
 
@@ -89,7 +96,7 @@ public EventTicket createEventTicket(){return new EventTicket();}
     }
     //Viimane kinnitusleht
     @RequestMapping(value="/confirmed")
-    public String confirm(@ModelAttribute("client") Client client){
+    public String confirm(@ModelAttribute("client") Client client, @ModelAttribute("toMail") boolean toMail){
         return "confirmation";
     }
 
