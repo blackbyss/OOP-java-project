@@ -11,6 +11,10 @@ package com.ticket.ticketproject.controllers;
         import org.hibernate.Session;
         import org.hibernate.query.Query;
         import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.core.io.InputStreamResource;
+        import org.springframework.http.HttpHeaders;
+        import org.springframework.http.MediaType;
+        import org.springframework.http.ResponseEntity;
         import org.springframework.stereotype.Controller;
         import org.springframework.ui.Model;
         import org.springframework.web.bind.annotation.*;
@@ -18,6 +22,9 @@ package com.ticket.ticketproject.controllers;
 
         import javax.servlet.http.HttpServletRequest;
         import javax.servlet.http.HttpSession;
+        import java.io.File;
+        import java.io.FileInputStream;
+        import java.io.IOException;
         import java.util.Date;
         import java.util.Iterator;
         import java.util.List;
@@ -98,6 +105,27 @@ public EventTicket createEventTicket(){return new EventTicket();}
     @RequestMapping(value="/confirmed")
     public String confirm(@ModelAttribute("client") Client client, @ModelAttribute("toMail") boolean toMail){
         return "confirmation";
+    }
+
+    @RequestMapping(value = "/download", method = RequestMethod.GET)
+    public ResponseEntity<Object> downloadFile() throws IOException
+    {
+        String filename = "DownloadTestimiseks.pdf";
+        File file = new File(filename);
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition",
+                String.format("attachment; filename=\"%s\"", file.getName()));
+        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+        headers.add("Pragma", "no-cache");
+        headers.add("Expires", "0");
+
+        ResponseEntity<Object> responseEntity = ResponseEntity.ok().headers(headers)
+                .contentLength(file.length())
+                .contentType(MediaType.parseMediaType("application/txt")).body(resource);
+
+        return responseEntity;
     }
 
 }
