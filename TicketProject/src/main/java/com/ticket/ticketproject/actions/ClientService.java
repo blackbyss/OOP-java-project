@@ -13,4 +13,7 @@ public class ClientService {
     public void saveThis(Client client) {
         repo.save(client);
     }
+    public Client getByNameAndFamiliyNameAndEmail(String name,String familyName,String email){
+        return repo.findClientByNameAndFamilyNameAndEmail(name,familyName,email);
+    }
 }

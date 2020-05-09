@@ -9,10 +9,13 @@ import com.ticket.ticketproject.dataStorage.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Controller
@@ -28,20 +31,26 @@ public class TicketController {
     TicketHistoryService ticketHistoryService;
     @Autowired
     OwnerService ownerService;
-
-
-    @RequestMapping("/send")
-    public ModelAndView sendEmailandSaveEntities(@SessionAttribute("client") Client client, @SessionAttribute("ticket")EventTicket ticket) throws Exception {
+    @Autowired
+    ClientService clientService;
+    @Transactional
+    @RequestMapping(value="/send", method = RequestMethod.GET)
+    public ModelAndView sendEmailandSaveEntities(@SessionAttribute("client") Client client,@SessionAttribute("cart") TicketCart cart) throws Exception {
         client.setAccountBalance(1000);
-        TicketCart ticketCart = new TicketCart(client,ownerService);
-        boolean ost = ticketCart.buy(ticket);
+        EventTicket ticket =cart.getCart().get(0);
+        boolean ost = cart.buy(ticket,ownerService);
         ModelAndView mav = new ModelAndView();
         if (ost) {
             long kood = ticket.getEventID() + ThreadLocalRandom.current().nextInt(0, 999999);
             String[] info = {String.valueOf(java.time.LocalDate.now()), "ID: " + ticket.getEventID(), "Nimi: " + eventService.getByID(ticket.getEventID()).getName(), "Piletitüüp: " + ticket.getName(), "Hind: " + ticket.getPrice()};
-            String file = pilet.pdf(kood, info,client.getTicketCount());
+            String file = pilet.pdf(kood, info);
 
             TicketHistory history = new TicketHistory(kood);
+
+
+            if(clientService.getByNameAndFamiliyNameAndEmail(client.getName(),client.getFamilyName(),client.getEmail())==null){
+                clientService.saveThis(client);
+            }
             ticketHistoryService.saveThis(history);
 
 
@@ -52,16 +61,35 @@ public class TicketController {
             mav.addObject("toMail", toMail);
             if(toMail){
                 emailKlass.email(client.getEmail(), file,true);
-
-
-            }else{
             }
 
         }
         else{
-            mav.setViewName("error123");
+            mav.setViewName("error");
         }
         return mav;
+    }
+
+
+    @RequestMapping(value="/cartview", method=RequestMethod.GET)
+    public String cartView(@SessionAttribute("client")Client client, Model model, @SessionAttribute("cart")TicketCart cart){
+        if(client.getName() != null && client.getFamilyName()!=null){
+            model.addAttribute("ticketCart",cart.getCart());
+            return "cart";
+        }else{
+            return "error";
+        }
+    }
+
+    @RequestMapping(value="/cartview/remove/{ticketIndex}", method=RequestMethod.GET)
+    public String removeTicket(@PathVariable("ticketIndex") String ticketIndex, @ModelAttribute("ticketCart")List<EventTicket>ticketCart,@SessionAttribute("client")Client client){
+        try{
+            int index = Integer.parseInt(ticketIndex);
+            ticketCart.remove(index);
+            return "redirect:cartview";
+        }catch (NumberFormatException e){
+            return "error";
+        }
     }
 
 

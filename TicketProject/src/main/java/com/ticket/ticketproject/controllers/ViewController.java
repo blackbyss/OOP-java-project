@@ -1,39 +1,40 @@
 package com.ticket.ticketproject.controllers;
 
 
-import com.ticket.ticketproject.actions.ClientService;
-import com.ticket.ticketproject.actions.EventService;
-import com.ticket.ticketproject.actions.TicketService;
-import com.ticket.ticketproject.dataStorage.Client;
-import com.ticket.ticketproject.dataStorage.Event;
-import com.ticket.ticketproject.dataStorage.EventTicket;
-import com.ticket.ticketproject.dataStorage.FormData;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+        import com.ticket.ticketproject.actions.ClientService;
+        import com.ticket.ticketproject.actions.EventService;
+        import com.ticket.ticketproject.actions.TicketCart;
+        import com.ticket.ticketproject.actions.TicketService;
+        import com.ticket.ticketproject.dataStorage.Client;
+        import com.ticket.ticketproject.dataStorage.Event;
+        import com.ticket.ticketproject.dataStorage.EventTicket;
+        import com.ticket.ticketproject.dataStorage.FormData;
+        import org.hibernate.Session;
+        import org.hibernate.query.Query;
+        import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.core.io.InputStreamResource;
+        import org.springframework.http.HttpHeaders;
+        import org.springframework.http.MediaType;
+        import org.springframework.http.ResponseEntity;
+        import org.springframework.stereotype.Controller;
+        import org.springframework.ui.Model;
+        import org.springframework.web.bind.annotation.*;
+        import org.springframework.web.servlet.ModelAndView;
 
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+        import javax.servlet.http.HttpServletRequest;
+        import javax.servlet.http.HttpServletResponse;
+        import javax.servlet.http.HttpSession;
+        import java.io.File;
+        import java.io.FileInputStream;
+        import java.io.IOException;
+        import java.util.Date;
+        import java.util.Iterator;
+        import java.util.List;
+        import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
-@SessionAttributes({"client","ticket"})
+@SessionAttributes({"client","cart","ticket"})
 public class ViewController {
 
     //Päringute service-id
@@ -46,14 +47,18 @@ public class ViewController {
     @Autowired
     EventService eventService;
 
-    //isendite loomine sessionisse panemiseks
-    @ModelAttribute("client")
-    public Client createClient(){
-        return new Client();
-    }
 
-    @ModelAttribute("ticket")
-    public EventTicket createEventTicket(){return new EventTicket();}
+//isendite loomine sessionisse panemiseks
+@ModelAttribute("client")
+public Client createClient(){
+    return new Client();
+}
+
+
+@ModelAttribute("cart")
+public TicketCart createCart(){return new TicketCart();}
+@ModelAttribute("ticket")
+public EventTicket createTicket(){return new EventTicket();}
 
     public void deleteTickets(){
         File tickets = new File(System.getProperty("user.dir")+"\\piletid");
@@ -70,24 +75,24 @@ public class ViewController {
         deleteTickets();
         List<Event> events = eventService.getAll();
         model.addAttribute("eventList",events);
-        return "index";
+    return "index";
     }
 
 
-    //Pileti tüübi valimine
+//Pileti tüübi valimine
     @RequestMapping("/selection/{eventID}")
-    public String selectTicket(Model model,@PathVariable String eventID){
-        //Päring vastava evendi kõikide valikus olevate piletite saamiseks.
-        List<EventTicket> ticketList = ticketService.getAllByEventId(Integer.parseInt(eventID));
-        model.addAttribute("ticketList",ticketList);
+     public String selectTicket(Model model,@PathVariable String eventID){
+    //Päring vastava evendi kõikide valikus olevate piletite saamiseks.
+    List<EventTicket> ticketList = ticketService.getAllByEventId(Integer.parseInt(eventID));
+    model.addAttribute("ticketList",ticketList);
 
-        return "select-ticket";
+    return "select-ticket";
     }
 
     //Testimiseks atomic counter.
     AtomicInteger counter = new AtomicInteger(0);
 
-    //Form
+//Form
     @RequestMapping(value="client-form/{eventID}/{ticketType}", method = RequestMethod.GET)
     public String LoadForm(Model model, @PathVariable String eventID, @PathVariable String ticketType, @ModelAttribute EventTicket ticket) {
 
@@ -95,7 +100,7 @@ public class ViewController {
         int event = Integer.parseInt(eventID);
         int type= Integer.parseInt(ticketType);
         ticket = ticketService.getByEventIdAndTicketType(event,type);
-        //Model andmete formi abil täitmiseks ja edastamiseks.
+      //Model andmete formi abil täitmiseks ja edastamiseks.
         model.addAttribute("ticket",ticket);
         model.addAttribute("form", new FormData());
         model.addAttribute("datetime", new Date());
@@ -105,12 +110,14 @@ public class ViewController {
     //redirect leht
     //edastab Client ja EventTicket isendid TicketControllerile.
     @RequestMapping(value="/calculate", method = RequestMethod.POST)
-    public String submitForm(Model model,@ModelAttribute("client") Client client, @ModelAttribute("form") FormData form,@SessionAttribute EventTicket ticket) {
+    public String submitForm(@ModelAttribute("client") Client client, @ModelAttribute("form") FormData form,@ModelAttribute("cart") TicketCart cart,@SessionAttribute("ticket") EventTicket ticket) {
         form.setUser_type("client");
-        client = new Client(form.getName(),form.getFamilyName(),Integer.parseInt(form.getAge()),form.getEmail(),form.getIban(),form.getAddress(),form.getCounty(),Long.parseLong(form.getIndex()),form.isYes_mail(),form.getTicketCount(),1000);
-        //Client isend salvestatakse andmebaasi.
-        clientService.saveThis(client);
-        return "redirect:send";
+        client = new Client(form.getName(),form.getFamilyName(),Integer.parseInt(form.getAge()),form.getEmail(),form.getIban(),form.getAddress(),form.getCounty(),Long.parseLong(form.getIndex()),form.isYes_mail(),1000);;
+        cart.setClient(client);
+        cart.addToCart(ticket);
+
+        return "redirect:cartview";
+
     }
     //Viimane kinnitusleht
     @RequestMapping(value="/confirmed")

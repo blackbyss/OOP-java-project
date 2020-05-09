@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 @Component
 public class TicketCart {
@@ -14,32 +15,29 @@ public class TicketCart {
     private List<EventTicket> cart; //Ostukorv
     private List<EventTicket>purchased; //FIXME: Ei tea veel kas läheb tarvis.
     private double cartPrice;
-    OwnerService os;
     @Autowired
     private Client client;
-    public TicketCart(Client client,OwnerService os){
-        this.client = client;
-        this.cart = client.getCart();
-        this.purchased = client.getPurchased();
-        this.os=os;
+
+    public TicketCart(){
+        this.cart = new ArrayList<>();
+        this.purchased = new ArrayList<>();
     }
+
+
     public void addToCart(EventTicket ticket) {
         cartPrice += ticket.getPrice();
         cart.add(ticket);
-        client.setCart(cart);
     }
     public void removeFromCart(EventTicket ticket){
         cartPrice-= ticket.getPrice();
         cart.remove(ticket);
-        client.setCart(cart);
     }
     public void clearCart(){
         cart.clear();
         cartPrice = 0;
-        client.setCart(cart);
     }
     //Maksmise meetod.
-    public boolean buy(EventTicket ticket){
+    public boolean buy(EventTicket ticket,OwnerService os){
        Owner owner= os.getByEventID(ticket.getEventID());
 
         double sum= ticket.getPrice();
@@ -54,7 +52,7 @@ public class TicketCart {
             return false;
         }
     }
-    public boolean buyAll(Owner thisOwner){
+    public boolean buyAll(OwnerService os){
         double accountBalance = client.getAccountBalance();
         if (accountBalance >= cartPrice && !cart.isEmpty()) {
             // Owner thisOwner = ownerService.getByEventID(cart.get(0).getEventID());
@@ -79,5 +77,18 @@ public class TicketCart {
             return false;
         }
     }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public List<EventTicket> getCart() {
+        return cart;
+    }
+
 
 }
