@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="../static/css/index.css" th:href="@{/css/index.css}">
 </head>
 <body>
-    <div class="container">
-        <h2>Aitäh, et kasutasite meie piletiteenust!</h2>
-        <h3 th:if="*{toMail==true}"th:text="'Kiri saadeti aadressile: '+${client.getEmail()}" >Kiri saadeti aadressile: replacethis@gmail.com</h3>
-        <p th:if="*{toMail==false}" >Lae pilet alla <a class="textLink" th:href="@{/confirmed/download}">siit.</a></p>
-        <a  class="button" href="client-form.html" th:href="@{/}">Tagasi</a>
-    </div>
+<div class="container">
+    <h2>Aitäh, et kasutasite meie piletiteenust!</h2>
+    <h3 th:if="*{toMail==true}"th:text="'Kiri saadeti aadressile: '+${client.getEmail()}" >Kiri saadeti aadressile: replacethis@gmail.com</h3>
+    <p th:if="*{toMail==false}" >Lae pilet alla <a class="textLink" th:href="@{/confirmed/download}">siit.</a></p>
+    <a  class="button" href="client-form.html" th:href="@{/}">Tagasi</a>
+</div>
 </body>
 </html>

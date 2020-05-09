@@ -33,6 +33,6 @@ VALUES (7,'seeniorpilet',59.99,2,3);
 INSERT INTO EVENT_TICKET (id,name,price,eventid,ticket_type)
 VALUES (8,'early bird',79.99,2,4);
 
-INSERT INTO Owner (id,name,email,iban,eventID,family_name, address, age, county, index,account_balance)
-VALUES (10,'Peeter','peeter.moos@gmail.com','ee2345234',1,'Moos','address',18, 'county', '12345',125000);
+INSERT INTO Owner (id,name,email,iban,eventID,family_name, address, age, county, index,ticket_count,account_balance)
+VALUES (10,'Peeter','peeter.moos@gmail.com','ee2345234',1,'Moos','address',18, 'county', '12345',1,125000);
 

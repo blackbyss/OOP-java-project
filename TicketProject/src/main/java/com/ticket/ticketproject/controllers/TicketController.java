@@ -39,7 +39,7 @@ public class TicketController {
         if (ost) {
             long kood = ticket.getEventID() + ThreadLocalRandom.current().nextInt(0, 999999);
             String[] info = {String.valueOf(java.time.LocalDate.now()), "ID: " + ticket.getEventID(), "Nimi: " + eventService.getByID(ticket.getEventID()).getName(), "Piletitüüp: " + ticket.getName(), "Hind: " + ticket.getPrice()};
-            String file = pilet.pdf(kood, info);
+            String file = pilet.pdf(kood, info,client.getTicketCount());
 
             TicketHistory history = new TicketHistory(kood);
             ticketHistoryService.saveThis(history);
@@ -55,7 +55,6 @@ public class TicketController {
 
 
             }else{
-               //TODO: Download funktsioon siia.
             }
 
         }
