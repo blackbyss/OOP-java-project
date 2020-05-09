@@ -8,6 +8,7 @@ import com.ticket.ticketproject.dataStorage.Client;
 import com.ticket.ticketproject.dataStorage.Event;
 import com.ticket.ticketproject.dataStorage.EventTicket;
 import com.ticket.ticketproject.dataStorage.FormData;
+import com.ticket.ticketproject.functionalities.ZipDirectory;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +25,12 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+
 
 @Controller
 @SessionAttributes({"client","ticket"})
@@ -54,15 +54,6 @@ public class ViewController {
 
     @ModelAttribute("ticket")
     public EventTicket createEventTicket(){return new EventTicket();}
-
-    public void deleteTickets(){
-        File tickets = new File(System.getProperty("user.dir")+"\\piletid");
-        String[]entries = tickets.list();
-        for(String s: entries){
-            File currentFile = new File(tickets.getPath(),s);
-            currentFile.delete();
-        }
-    }
 
     //Index leht ja pileti valimine
     @RequestMapping("/")
@@ -124,9 +115,21 @@ public class ViewController {
     {
         File folder = new File(System.getProperty("user.dir")+"\\piletid");
         File[] listOfFiles = folder.listFiles();
+        File file;
+        InputStreamResource resource;
+        if(listOfFiles.length == 1) {
+            file = new File(folder + "\\" + listOfFiles[0].getName());
+            resource = new InputStreamResource(new FileInputStream(file));
+        }
+        else {
+            ZipDirectory zipDirectory = new ZipDirectory();
+            zipDirectory.generateFileList(new File(System.getProperty("user.dir")+"\\piletid"));
+            zipDirectory.zipIt(System.getProperty("user.dir")+"\\piletid.zip");
+            file = new File(System.getProperty("user.dir")+"\\piletid.zip");
+            resource = new InputStreamResource(new FileInputStream(file));
 
-        File file = new File(folder+"\\"+listOfFiles[0].getName());
-        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+        }
+
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition",
@@ -143,4 +146,20 @@ public class ViewController {
         return responseEntity;
     }
 
+    private void deleteTickets(){
+        File tickets = new File(System.getProperty("user.dir")+"\\piletid");
+        boolean exists = tickets.exists();
+        if(exists){
+            String[]entries = tickets.list();
+            for(String s: entries){
+                File currentFile = new File(tickets.getPath(),s);
+                currentFile.delete();
+            }
+        }
+        else{
+            String path = System.getProperty("user.dir")+"\\piletid";
+            File directory = new File(path);
+            directory.mkdir();
+        }
+    }
 }

@@ -10,9 +10,9 @@ import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
 public class PdfPilet {
     public String pdf(long piletikood, String[] info) throws Exception {
-        String path = System.getProperty("user.dir");
+        String path = System.getProperty("user.dir")+"\\piletid";
         String fileName = "pilet"+piletikood+".pdf";
-        String filePath = path+"\\piletid\\"+fileName;
+        String filePath = path+"\\"+fileName;
         File file = new File(filePath);
         PDDocument doc = new PDDocument();
 

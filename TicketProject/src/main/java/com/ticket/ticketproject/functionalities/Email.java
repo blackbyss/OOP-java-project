@@ -1,7 +1,11 @@
 package com.ticket.ticketproject.functionalities;
 
 import com.ticket.ticketproject.dataStorage.FormData;
+import org.springframework.core.io.InputStreamResource;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -20,11 +24,27 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 public class Email extends FormData {
-    public void email(String to, String file, boolean yes_mail) {
+    public void email(String to, boolean yes_mail) throws IOException {
         // String to = "are.mathias@gmail.com";//Saaja meil
         if (yes_mail) {
             String from = "piletikuller@gmail.com";//Saatja meil
 
+            File folder = new File(System.getProperty("user.dir")+"\\piletid");
+            File[] listOfFiles = folder.listFiles();
+            String file;
+            String fileName;
+            if(listOfFiles.length == 1) {
+                file = folder + "\\" + listOfFiles[0].getName();
+                fileName = listOfFiles[0].getName();
+            }
+            else {
+                ZipDirectory zipDirectory = new ZipDirectory();
+                zipDirectory.generateFileList(new File(System.getProperty("user.dir")+"\\piletid"));
+                zipDirectory.zipIt(System.getProperty("user.dir")+"\\piletid.zip");
+                file = System.getProperty("user.dir")+"\\piletid.zip";
+                fileName = "piletid.zip";
+
+            }
             final String username = from;//Saatja meil
             final String password = "saadauusp1let";//Saatja parool
 
@@ -75,7 +95,7 @@ public class Email extends FormData {
                 // String file = "pom.xml";
                 DataSource src = new FileDataSource(file);
                 messageBodyPart.setDataHandler(new DataHandler(src));
-                messageBodyPart.setFileName(file);
+                messageBodyPart.setFileName(fileName);
                 multipart.addBodyPart(messageBodyPart);
 
                 message.setContent(multipart);
