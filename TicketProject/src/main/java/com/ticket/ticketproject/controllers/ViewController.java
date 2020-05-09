@@ -61,6 +61,7 @@ public class ViewController {
 
     @RequestMapping("/")
     public String index() {
+        deleteTickets();
         return "index";
     }
 

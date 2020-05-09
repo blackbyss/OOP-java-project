@@ -24,9 +24,8 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 public class Email extends FormData {
-    public void email(String to, boolean yes_mail) throws IOException {
+    public void email(String to) throws IOException {
         // String to = "are.mathias@gmail.com";//Saaja meil
-        if (yes_mail) {
             String from = "piletikuller@gmail.com";//Saatja meil
 
             File folder = new File(System.getProperty("user.dir")+"\\piletid");
@@ -109,4 +108,3 @@ public class Email extends FormData {
             }
         }
     }
-}
