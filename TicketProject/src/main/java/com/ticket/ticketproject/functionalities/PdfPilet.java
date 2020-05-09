@@ -10,9 +10,11 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
 public class PdfPilet {
-    public String pdf(long piletikood, String[] info, int ticketCount) throws Exception {
-        String fileName = "pilet" + piletikood + ".pdf";
-        File file = new File(fileName);
+    public String pdf(long piletikood, String[] info,int ticketCount) throws Exception {
+        String path = System.getProperty("user.dir");
+        String fileName = "pilet"+piletikood+".pdf";
+        String filePath = path+"\\piletid\\"+fileName;
+        File file = new File(filePath);
         PDDocument doc = new PDDocument();
         for (int i = 0; i < ticketCount; i++) {
 
@@ -74,9 +76,9 @@ public class PdfPilet {
 
             contents.close();
         }
-        doc.save("pilet" + piletikood + ".pdf");//Salvestab dokumendi
+        doc.save(filePath);//Salvestab dokumendi
 
         doc.close();//suleb dokumendi
-        return fileName;
+        return filePath;
     }
 }
