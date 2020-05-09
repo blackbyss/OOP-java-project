@@ -18,7 +18,7 @@
             <div class ="formheader"><h1>OSTA PILET SIIT</h1></div>
 
             <label for="eesnimi">Eesnimi:</label><br>
-            <input type="text" th:field="*{name}" id="eesnimi" name="eesnimi" class="textfield"  required><br>
+            <input type="text" th:field="${form.name}" id="eesnimi" name="eesnimi" class="textfield"  required><br>
 
             <label for="perenimi">Perekonnanimi:</label><br>
             <input type="text" id="perenimi" name="perenimi"class="textfield" th:field="*{familyName}" required><br>

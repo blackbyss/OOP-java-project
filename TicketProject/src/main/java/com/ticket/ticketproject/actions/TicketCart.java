@@ -14,14 +14,16 @@ public class TicketCart {
     private List<EventTicket> cart; //Ostukorv
     private List<EventTicket>purchased; //FIXME: Ei tea veel kas läheb tarvis.
     private double cartPrice;
-    OwnerService os;
     @Autowired
     private Client client;
-    public TicketCart(Client client,OwnerService os){
+
+    public TicketCart(){}
+
+
+    public TicketCart(Client client){
         this.client = client;
         this.cart = client.getCart();
         this.purchased = client.getPurchased();
-        this.os=os;
     }
     public void addToCart(EventTicket ticket) {
         cartPrice += ticket.getPrice();
@@ -39,7 +41,7 @@ public class TicketCart {
         client.setCart(cart);
     }
     //Maksmise meetod.
-    public boolean buy(EventTicket ticket){
+    public boolean buy(EventTicket ticket,OwnerService os){
        Owner owner= os.getByEventID(ticket.getEventID());
 
         double sum= ticket.getPrice();
@@ -54,7 +56,7 @@ public class TicketCart {
             return false;
         }
     }
-    public boolean buyAll(Owner thisOwner){
+    public boolean buyAll(OwnerService os){
         double accountBalance = client.getAccountBalance();
         if (accountBalance >= cartPrice && !cart.isEmpty()) {
             // Owner thisOwner = ownerService.getByEventID(cart.get(0).getEventID());
@@ -80,4 +82,15 @@ public class TicketCart {
         }
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public List<EventTicket> getCart() {
+        return cart;
+    }
 }

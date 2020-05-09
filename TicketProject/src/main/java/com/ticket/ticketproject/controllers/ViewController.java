@@ -3,6 +3,7 @@ package com.ticket.ticketproject.controllers;
 
         import com.ticket.ticketproject.actions.ClientService;
         import com.ticket.ticketproject.actions.EventService;
+        import com.ticket.ticketproject.actions.TicketCart;
         import com.ticket.ticketproject.actions.TicketService;
         import com.ticket.ticketproject.dataStorage.Client;
         import com.ticket.ticketproject.dataStorage.Event;
@@ -33,12 +34,10 @@ package com.ticket.ticketproject.controllers;
         import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
-@SessionAttributes({"client","ticket"})
+@SessionAttributes({"client","cart","ticket"})
 public class ViewController {
 
     //Päringute service-id
-    @Autowired
-    ClientService clientService;
 
     @Autowired
     TicketService ticketService;
@@ -53,8 +52,11 @@ public Client createClient(){
     return new Client();
 }
 
+
+@ModelAttribute("cart")
+public TicketCart createCart(){return new TicketCart();}
 @ModelAttribute("ticket")
-public EventTicket createEventTicket(){return new EventTicket();}
+public EventTicket createTicket(){return new EventTicket();}
 
 //Index leht ja pileti valimine
     @RequestMapping("/")
@@ -80,12 +82,12 @@ public EventTicket createEventTicket(){return new EventTicket();}
 
 //Form
     @RequestMapping(value="client-form/{eventID}/{ticketType}", method = RequestMethod.GET)
-    public String LoadForm(Model model, @PathVariable String eventID, @PathVariable String ticketType, @ModelAttribute EventTicket ticket) {
+    public String LoadForm(Model model, @PathVariable String eventID, @PathVariable String ticketType,@ModelAttribute("ticket") EventTicket ticket) {
 
         //EventTicketi päring ürituse id ja piletitüübi abil
         int event = Integer.parseInt(eventID);
         int type= Integer.parseInt(ticketType);
-      ticket = ticketService.getByEventIdAndTicketType(event,type);
+        ticket = ticketService.getByEventIdAndTicketType(event,type);
       //Model andmete formi abil täitmiseks ja edastamiseks.
         model.addAttribute("ticket",ticket);
         model.addAttribute("form", new FormData());
@@ -96,12 +98,12 @@ public EventTicket createEventTicket(){return new EventTicket();}
     //redirect leht
     //edastab Client ja EventTicket isendid TicketControllerile.
     @RequestMapping(value="/calculate", method = RequestMethod.POST)
-    public String submitForm(Model model,@ModelAttribute("client") Client client, @ModelAttribute("form") FormData form,@SessionAttribute EventTicket ticket) {
+    public String submitForm(@ModelAttribute("client") Client client, @ModelAttribute("form") FormData form,@SessionAttribute("cart") TicketCart cart,@SessionAttribute("ticket") EventTicket ticket) {
         form.setUser_type("client");
         client = new Client(form.getName(),form.getFamilyName(),Integer.parseInt(form.getAge()),form.getEmail(),form.getIban(),form.getAddress(),form.getCounty(),Long.parseLong(form.getIndex()),form.isYes_mail(),1000);
-        //Client isend salvestatakse andmebaasi.
-        clientService.saveThis(client);
-        return "redirect:send";
+        cart = new TicketCart(client);
+        return "redirect:cartview";
+
     }
     //Viimane kinnitusleht
     @RequestMapping(value="/confirmed")
