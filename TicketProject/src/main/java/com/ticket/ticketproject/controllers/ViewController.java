@@ -46,8 +46,6 @@ public class ViewController {
     @Autowired
     EventService eventService;
 
-    String fileName = "";
-
     //isendite loomine sessionisse panemiseks
     @ModelAttribute("client")
     public Client createClient(){
@@ -57,9 +55,19 @@ public class ViewController {
     @ModelAttribute("ticket")
     public EventTicket createEventTicket(){return new EventTicket();}
 
+    public void deleteTickets(){
+        File tickets = new File(System.getProperty("user.dir")+"\\piletid");
+        String[]entries = tickets.list();
+        for(String s: entries){
+            File currentFile = new File(tickets.getPath(),s);
+            currentFile.delete();
+        }
+    }
+
     //Index leht ja pileti valimine
     @RequestMapping("/")
     public String index(Model model){
+        deleteTickets();
         List<Event> events = eventService.getAll();
         model.addAttribute("eventList",events);
         return "index";
@@ -106,8 +114,7 @@ public class ViewController {
     }
     //Viimane kinnitusleht
     @RequestMapping(value="/confirmed")
-    public String confirm(@ModelAttribute("client") Client client, @ModelAttribute("toMail") boolean toMail, @ModelAttribute("fileName") String file){
-        fileName = file;
+    public String confirm(@ModelAttribute("client") Client client, @ModelAttribute("toMail") boolean toMail){
         return "confirmation";
     }
 
@@ -115,8 +122,10 @@ public class ViewController {
     @ResponseBody
     public ResponseEntity<Object>  downloadFile() throws IOException
     {
-        String filename = "DownloadTestimiseks.pdf";
-        File file = new File(fileName);
+        File folder = new File(System.getProperty("user.dir")+"\\piletid");
+        File[] listOfFiles = folder.listFiles();
+
+        File file = new File(folder+"\\"+listOfFiles[0].getName());
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
         HttpHeaders headers = new HttpHeaders();

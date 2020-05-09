@@ -55,8 +55,6 @@ public class TicketController {
 
 
             }else{
-                String fileName = "pilet"+kood+".pdf";
-                mav.addObject("fileName", fileName);
             }
 
         }
