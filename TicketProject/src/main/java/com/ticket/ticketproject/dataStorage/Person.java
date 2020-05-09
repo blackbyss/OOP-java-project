@@ -17,7 +17,7 @@ public class Person implements Storage {
     public Person() {
     }
 
-    public Person(String name, String familyName, int age, String email, String iban, String address, String county, long index, int ticketCount, double accountBalance) {
+    public Person(String name, String familyName, int age, String email, String iban, String address, String county, long index, double accountBalance) {
         this.name = name;
         this.familyName = familyName;
         this.age = age;
@@ -26,7 +26,6 @@ public class Person implements Storage {
         this.address = address;
         this.county = county;
         this.index = index;
-        this.ticketCount = ticketCount;
         this.accountBalance = accountBalance;
     }
 

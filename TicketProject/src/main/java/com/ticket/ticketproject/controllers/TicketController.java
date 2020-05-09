@@ -43,7 +43,7 @@ public class TicketController {
         if (ost) {
             long kood = ticket.getEventID() + ThreadLocalRandom.current().nextInt(0, 999999);
             String[] info = {String.valueOf(java.time.LocalDate.now()), "ID: " + ticket.getEventID(), "Nimi: " + eventService.getByID(ticket.getEventID()).getName(), "Piletitüüp: " + ticket.getName(), "Hind: " + ticket.getPrice()};
-            String file = pilet.pdf(kood, info);
+            String file = pilet.pdf(kood, info,1); //TODO:!!!
 
             TicketHistory history = new TicketHistory(kood);
 
@@ -60,7 +60,7 @@ public class TicketController {
             boolean toMail = client.isYes_mail();
             mav.addObject("toMail", toMail);
             if(toMail){
-                emailKlass.email(client.getEmail(), file,true);
+                emailKlass.email(client.getEmail(), file);
             }
 
         }

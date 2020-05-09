@@ -11,7 +11,7 @@ public class Owner extends Person implements Storage {
 
 
     public Owner(String name, String familyName, int age, String email, String iban, String address, String county, long index, long eventID,int ticketCount, double accountBalance) {
-        super(name, familyName, age, email, iban, address, county, index,ticketCount, accountBalance);
+        super(name, familyName, age, email, iban, address, county, index, accountBalance);
     }
 
     public Owner() {

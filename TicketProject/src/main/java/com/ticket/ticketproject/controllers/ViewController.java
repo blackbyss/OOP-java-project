@@ -72,7 +72,7 @@ public EventTicket createTicket(){return new EventTicket();}
     //Index leht ja pileti valimine
     @RequestMapping("/")
     public String index(Model model){
-        deleteTickets();
+       // deleteTickets();
         List<Event> events = eventService.getAll();
         model.addAttribute("eventList",events);
     return "index";
