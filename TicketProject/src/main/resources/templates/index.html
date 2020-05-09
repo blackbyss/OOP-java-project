@@ -12,15 +12,8 @@
 <body>
 
 <div class="container">
-    <h1>Valige pilet</h1>
-    <div class="event-box" th:each="e: ${eventList}" >
-        <h2 th:text="${e.getName()}">Nimi </h2>
-        <p th:text="${e.getHappeningTime()} +'      ' +${e.getLocation()}">2020-04-24</p>
-        <p th:text="'Vanusepiirang:  '+${e.getAgeLimit()}+'+'">18+</p>
-         <a href="select-ticket.html" class="button" th:href="@{~/selection/{event}(event=${e.getId()})}" th:text="'Lisa korvi'">Lisa korvi</a>
+    <a th:href="@{/client-form}">Alusta</a>
 
-     </div>
-
- </div>
- </body>
- </html>
+</div>
+</body>
+</html>

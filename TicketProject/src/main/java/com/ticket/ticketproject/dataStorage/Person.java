@@ -11,11 +11,13 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-@MappedSuperclass
-public class Person implements Storage{
-    public Person(){}
 
-    public Person(String name, String familyName, int age, String email, String iban, String address, String county, long index,double accountBalance) {
+@MappedSuperclass
+public class Person implements Storage {
+    public Person() {
+    }
+
+    public Person(String name, String familyName, int age, String email, String iban, String address, String county, long index, double accountBalance) {
         this.name = name;
         this.familyName = familyName;
         this.age = age;
@@ -24,7 +26,7 @@ public class Person implements Storage{
         this.address = address;
         this.county = county;
         this.index = index;
-        this.accountBalance=accountBalance;
+        this.accountBalance = accountBalance;
     }
 
     //Variables
@@ -39,9 +41,9 @@ public class Person implements Storage{
     private String address;
     private String county;
     private long index;
+    private int ticketCount;
     @NotNull
     private double accountBalance;
-
 
 
     //Getters and Setters
@@ -111,7 +113,6 @@ public class Person implements Storage{
     public void setIndex(long index) {
         this.index = index;
     }
-
 
     public double getAccountBalance() {
         return accountBalance;

@@ -9,10 +9,13 @@ import com.ticket.ticketproject.dataStorage.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Controller
@@ -28,13 +31,14 @@ public class TicketController {
     TicketHistoryService ticketHistoryService;
     @Autowired
     OwnerService ownerService;
-
-
-    @RequestMapping("/send")
-    public ModelAndView sendEmailandSaveEntities(@SessionAttribute("client") Client client, @SessionAttribute("ticket")EventTicket ticket) throws Exception {
+    @Autowired
+    ClientService clientService;
+    @Transactional
+    @RequestMapping(value="/send", method = RequestMethod.GET)
+    public ModelAndView sendEmailandSaveEntities(@SessionAttribute("client") Client client,@SessionAttribute("cart") TicketCart cart) throws Exception {
         client.setAccountBalance(1000);
-        TicketCart ticketCart = new TicketCart(client,ownerService);
-        boolean ost = ticketCart.buy(ticket);
+        EventTicket ticket =cart.getCart().get(0);
+        boolean ost = cart.buy(ticket,ownerService);
         ModelAndView mav = new ModelAndView();
         if (ost) {
             long kood = ticket.getEventID() + ThreadLocalRandom.current().nextInt(0, 999999);
@@ -42,6 +46,11 @@ public class TicketController {
             pilet.pdf(kood, info);
 
             TicketHistory history = new TicketHistory(kood);
+
+
+            if(clientService.getByNameAndFamiliyNameAndEmail(client.getName(),client.getFamilyName(),client.getEmail())==null){
+                clientService.saveThis(client);
+            }
             ticketHistoryService.saveThis(history);
 
 
@@ -51,15 +60,12 @@ public class TicketController {
             boolean toMail = client.isYes_mail();
             mav.addObject("toMail", toMail);
             if(toMail){
-                emailKlass.email(client.getEmail(),true);
-
-
-            }else{
+                emailKlass.email(client.getEmail());
             }
 
         }
         else{
-            mav.setViewName("error123");
+            mav.setViewName("error");
         }
         return mav;
     }
