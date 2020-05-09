@@ -13,13 +13,14 @@ import java.util.List;
 @Component
 public class Client extends Person implements Storage {
     boolean yes_mail; //Kas soovib emailiga piletit?
+    int ticketCount;
     @Transient
     private List<EventTicket> cart; //Ostukorv
     @Transient
     private List<EventTicket>purchased; //FIXME: Ei tea veel kas läheb tarvis.
 
-    public Client(String eesnimi, String perenimi, int vanus, String email, String iban, String aadress, String maakond, long indeks, boolean yes_mail,double accountBalance) {
-        super(eesnimi, perenimi, vanus, email, iban, aadress, maakond, indeks,accountBalance);
+    public Client(String eesnimi, String perenimi, int vanus, String email, String iban, String aadress, String maakond, long indeks, boolean yes_mail, int ticketCount, double accountBalance) {
+        super(eesnimi, perenimi, vanus, email, iban, aadress, maakond, indeks,ticketCount, accountBalance);
         this.yes_mail = yes_mail;
         cart=new ArrayList<EventTicket>();
         purchased=new ArrayList<EventTicket>();
@@ -41,6 +42,13 @@ public class Client extends Person implements Storage {
         this.yes_mail = yes_mail;
     }
 
+    public int getTicketCount() {
+        return ticketCount;
+    }
+
+    public void setTicketCount(int ticketCount) {
+        this.ticketCount = ticketCount;
+    }
 
     public List<EventTicket> getCart() {
         return cart;

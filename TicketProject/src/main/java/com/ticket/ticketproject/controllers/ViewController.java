@@ -89,7 +89,7 @@ public EventTicket createEventTicket(){return new EventTicket();}
     @RequestMapping(value="/calculate", method = RequestMethod.POST)
     public String submitForm(@ModelAttribute("client") Client client, @ModelAttribute("form") FormData form,@SessionAttribute EventTicket ticket) {
         form.setUser_type("client");
-        client = new Client(form.getName(),form.getFamilyName(),Integer.parseInt(form.getAge()),form.getEmail(),form.getIban(),form.getAddress(),form.getCounty(),Long.parseLong(form.getIndex()),form.isYes_mail(),1000);
+        client = new Client(form.getName(),form.getFamilyName(),Integer.parseInt(form.getAge()),form.getEmail(),form.getIban(),form.getAddress(),form.getCounty(),Long.parseLong(form.getIndex()),form.isYes_mail(),form.getTicketCount(),1000);
         //Client isend salvestatakse andmebaasi.
         clientService.saveThis(client);
         return "redirect:send";
