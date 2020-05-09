@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Thank you!</title>
+
+    <link rel="stylesheet" href="../static/bootstrap.css" th:href="@{/bootstrap.css}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="../static/css/index.css" th:href="@{/css/index.css}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Valige pilet</h1>
+    <div class="event-box" th:each="e: ${eventList}" >
+        <h2 th:text="${e.getName()}">Nimi </h2>
+        <p th:text="${e.getHappeningTime()} +'      ' +${e.getLocation()}">2020-04-24</p>
+        <p th:text="'Vanusepiirang:  '+${e.getAgeLimit()}+'+'">18+</p>
+         <a href="select-ticket.html" class="button" th:href="@{~/selection/{event}(event=${e.getId()})}" th:text="'Lisa korvi'">Lisa korvi</a>
+
+     </div>
+
+ </div>
+ </body>
+ </html>

@@ -71,26 +71,7 @@ public class TicketController {
     }
 
 
-    @RequestMapping(value="/cartview", method=RequestMethod.GET)
-    public String cartView(@SessionAttribute("client")Client client, Model model, @SessionAttribute("cart")TicketCart cart){
-        if(client.getName() != null && client.getFamilyName()!=null){
-            model.addAttribute("ticketCart",cart.getCart());
-            return "cart";
-        }else{
-            return "error";
-        }
-    }
 
-    @RequestMapping(value="/cartview/remove/{ticketIndex}", method=RequestMethod.GET)
-    public String removeTicket(@PathVariable("ticketIndex") String ticketIndex, @ModelAttribute("ticketCart")List<EventTicket>ticketCart,@SessionAttribute("client")Client client){
-        try{
-            int index = Integer.parseInt(ticketIndex);
-            ticketCart.remove(index);
-            return "redirect:cartview";
-        }catch (NumberFormatException e){
-            return "error";
-        }
     }
 
 
-}

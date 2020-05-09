@@ -9,8 +9,6 @@ package com.ticket.ticketproject.controllers;
         import com.ticket.ticketproject.dataStorage.Event;
         import com.ticket.ticketproject.dataStorage.EventTicket;
         import com.ticket.ticketproject.dataStorage.FormData;
-        import org.hibernate.Session;
-        import org.hibernate.query.Query;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.core.io.InputStreamResource;
         import org.springframework.http.HttpHeaders;
@@ -19,17 +17,12 @@ package com.ticket.ticketproject.controllers;
         import org.springframework.stereotype.Controller;
         import org.springframework.ui.Model;
         import org.springframework.web.bind.annotation.*;
-        import org.springframework.web.servlet.ModelAndView;
 
 
-        import javax.servlet.http.HttpServletRequest;
-        import javax.servlet.http.HttpServletResponse;
-        import javax.servlet.http.HttpSession;
         import java.io.File;
         import java.io.FileInputStream;
         import java.io.IOException;
         import java.util.Date;
-        import java.util.Iterator;
         import java.util.List;
         import java.util.concurrent.atomic.AtomicInteger;
 
@@ -48,91 +41,123 @@ public class ViewController {
     EventService eventService;
 
 
-//isendite loomine sessionisse panemiseks
-@ModelAttribute("client")
-public Client createClient(){
-    return new Client();
-}
+    //isendite loomine sessionisse panemiseks
+    @ModelAttribute("client")
+    public Client createClient() {
+        return new Client();
+    }
 
 
-@ModelAttribute("cart")
-public TicketCart createCart(){return new TicketCart();}
-@ModelAttribute("ticket")
-public EventTicket createTicket(){return new EventTicket();}
+    @ModelAttribute("cart")
+    public TicketCart createCart() {
+        return new TicketCart();
+    }
 
-    public void deleteTickets(){
-        File tickets = new File(System.getProperty("user.dir")+"\\piletid");
-        String[]entries = tickets.list();
-        for(String s: entries){
-            File currentFile = new File(tickets.getPath(),s);
+    @ModelAttribute("ticket")
+    public EventTicket createTicket() {
+        return new EventTicket();
+    }
+
+    public void deleteTickets() {
+        File tickets = new File(System.getProperty("user.dir") + "\\piletid");
+        String[] entries = tickets.list();
+        for (String s : entries) {
+            File currentFile = new File(tickets.getPath(), s);
             currentFile.delete();
         }
     }
 
-    //Index leht ja pileti valimine
     @RequestMapping("/")
-    public String index(Model model){
-       // deleteTickets();
-        List<Event> events = eventService.getAll();
-        model.addAttribute("eventList",events);
-    return "index";
+    public String index() {
+        return "index";
+    }
+
+    @RequestMapping(value = "/client-form")
+    public String getFormData(Model model) {
+        model.addAttribute("form", new FormData());
+        return "client-form";
     }
 
 
-//Pileti tüübi valimine
-    @RequestMapping("/selection/{eventID}")
-     public String selectTicket(Model model,@PathVariable String eventID){
-    //Päring vastava evendi kõikide valikus olevate piletite saamiseks.
-    List<EventTicket> ticketList = ticketService.getAllByEventId(Integer.parseInt(eventID));
-    model.addAttribute("ticketList",ticketList);
+    //Index leht ja pileti valimine
+    @RequestMapping("/selection")
+    public String selectEvent(Model model,@ModelAttribute("client") Client client, @ModelAttribute("form") FormData form) {
+        if(client.getName()==null){
+            client = new Client(form.getName(), form.getFamilyName(), Integer.parseInt(form.getAge()), form.getEmail(), form.getIban(), form.getAddress(), form.getCounty(), Long.parseLong(form.getIndex()), form.isYes_mail(), 1000);
+        }
 
-    return "select-ticket";
+        List<Event> events = eventService.getAll();
+        model.addAttribute("eventList", events);
+        return "select-event";
+    }
+
+
+
+    //Pileti tüübi valimine
+    @RequestMapping("/selection/{eventID}")
+    public String selectTicket(Model model, @PathVariable String eventID) {
+        //Päring vastava evendi kõikide valikus olevate piletite saamiseks.
+        List<EventTicket> ticketList = ticketService.getAllByEventId(Integer.parseInt(eventID));
+        model.addAttribute("ticketList", ticketList);
+
+        return "select-ticket";
     }
 
     //Testimiseks atomic counter.
     AtomicInteger counter = new AtomicInteger(0);
 
-//Form
-    @RequestMapping(value="client-form/{eventID}/{ticketType}", method = RequestMethod.GET)
-    public String LoadForm(Model model, @PathVariable String eventID, @PathVariable String ticketType, @ModelAttribute EventTicket ticket) {
+    //Form
+    @RequestMapping(value = "selection/{eventID}/{ticketType}", method = RequestMethod.GET)
+    public String LoadForm(Model model, @PathVariable String eventID, @PathVariable String ticketType, @ModelAttribute("ticket") EventTicket ticket,@ModelAttribute("cart") TicketCart cart,@ModelAttribute("client")Client client) {
 
         //EventTicketi päring ürituse id ja piletitüübi abil
         int event = Integer.parseInt(eventID);
-        int type= Integer.parseInt(ticketType);
-        ticket = ticketService.getByEventIdAndTicketType(event,type);
-      //Model andmete formi abil täitmiseks ja edastamiseks.
-        model.addAttribute("ticket",ticket);
-        model.addAttribute("form", new FormData());
-        model.addAttribute("datetime", new Date());
-        model.addAttribute("counter",counter.incrementAndGet());
-        return "client-form";
-    }
-    //redirect leht
-    //edastab Client ja EventTicket isendid TicketControllerile.
-    @RequestMapping(value="/calculate", method = RequestMethod.POST)
-    public String submitForm(@ModelAttribute("client") Client client, @ModelAttribute("form") FormData form,@ModelAttribute("cart") TicketCart cart,@SessionAttribute("ticket") EventTicket ticket) {
-        form.setUser_type("client");
-        client = new Client(form.getName(),form.getFamilyName(),Integer.parseInt(form.getAge()),form.getEmail(),form.getIban(),form.getAddress(),form.getCounty(),Long.parseLong(form.getIndex()),form.isYes_mail(),1000);;
+        int type = Integer.parseInt(ticketType);
+        ticket = ticketService.getByEventIdAndTicketType(event, type);
+        //Model andmete formi abil täitmiseks ja edastamiseks.
         cart.setClient(client);
         cart.addToCart(ticket);
+        model.addAttribute("ticketCart", cart.getCart());
+        return "cart";
+    }
 
-        return "redirect:cartview";
+
+    @RequestMapping(value = "/cartview", method = RequestMethod.GET)
+    public String cartView(@SessionAttribute("client") Client client, Model model, @SessionAttribute("cart") TicketCart cart) {
+        if (client.getName() != null && client.getFamilyName() != null) {
+            model.addAttribute("ticketCart", cart.getCart());
+            return "cart";
+        } else {
+            return "error";
+        }
+    }
+
+    @RequestMapping(value = "/cartview/remove/{ticketIndex}", method = RequestMethod.GET)
+    public String removeTicket(@PathVariable("ticketIndex") String ticketIndex, @ModelAttribute("ticketCart") List<EventTicket> ticketCart, @SessionAttribute("client") Client client) {
+        try {
+            int index = Integer.parseInt(ticketIndex);
+            ticketCart.remove(index);
+            return "redirect:cartview";
+        } catch (NumberFormatException e) {
+            return "error";
+        }
 
     }
+
+
     //Viimane kinnitusleht
-    @RequestMapping(value="/confirmed")
-    public String confirm(@ModelAttribute("client") Client client, @ModelAttribute("toMail") boolean toMail){
+    @RequestMapping(value = "/confirmed")
+    public String confirm(@ModelAttribute("client") Client client, @ModelAttribute("toMail") boolean toMail) {
         return "confirmation";
     }
 
     @RequestMapping(value = "confirmed/download", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<Object>  downloadFile() throws IOException
-    {
-        File folder = new File(System.getProperty("user.dir")+"\\piletid");
+    public ResponseEntity<Object> downloadFile() throws IOException {
+        File folder = new File(System.getProperty("user.dir") + "\\piletid");
         File[] listOfFiles = folder.listFiles();
 
-        File file = new File(folder+"\\"+listOfFiles[0].getName());
+        File file = new File(folder + "\\" + listOfFiles[0].getName());
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
         HttpHeaders headers = new HttpHeaders();
@@ -149,5 +174,7 @@ public EventTicket createTicket(){return new EventTicket();}
 
         return responseEntity;
     }
+
+
 
 }

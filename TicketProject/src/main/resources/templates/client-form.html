@@ -14,11 +14,11 @@
 <body>
     <div class="container">
 
-        <form action="#" th:action="@{/calculate}" th:object="${form}" method="post">
+        <form action="#" th:action="@{/selection}" th:object="${form}" method="post">
             <div class ="formheader"><h1>OSTA PILET SIIT</h1></div>
 
             <label for="eesnimi">Eesnimi:</label><br>
-            <input type="text" th:field="${form.name}" id="eesnimi" name="eesnimi" class="textfield"  required><br>
+            <input type="text" th:field="*{name}" id="eesnimi" name="eesnimi" class="textfield"  required><br>
 
             <label for="perenimi">Perekonnanimi:</label><br>
             <input type="text" id="perenimi" name="perenimi"class="textfield" th:field="*{familyName}" required><br>
@@ -47,8 +47,6 @@
 
             <input type="submit" value="Osta pilet" id="submit-button" class="button" ><br>
 
-            <!---- Thredingu näide: ava mitu tab-i ja vaata numbrit------>
-            <p th:text="${datetime}+'   Counter:    '+${counter}">22.03.1999  -1</p>
         </form>
 
     </div>
