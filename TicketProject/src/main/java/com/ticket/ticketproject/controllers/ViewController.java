@@ -98,10 +98,12 @@ public EventTicket createTicket(){return new EventTicket();}
     //redirect leht
     //edastab Client ja EventTicket isendid TicketControllerile.
     @RequestMapping(value="/calculate", method = RequestMethod.POST)
-    public String submitForm(@ModelAttribute("client") Client client, @ModelAttribute("form") FormData form,@SessionAttribute("cart") TicketCart cart,@SessionAttribute("ticket") EventTicket ticket) {
+    public String submitForm(@ModelAttribute("client") Client client, @ModelAttribute("form") FormData form,@ModelAttribute("cart") TicketCart cart,@SessionAttribute("ticket") EventTicket ticket) {
         form.setUser_type("client");
-        client = new Client(form.getName(),form.getFamilyName(),Integer.parseInt(form.getAge()),form.getEmail(),form.getIban(),form.getAddress(),form.getCounty(),Long.parseLong(form.getIndex()),form.isYes_mail(),1000);
-        cart = new TicketCart(client);
+        client = new Client(form.getName(),form.getFamilyName(),Integer.parseInt(form.getAge()),form.getEmail(),form.getIban(),form.getAddress(),form.getCounty(),Long.parseLong(form.getIndex()),form.isYes_mail(),1000);;
+        cart.setClient(client);
+        cart.addToCart(ticket);
+
         return "redirect:cartview";
 
     }

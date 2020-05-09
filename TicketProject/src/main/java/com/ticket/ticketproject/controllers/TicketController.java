@@ -86,7 +86,6 @@ public class TicketController {
         try{
             int index = Integer.parseInt(ticketIndex);
             ticketCart.remove(index);
-            client.setCart(ticketCart);
             return "redirect:cartview";
         }catch (NumberFormatException e){
             return "error";

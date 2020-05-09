@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 @Component
 public class TicketCart {
@@ -17,28 +18,23 @@ public class TicketCart {
     @Autowired
     private Client client;
 
-    public TicketCart(){}
-
-
-    public TicketCart(Client client){
-        this.client = client;
-        this.cart = client.getCart();
-        this.purchased = client.getPurchased();
+    public TicketCart(){
+        this.cart = new ArrayList<>();
+        this.purchased = new ArrayList<>();
     }
+
+
     public void addToCart(EventTicket ticket) {
         cartPrice += ticket.getPrice();
         cart.add(ticket);
-        client.setCart(cart);
     }
     public void removeFromCart(EventTicket ticket){
         cartPrice-= ticket.getPrice();
         cart.remove(ticket);
-        client.setCart(cart);
     }
     public void clearCart(){
         cart.clear();
         cartPrice = 0;
-        client.setCart(cart);
     }
     //Maksmise meetod.
     public boolean buy(EventTicket ticket,OwnerService os){
@@ -93,4 +89,6 @@ public class TicketCart {
     public List<EventTicket> getCart() {
         return cart;
     }
+
+
 }
