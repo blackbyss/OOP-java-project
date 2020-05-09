@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Thank you!</title>
+
+    <link rel="stylesheet" href="../static/bootstrap.css" th:href="@{/bootstrap.css}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="../static/css/index.css" th:href="@{/css/index.css}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Minu ostukorv</h1>
+    <div th:if="${ticketCart.size()>0}" th:each="ticket:${ticketCart}">
+        <p th:text="${ticket.getName()}+'       '+${ticket.getPrice()}"></p>
+        <a>Eemalda</a>
+    </div>
+
+    <h3 th:if="${ticketCart.size() == 0}" th:text="'Teil pole hetkel ühtegi piletit valitud.'"></h3>
+
+    <a href="#"  th:href="@{/send}" class="button">Maksma</a>
+    <a href="#" class="button" th:href="@{/selection}">Tagasi ostma</a>
+    
+
+ </div>
+ </body>
+ </html>
