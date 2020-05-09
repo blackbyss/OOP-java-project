@@ -1,7 +1,6 @@
 package com.ticket.ticketproject.controllers;
 
 import com.ticket.ticketproject.actions.*;
-import com.ticket.ticketproject.dataStorage.Event;
 import com.ticket.ticketproject.dataStorage.EventTicket;
 import com.ticket.ticketproject.dataStorage.TicketHistory;
 import com.ticket.ticketproject.functionalities.PdfPilet;
@@ -52,16 +51,17 @@ public class TicketController {
             boolean toMail = client.isYes_mail();
             mav.addObject("toMail", toMail);
             if(toMail){
-                emailKlass.email(client.getEmail(), file,toMail);
+                emailKlass.email(client.getEmail(), file,true);
 
 
             }else{
-               //TODO: Download funktsioon siia.
+                String fileName = "pilet"+kood+".pdf";
+                mav.addObject("fileName", fileName);
             }
 
         }
         else{
-            mav.setViewName("error");
+            mav.setViewName("error123");
         }
         return mav;
     }
