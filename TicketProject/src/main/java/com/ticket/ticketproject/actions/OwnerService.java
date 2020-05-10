@@ -16,4 +16,5 @@ public class OwnerService {
     public Owner getByEventID(Long event_id) {
         return ownerRepo.findByEventID(event_id);
     }
+
 }

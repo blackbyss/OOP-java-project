@@ -13,11 +13,14 @@ package com.ticket.ticketproject.controllers;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.core.io.InputStreamResource;
         import org.springframework.http.HttpHeaders;
+        import org.springframework.http.HttpStatus;
         import org.springframework.http.MediaType;
         import org.springframework.http.ResponseEntity;
         import org.springframework.stereotype.Controller;
         import org.springframework.ui.Model;
+        import org.springframework.validation.BindException;
         import org.springframework.web.bind.annotation.*;
+        import org.springframework.web.client.HttpClientErrorException;
         import org.springframework.web.servlet.ModelAndView;
 
 
@@ -76,16 +79,19 @@ public class ViewController {
     //Index leht ja pileti valimine
     @RequestMapping("/selection")
     public String selectEvent(Model model,@ModelAttribute("client") Client client, @ModelAttribute("form") FormData form) {
-        if(client.getName()==null){
-            client = new Client(form.getName(), form.getFamilyName(), Integer.parseInt(form.getAge()), form.getEmail(), form.getIban(), form.getAddress(), form.getCounty(), Long.parseLong(form.getIndex()), form.isYes_mail(), 1000);
 
-        }
-        List<Event> events = eventService.getAll();
-        model.addAttribute("eventList", events);
-        model.addAttribute("vanus",client.getAge());
+            if(client.getName()==null){
+                client = new Client(form.getName(), form.getFamilyName(), Integer.parseInt(form.getAge()), form.getEmail(), form.getIban(), form.getAddress(), form.getCounty(), Long.parseLong(form.getIndex()), form.isYes_mail(), 1000);
+
+            }
+            List<Event> events = eventService.getAll();
+
+            model.addAttribute("eventList", events);
+            model.addAttribute("vanus",client.getAge());
 
 
-        return "select-event";
+            return "select-event";
+
     }
 
 
@@ -108,15 +114,22 @@ public class ViewController {
     public ModelAndView LoadForm(Model model, @PathVariable String eventID, @PathVariable String ticketType, @ModelAttribute("ticket") EventTicket ticket, @ModelAttribute("cart") TicketCart cart, @ModelAttribute("client")Client client) {
         ModelAndView mav = new ModelAndView();
         //EventTicketi päring ürituse id ja piletitüübi abil
-        int event = Integer.parseInt(eventID);
-        int type = Integer.parseInt(ticketType);
-        ticket = ticketService.getByEventIdAndTicketType(event, type);
-        //Model andmete formi abil täitmiseks ja edastamiseks.
+        try{
 
-        cart.setClient(client);
-        cart.addToCart(ticket);
-        mav.setViewName("redirect:/cart");
-        return mav;
+            int event = Integer.parseInt(eventID);
+            int type = Integer.parseInt(ticketType);
+            ticket = ticketService.getByEventIdAndTicketType(event, type);
+            //Model andmete formi abil täitmiseks ja edastamiseks.
+
+            cart.setClient(client);
+            cart.addToCart(ticket);
+            mav.setViewName("redirect:/cart");
+            return mav;
+        }catch (NumberFormatException e){
+            mav.setViewName("error");
+            return mav;
+        }
+
     }
     @GetMapping("/cart")
     public String showCart(@SessionAttribute("cart") TicketCart cart, Model model){

@@ -20,7 +20,7 @@
         <a href="select-ticket.html" th:if="${e.getAgeLimit()<=vanus}" class="button" th:href="@{~/selection/{event}(event=${e.getId()})}" th:text="'Lisa korvi'">Lisa korvi</a>
         <p th:if="${e.getAgeLimit()>vanus}" style="color:red;" th:text="'Ebasobiv vanus!'">Ebasobiv vanus!</p>
      </div>
-
+    <a href="index.html" th:href="@{/}" class="button">Tagasi</a>
  </div>
  </body>
  </html>
