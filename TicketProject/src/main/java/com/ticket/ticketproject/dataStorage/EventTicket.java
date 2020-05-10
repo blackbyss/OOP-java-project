@@ -1,7 +1,6 @@
 package com.ticket.ticketproject.dataStorage;
 
 import javax.persistence.Entity;
-import javax.persistence.Transient;
 
 @Entity
 public class EventTicket extends Ticket implements Storage {
