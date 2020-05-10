@@ -21,8 +21,6 @@ public class Event implements  Storage{
    }
    @Enumerated(EnumType.ORDINAL)
    saveUserData save_user_data;
-   @Transient
-   private Owner owner;
 
 
     public Event(String name,String location, int capacity/*, Date aeg */, Owner owner) {
@@ -30,7 +28,6 @@ public class Event implements  Storage{
         this.location = location;
         this.capacity = capacity;
         // this.aeg = aeg;
-        this.owner = owner;
     }
     public Event(){
 
@@ -99,14 +96,6 @@ public class Event implements  Storage{
 
     public void setSave_user_data(saveUserData save_user_data) {
         this.save_user_data = save_user_data;
-    }
-
-    public Owner getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Owner owner) {
-        this.owner = owner;
     }
 }
 
