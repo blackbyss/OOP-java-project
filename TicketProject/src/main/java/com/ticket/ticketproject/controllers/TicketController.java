@@ -2,6 +2,7 @@ package com.ticket.ticketproject.controllers;
 
 import com.ticket.ticketproject.actions.*;
 import com.ticket.ticketproject.dataStorage.Client;
+import com.ticket.ticketproject.dataStorage.Event;
 import com.ticket.ticketproject.dataStorage.EventTicket;
 import com.ticket.ticketproject.dataStorage.TicketHistory;
 import com.ticket.ticketproject.functionalities.Email;
@@ -43,7 +44,12 @@ public class TicketController {
 
                 EventTicket ticket = cart.getCart().get(i);
                 long kood = ticket.getEventID() + ThreadLocalRandom.current().nextInt(0, 999999);
-                String[] info = {String.valueOf(java.time.LocalDate.now()), "ID: " + ticket.getEventID(), "Nimi: " + eventService.getByID(ticket.getEventID()).getName(), "Piletitüüp: " + ticket.getName(), "Hind: " + ticket.getPrice()};
+                Event event =eventService.getByID(ticket.getEventID());
+                if (event.getTicketsLeft() > 0) {
+                    event.setTicketsLeft(event.getTicketsLeft() - 1);
+                    eventService.saveThis(event);
+                }
+                String[] info = {String.valueOf(java.time.LocalDate.now()), "ID: " + ticket.getEventID(), "Nimi: " + event.getName(), "Piletitüüp: " + ticket.getName(), "Hind: " + ticket.getPrice()};
                 pilet.pdf(kood, info);
 
                 TicketHistory history = new TicketHistory(kood);

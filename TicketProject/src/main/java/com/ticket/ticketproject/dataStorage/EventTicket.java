@@ -8,10 +8,6 @@ public class EventTicket extends Ticket implements Storage {
 
     long eventID;
     long ticketType;
-    @Transient
-    long amount;
-    @Transient
-    Event event; //piletile vastav üritus
 
 
     public EventTicket() {

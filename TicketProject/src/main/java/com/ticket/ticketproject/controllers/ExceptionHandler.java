@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ExceptionHandler {
     public static final String DEFAULT_ERROR_VIEW = "error";
 
-    // @org.springframework.web.bind.annotation.ExceptionHandler(value = Exception.class)
+     @org.springframework.web.bind.annotation.ExceptionHandler(value = Exception.class)
     public ModelAndView
     defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
 

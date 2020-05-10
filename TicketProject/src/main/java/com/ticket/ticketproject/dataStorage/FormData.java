@@ -14,7 +14,6 @@ public class FormData {
     private String address;
     private String county;
     private boolean yes_mail;
-    private int ticketCount;
 
     public boolean isYes_mail() {
         return yes_mail;
@@ -106,13 +105,5 @@ public class FormData {
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public int getTicketCount() {
-        return ticketCount;
-    }
-
-    public void setTicketCount(int ticketCount) {
-        this.ticketCount = ticketCount;
     }
 }

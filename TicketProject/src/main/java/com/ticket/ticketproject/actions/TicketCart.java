@@ -53,11 +53,6 @@ public class TicketCart {
             client.setAccountBalance(accountBalance);
             return true;
         } else {
-            if (cart.isEmpty()) {
-
-            } else {
-
-            }
             return false;
         }
     }
