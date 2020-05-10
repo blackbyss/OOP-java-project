@@ -1,5 +1,6 @@
 package com.ticket.ticketproject.actions;
 
+import com.ticket.ticketproject.dataStorage.Client;
 import com.ticket.ticketproject.dataStorage.Event;
 import com.ticket.ticketproject.dataStorage.EventTicket;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,9 @@ public class EventService {
         List<Event> eventList = new ArrayList<>();
       eventRepo.findAll().forEach(eventList::add);
       return eventList;
+    }
+
+    public void saveThis(Event event) {
+        eventRepo.save(event);
     }
 }

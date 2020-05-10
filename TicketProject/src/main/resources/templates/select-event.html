@@ -17,8 +17,9 @@
         <h2 th:text="${e.getName()}">Nimi </h2>
         <p th:text="${e.getHappeningTime()} +'      ' +${e.getLocation()}">2020-04-24</p>
         <p th:text="'Vanusepiirang:  '+${e.getAgeLimit()}+'+'">18+</p>
-        <a href="select-ticket.html" th:if="${e.getAgeLimit()<=vanus}" class="button" th:href="@{~/selection/{event}(event=${e.getId()})}" th:text="'Lisa korvi'">Lisa korvi</a>
+        <a href="select-ticket.html" th:if="${e.getAgeLimit()<=vanus and e.getTicketsLeft()>0}" class="button" th:href="@{~/selection/{event}(event=${e.getId()})}" th:text="'Lisa korvi'">Lisa korvi</a>
         <p th:if="${e.getAgeLimit()>vanus}" style="color:red;" th:text="'Ebasobiv vanus!'">Ebasobiv vanus!</p>
+        <p th:if="${e.getTicketsLeft()<=0}" style="color:red;" th:text="'Piletid otsas!'">Piletid otsas!</p>
      </div>
 
  </div>
