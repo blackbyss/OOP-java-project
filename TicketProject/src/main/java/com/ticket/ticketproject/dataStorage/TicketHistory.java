@@ -47,9 +47,10 @@ public class TicketHistory {
 
     public TicketHistory() {
     }
-    public  TicketHistory(long ticket_id){
-      this.ticket_id = ticket_id;
-      time = LocalDate.now();
+
+    public TicketHistory(long ticket_id) {
+        this.ticket_id = ticket_id;
+        time = LocalDate.now();
     }
 
 }

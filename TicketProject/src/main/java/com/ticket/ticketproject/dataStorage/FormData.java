@@ -25,7 +25,8 @@ public class FormData {
     }
 
     private String user_type;
-    @Transient private String index;
+    @Transient
+    private String index;
 
     public String getUser_type() {
         return user_type;

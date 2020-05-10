@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OwnerRepository extends CrudRepository<Owner, Long> {
-    public Owner findByEventID(long eventID);
+    Owner findByEventID(long eventID);
 }

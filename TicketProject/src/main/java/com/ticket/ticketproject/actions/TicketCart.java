@@ -1,14 +1,14 @@
 package com.ticket.ticketproject.actions;
 
-import com.ticket.ticketproject.dataStorage.*;
+import com.ticket.ticketproject.dataStorage.Client;
+import com.ticket.ticketproject.dataStorage.EventTicket;
+import com.ticket.ticketproject.dataStorage.Owner;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Component
 public class TicketCart {
 
@@ -17,7 +17,7 @@ public class TicketCart {
     @Autowired
     private Client client;
 
-    public TicketCart(){
+    public TicketCart() {
         this.cart = new ArrayList<>();
     }
 
@@ -26,54 +26,36 @@ public class TicketCart {
         cartPrice += ticket.getPrice();
         cart.add(ticket);
     }
-    public void removeFromCart(EventTicket ticket){
-        cartPrice-= ticket.getPrice();
-        cart.remove(ticket);
-    }
-    public void removeByIndex(int i){
+
+    public void removeByIndex(int i) {
         EventTicket ticket = cart.get(i);
-        cartPrice-= ticket.getPrice();
+        cartPrice -= ticket.getPrice();
         cart.remove(i);
     }
-    public void clearCart(){
+
+    public void clearCart() {
         cart.clear();
         cartPrice = 0;
     }
     //Maksmise meetod.
-    public boolean buy(EventTicket ticket,OwnerService os){
-       Owner owner= os.getByEventID(ticket.getEventID());
 
-        double sum= ticket.getPrice();
-        double accountBalance = client.getAccountBalance();
-        if(accountBalance >= sum){
-            accountBalance -= sum;
-            owner.setAccountBalance(accountBalance);
-            client.setAccountBalance(accountBalance);
-            return true;
-        }else{
-            //TODO: Teavitamine webappis.
-            return false;
-        }
-    }
-    public boolean buyAll(OwnerService os){
+    public boolean buyAll(OwnerService os) {
         double accountBalance = client.getAccountBalance();
         if (accountBalance >= cartPrice && !cart.isEmpty()) {
-            for (EventTicket ticket:cart) {
-                Owner owner= os.getByEventID(ticket.getEventID());
-                double sum= ticket.getPrice();
+            for (EventTicket ticket : cart) {
+                Owner owner = os.getByEventID(ticket.getEventID());
+                double sum = ticket.getPrice();
                 double ownerbalance = owner.getAccountBalance();
-                owner.setAccountBalance(ownerbalance+sum);
+                owner.setAccountBalance(ownerbalance + sum);
 
             }
             accountBalance -= cartPrice;
             client.setAccountBalance(accountBalance);
             return true;
         } else {
-            if(cart.isEmpty()){
+            if (cart.isEmpty()) {
 
-            }
-
-            else {
+            } else {
 
             }
             return false;

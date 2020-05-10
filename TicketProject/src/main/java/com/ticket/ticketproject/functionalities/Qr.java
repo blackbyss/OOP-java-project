@@ -9,7 +9,7 @@ import java.io.IOException;
 public class Qr {
 
     public static ByteArrayOutputStream qrGenereerija(String hash) throws IOException {
-        String pilet = "Pileti hash: "+hash;//Pileti info
+        String pilet = "Pileti hash: " + hash;//Pileti info
         ByteArrayOutputStream out = QRCode.from(pilet).to(ImageType.JPG).stream();
         return out;
     }

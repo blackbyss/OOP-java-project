@@ -1,7 +1,6 @@
 package com.ticket.ticketproject.actions;
 
 import com.ticket.ticketproject.dataStorage.Client;
-import com.ticket.ticketproject.dataStorage.FormData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +12,8 @@ public class ClientService {
     public void saveThis(Client client) {
         repo.save(client);
     }
-    public Client getByNameAndFamiliyNameAndEmail(String name,String familyName,String email){
-        return repo.findClientByNameAndFamilyNameAndEmail(name,familyName,email);
+
+    public Client getByNameAndFamiliyNameAndEmail(String name, String familyName, String email) {
+        return repo.findClientByNameAndFamilyNameAndEmail(name, familyName, email);
     }
 }

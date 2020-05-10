@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Piletikuller</title>
 
     <link rel="stylesheet" href="../static/bootstrap.css" th:href="@{/bootstrap.css}">
@@ -12,9 +12,10 @@
 <body>
 <div class="container">
     <h2>Aitäh, et kasutasite meie piletiteenust!</h2>
-    <h3 th:if="*{toMail==true}"th:text="'Kiri saadeti aadressile: '+${client.getEmail()}" >Kiri saadeti aadressile: replacethis@gmail.com</h3>
-    <p th:if="*{toMail==false}" >Lae pilet alla <a class="textLink" th:href="@{/confirmed/download}">siit.</a></p>
-    <a  class="button" href="client-form.html" th:href="@{/}">Tagasi</a>
+    <h3 th:if="*{toMail==true}" th:text="'Kiri saadeti aadressile: '+${client.getEmail()}">Kiri saadeti aadressile:
+        replacethis@gmail.com</h3>
+    <p th:if="*{toMail==false}">Lae pilet alla <a class="textLink" th:href="@{/confirmed/download}">siit.</a></p>
+    <a class="button" href="client-form.html" th:href="@{/}">Tagasi</a>
 </div>
 </body>
 </html>

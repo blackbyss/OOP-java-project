@@ -1,21 +1,20 @@
 package com.ticket.ticketproject.controllers;
 
 import com.ticket.ticketproject.actions.*;
+import com.ticket.ticketproject.dataStorage.Client;
 import com.ticket.ticketproject.dataStorage.EventTicket;
 import com.ticket.ticketproject.dataStorage.TicketHistory;
-import com.ticket.ticketproject.functionalities.PdfPilet;
 import com.ticket.ticketproject.functionalities.Email;
-import com.ticket.ticketproject.dataStorage.Client;
+import com.ticket.ticketproject.functionalities.PdfPilet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Controller

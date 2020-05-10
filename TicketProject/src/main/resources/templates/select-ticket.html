@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Thank you!</title>
 
     <link rel="stylesheet" href="../static/bootstrap.css" th:href="@{/bootstrap.css}">
@@ -12,7 +12,8 @@
 <body>
 <div class="container">
     <h1 th:if="${ticketList.size() > 0}" th:text="'Valige pileti tüüp'">Valige pileti tüüp</h1>
-    <a class="button" th:each="t: ${ticketList}" th:text="${t.getName()} + '  ' + ${t.getPrice()}" th:href="@{~/selection/{event}/{type}(event=${eventID},type=${t.getTicketType()})}"></a>
+    <a class="button" th:each="t: ${ticketList}" th:text="${t.getName()} + '  ' + ${t.getPrice()}"
+       th:href="@{~/selection/{event}/{type}(event=${eventID},type=${t.getTicketType()})}"></a>
     <div class="no-tickets" th:if="${ticketList.size() == 0}"><h2 th:text="'Kahjuks on kõik piletid otsas :('"></h2>
         <a class="button" th:href="@{/}">Tagasi</a>
     </div>

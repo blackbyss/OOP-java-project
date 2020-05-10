@@ -1,16 +1,9 @@
 package com.ticket.ticketproject.dataStorage;
 
-
-import org.springframework.stereotype.Component;
-
-import javax.annotation.processing.Generated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 
 @MappedSuperclass
 public class Person implements Storage {

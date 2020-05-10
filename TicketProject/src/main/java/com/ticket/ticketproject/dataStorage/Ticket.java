@@ -12,7 +12,7 @@ public abstract class Ticket implements Storage {
     @GeneratedValue
     private long id;
     private String name;
-   private double price;
+    private double price;
 
 
     public Ticket() {

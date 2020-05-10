@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>[Piletimüüja nimi]</title>
     <link rel="stylesheet" href="../static/bootstrap.css" th:href="@{/bootstrap.css}">
 
@@ -12,43 +12,44 @@
 </head>
 
 <body>
-    <div class="container">
+<div class="container">
 
-        <form action="#" th:action="@{/selection}" th:object="${form}" method="post">
-            <div class ="formheader"><h1>OSTA PILET SIIT</h1></div>
+    <form action="#" th:action="@{/selection}" th:object="${form}" method="post">
+        <div class="formheader"><h1>OSTA PILET SIIT</h1></div>
 
-            <label for="eesnimi">Eesnimi:</label><br>
-            <input type="text" th:field="*{name}" id="eesnimi" name="eesnimi" class="textfield"  required><br>
+        <label for="eesnimi">Eesnimi:</label><br>
+        <input type="text" th:field="*{name}" id="eesnimi" name="eesnimi" class="textfield" required><br>
 
-            <label for="perenimi">Perekonnanimi:</label><br>
-            <input type="text" id="perenimi" name="perenimi"class="textfield" th:field="*{familyName}" required><br>
+        <label for="perenimi">Perekonnanimi:</label><br>
+        <input type="text" id="perenimi" name="perenimi" class="textfield" th:field="*{familyName}" required><br>
 
-            <label for="age">Vanus:</label><br>
-            <input type="text" id="age" name="age"class="textfield" th:field="*{age}" required><br>
+        <label for="age">Vanus:</label><br>
+        <input type="text" id="age" name="age" class="textfield" th:field="*{age}" required><br>
 
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" class="textfield" th:field="*{email}" required><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" class="textfield" th:field="*{email}" required><br>
 
-            <label for="iban">IBAN kood:</label><br>
-            <input type="text" id="iban" name="iban"class="textfield" th:field="*{iban}" required><br>
+        <label for="iban">IBAN kood:</label><br>
+        <input type="text" id="iban" name="iban" class="textfield" th:field="*{iban}" required><br>
 
-            <label for="aadress">Aadress:</label><br>
-            <input type="text" id="aadress" name="aadress"class="textfield" th:field="*{address}" required><br>
+        <label for="aadress">Aadress:</label><br>
+        <input type="text" id="aadress" name="aadress" class="textfield" th:field="*{address}" required><br>
 
-            <label for="Maakond">Maakond/Linn:</label><br>
-            <input type="text" id="maakond" name="maakond"class="textfield" th:field="*{county}" required><br>
+        <label for="Maakond">Maakond/Linn:</label><br>
+        <input type="text" id="maakond" name="maakond" class="textfield" th:field="*{county}" required><br>
 
 
-            <label for="indeks">Postiindeks:</label><br>
-            <input type="text" id="indeks" name="indeks"class="textfield" th:field="*{index}" required><br>
+        <label for="indeks">Postiindeks:</label><br>
+        <input type="text" id="indeks" name="indeks" class="textfield" th:field="*{index}" required><br>
 
-            <label for="yes-email">Kas soovid saada piletit e-kirjana?</label><br>
-            <span>Soovin!</span><input type="checkbox" id="yes-email" name="yes-email" th:field="*{yes_mail}" th:value="true"><br>
+        <label for="yes-email">Kas soovid saada piletit e-kirjana?</label><br>
+        <span>Soovin!</span><input type="checkbox" id="yes-email" name="yes-email" th:field="*{yes_mail}"
+                                   th:value="true"><br>
 
-            <input type="submit" value="Osta pilet" id="submit-button" class="button" ><br>
+        <input type="submit" value="Osta pilet" id="submit-button" class="button"><br>
 
-        </form>
+    </form>
 
-    </div>
+</div>
 </body>
 </html>

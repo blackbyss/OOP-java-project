@@ -1,7 +1,6 @@
 package com.ticket.ticketproject.dataStorage;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
@@ -15,10 +14,8 @@ public class EventTicket extends Ticket implements Storage {
     Event event; //piletile vastav üritus
 
 
-
     public EventTicket() {
     }
-
 
 
     //Getters and Setters

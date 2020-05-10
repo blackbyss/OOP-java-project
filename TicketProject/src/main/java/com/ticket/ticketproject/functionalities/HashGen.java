@@ -1,11 +1,11 @@
 package com.ticket.ticketproject.functionalities;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class HashGen {
-    public static String enkrüpteerimine(String input)
-    {
+    public static String enkrüpteerimine(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-512");
 
@@ -20,9 +20,7 @@ public class HashGen {
             }
 
             return hashtext;
-        }
-
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
     }

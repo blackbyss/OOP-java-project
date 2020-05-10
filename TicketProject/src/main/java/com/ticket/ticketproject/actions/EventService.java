@@ -1,13 +1,10 @@
 package com.ticket.ticketproject.actions;
 
-import com.ticket.ticketproject.dataStorage.Client;
 import com.ticket.ticketproject.dataStorage.Event;
-import com.ticket.ticketproject.dataStorage.EventTicket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,14 +13,15 @@ public class EventService {
     @Autowired
     EventRepository eventRepo;
 
-    public Event getByID(long id){
-        Optional<Event> optional=  eventRepo.findById(id);
+    public Event getByID(long id) {
+        Optional<Event> optional = eventRepo.findById(id);
         return Optional.of(optional.get()).orElse(null);
     }
-    public List<Event> getAll(){
+
+    public List<Event> getAll() {
         List<Event> eventList = new ArrayList<>();
-      eventRepo.findAll().forEach(eventList::add);
-      return eventList;
+        eventRepo.findAll().forEach(eventList::add);
+        return eventList;
     }
 
     public void saveThis(Event event) {

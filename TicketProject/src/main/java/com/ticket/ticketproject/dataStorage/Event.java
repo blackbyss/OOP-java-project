@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-public class Event implements  Storage{
+public class Event implements Storage {
 
     @Id
     @GeneratedValue
@@ -16,24 +16,27 @@ public class Event implements  Storage{
     private int ageLimit;
     private long ticketsLeft;
     private long owner_id;
-   enum saveUserData{
-       Yes,
-       No
-   }
-   @Enumerated(EnumType.ORDINAL)
-   saveUserData save_user_data;
-   @Transient
-   private Owner owner;
+
+    enum saveUserData {
+        Yes,
+        No
+    }
+
+    @Enumerated(EnumType.ORDINAL)
+    saveUserData save_user_data;
+    @Transient
+    private Owner owner;
 
 
-    public Event(String name,String location, int capacity/*, Date aeg */,long ticketsLeft) {
-        this.name=name;
+    public Event(String name, String location, int capacity/*, Date aeg */, long ticketsLeft) {
+        this.name = name;
         this.location = location;
         this.capacity = capacity;
         // this.aeg = aeg;
         this.ticketsLeft = ticketsLeft;
     }
-    public Event(){
+
+    public Event() {
 
     }
 

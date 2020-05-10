@@ -13,20 +13,20 @@ public class TicketService {
     @Autowired
     TicketRepository repo;
 
-    public void saveThis(EventTicket ticket){
+    public void saveThis(EventTicket ticket) {
         repo.save(ticket);
     }
 
-    public EventTicket getByID(long id){
-        Optional<EventTicket> optional=  repo.findById(id);
+    public EventTicket getByID(long id) {
+        Optional<EventTicket> optional = repo.findById(id);
         return Optional.of(optional.get()).orElse(null);
     }
 
-    public EventTicket getByEventIdAndTicketType(long eventID,long ticketType){
-       return repo.findByTicketTypeAndEventID(ticketType,eventID);
+    public EventTicket getByEventIdAndTicketType(long eventID, long ticketType) {
+        return repo.findByTicketTypeAndEventID(ticketType, eventID);
     }
 
-    public List<EventTicket> getAllByEventId (long id){
+    public List<EventTicket> getAllByEventId(long id) {
         return repo.findAllByEventID(id);
     }
 
