@@ -78,10 +78,13 @@ public class ViewController {
     public String selectEvent(Model model,@ModelAttribute("client") Client client, @ModelAttribute("form") FormData form) {
         if(client.getName()==null){
             client = new Client(form.getName(), form.getFamilyName(), Integer.parseInt(form.getAge()), form.getEmail(), form.getIban(), form.getAddress(), form.getCounty(), Long.parseLong(form.getIndex()), form.isYes_mail(), 1000);
-        }
 
+        }
         List<Event> events = eventService.getAll();
         model.addAttribute("eventList", events);
+        model.addAttribute("vanus",client.getAge());
+
+
         return "select-event";
     }
 
