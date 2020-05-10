@@ -133,7 +133,8 @@ public class ViewController {
 
     //Viimane kinnitusleht
     @RequestMapping(value = "/confirmed")
-    public String confirm(@ModelAttribute("client") Client client, @ModelAttribute("toMail") boolean toMail) {
+    public String confirm(@ModelAttribute("client") Client client, @ModelAttribute("toMail") boolean toMail,  @SessionAttribute("cart") TicketCart cart) {
+        cart.clearCart();
         return "confirmation";
     }
 

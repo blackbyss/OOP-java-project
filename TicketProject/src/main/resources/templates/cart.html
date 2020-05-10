@@ -20,7 +20,7 @@
 
     <h3 th:if="${ticketCart.size() == 0}" th:text="'Teil pole hetkel ühtegi piletit valitud.'"></h3>
 
-    <a href="#"  th:href="@{/send}" class="button">Maksma</a>
+    <a href="#" th:if="${ticketCart.size()>0}"  th:href="@{/send}" class="button">Maksma</a>
     <a href="#" class="button" th:href="@{/selection}">Tagasi ostma</a>
     
 
