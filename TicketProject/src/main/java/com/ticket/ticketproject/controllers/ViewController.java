@@ -116,15 +116,16 @@ public class ViewController {
         int type = Integer.parseInt(ticketType);
         ticket = ticketService.getByEventIdAndTicketType(event, type);
         //Model andmete formi abil täitmiseks ja edastamiseks.
-
+    client.setAccountBalance(200);
         cart.setClient(client);
         cart.addToCart(ticket);
         mav.setViewName("redirect:/cart");
         return mav;
     }
     @GetMapping("/cart")
-    public String showCart(@SessionAttribute("cart") TicketCart cart, Model model){
+    public String showCart(@SessionAttribute("cart") TicketCart cart, Model model, @ModelAttribute("message")String message){
         model.addAttribute("ticketCart",cart.getCart());
+        model.addAttribute("message",message);
         return "cart";
     }
 

@@ -37,7 +37,6 @@ public class TicketController {
     @Transactional
     @RequestMapping(value = "/send", method = RequestMethod.GET)
     public ModelAndView sendEmailandSaveEntities(@SessionAttribute("client") Client client, @SessionAttribute("cart") TicketCart cart) throws Exception {
-        client.setAccountBalance(1000);
         boolean ost = cart.buyAll(ownerService);
         ModelAndView mav = new ModelAndView();
         if (ost) {
@@ -67,7 +66,9 @@ public class TicketController {
                 }
             }
         } else {
-            mav.setViewName("");
+            mav.setViewName("redirect:/cart");
+            String message="Teil pole kontol piisavalt raha!";
+            mav.addObject("message",message);
         }
         return mav;
     }

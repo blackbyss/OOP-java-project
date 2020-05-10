@@ -1,5 +1,5 @@
 INSERT INTO EVENT (id,age_limit,capacity,happening_time,location,name,owner_ID,save_user_data,tickets_left)
-VALUES ( 1,18,50000,'2022-03-14','Saku Suurhall','Raju Reede',10,1,50000);
+VALUES ( 1,18,50000,'2022-03-14','Saku Suurhall','Raju Reede',10,1,2);
 
 INSERT INTO EVENT (id,age_limit,capacity,happening_time,location,name,owner_ID,save_user_data,tickets_left)
 VALUES ( 2,16,20000,'2022-04-24','Lauluväljak','RockEvent2022',14,0,20000);
