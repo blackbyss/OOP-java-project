@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Thank you!</title>
 
     <link rel="stylesheet" href="../static/bootstrap.css" th:href="@{/bootstrap.css}">
@@ -14,16 +14,16 @@
 <div class="container">
     <h1>Minu ostukorv</h1>
     <div class="ticket-display" th:if="${ticketCart.size()>0}" th:each="ticket:${ticketCart}">
-        <p th:text="${ticket.getName()}+'       '+${ticket.getPrice()}">tavapilet 49.99</p>
-        <a href="#" th:href="@{cart/remove/{ticketIndex}(ticketIndex = ${ticketCart.indexOf(ticket)})}">Eemalda</a>
+        <p th:text="${ticket.getName()}+'       '+${ticket.getPrice()}">tavapilet          49.99</p>
+        <a href="#"  th:href="@{cart/remove/{ticketIndex}(ticketIndex = ${ticketCart.indexOf(ticket)})}">Eemalda</a>
     </div>
 
     <h3 th:if="${ticketCart.size() == 0}" th:text="'Teil pole hetkel ühtegi piletit valitud.'"></h3>
-
-    <a href="#" th:if="${ticketCart.size()>0}" th:href="@{/send}" class="button">Maksma</a>
+    <h3 th:if="${message != null}" th:text="${message}"></h3>
+    <a href="#" th:if="${ticketCart.size()>0}"  th:href="@{/send}" class="button">Maksma</a>
     <a href="#" class="button" th:href="@{/selection}">Tagasi ostma</a>
+    
 
-
-</div>
-</body>
-</html>
+ </div>
+ </body>
+ </html>
