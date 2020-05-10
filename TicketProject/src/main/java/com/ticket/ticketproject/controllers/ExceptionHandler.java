@@ -9,10 +9,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- *
 
-//@ControllerAdvice
+
+@ControllerAdvice
 public class ExceptionHandler{
    public static final String DEFAULT_ERROR_VIEW = "error";
 
@@ -31,4 +30,3 @@ public class ExceptionHandler{
         return mav;
     }
 }
-*/
