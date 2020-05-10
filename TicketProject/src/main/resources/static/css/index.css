@@ -1,14 +1,14 @@
-html,body{
+html, body {
     margin: 0;
-    padding:0;
+    padding: 0;
     font-family: 'Segoe UI', sans-serif;
     background-color: rgb(42, 36, 138);
 }
 
-.container{
+.container {
     background-color: white;
-    
-    padding:5em;
+
+    padding: 5em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -16,49 +16,59 @@ html,body{
     width: 70%;
     min-width: 576px;
     margin: 7em auto 7em auto;
-    white-space:nowrap;
+    white-space: nowrap;
 }
 
-.button{
+.button {
     margin-top: 5em;
     display: block;
-    background-color:  rgb(42, 36, 138);
+    background-color: rgb(42, 36, 138);
     text-decoration: none;
-    color:white;
+    color: white;
     font-size: 1.2rem;
     width: 40%;
     min-width: 7em;
     padding: 0.8em 0 0.8em 0;
-    text-align:center ;
+    text-align: center;
 }
 
 
-.button:hover
-{
+.button:hover {
     color: rgb(4, 32, 92);
     background-color: #F4925A;
-     text-decoration:none;
-     cursor:pointer;  
+    text-decoration: none;
+    cursor: pointer;
 }
 
-h1{
+h1 {
     font-size: 300%;
     margin-bottom: 2em;
 }
-h2,h3{
-    margin:1em;
+
+h2, h3 {
+    margin: 1em;
 }
-.no-tickets{
+
+.no-tickets {
     text-align: center;
-    margin:0;
+    margin: 0;
 }
-.event-box{
-    margin:1em;
+
+.event-box {
+    margin: 1em;
     text-align: center;
     background-color: #70FCAA;
     width: 50%;
 
 }
-p{
-font-size: 1.6rem;
+
+p {
+    font-size: 1.6rem;
+}
+
+.ticket-display {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
 }

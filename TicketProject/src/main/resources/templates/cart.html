@@ -13,9 +13,9 @@
 
 <div class="container">
     <h1>Minu ostukorv</h1>
-    <div th:if="${ticketCart.size()>0}" th:each="ticket:${ticketCart}">
-        <p th:text="${ticket.getName()}+'       '+${ticket.getPrice()}"></p>
-        <a>Eemalda</a>
+    <div class="ticket-display" th:if="${ticketCart.size()>0}" th:each="ticket:${ticketCart}">
+        <p th:text="${ticket.getName()}+'       '+${ticket.getPrice()}">tavapilet          49.99</p>
+        <a href="#"  th:href="@{cart/remove/{ticketIndex}(ticketIndex = ${ticketCart.indexOf(ticket)})}">Eemalda</a>
     </div>
 
     <h3 th:if="${ticketCart.size() == 0}" th:text="'Teil pole hetkel ühtegi piletit valitud.'"></h3>

@@ -18,6 +18,7 @@ package com.ticket.ticketproject.controllers;
         import org.springframework.stereotype.Controller;
         import org.springframework.ui.Model;
         import org.springframework.web.bind.annotation.*;
+        import org.springframework.web.servlet.ModelAndView;
 
 
         import java.io.File;
@@ -101,39 +102,31 @@ public class ViewController {
 
     //Form
     @RequestMapping(value = "selection/{eventID}/{ticketType}", method = RequestMethod.GET)
-    public String LoadForm(Model model, @PathVariable String eventID, @PathVariable String ticketType, @ModelAttribute("ticket") EventTicket ticket,@ModelAttribute("cart") TicketCart cart,@ModelAttribute("client")Client client) {
-
+    public ModelAndView LoadForm(Model model, @PathVariable String eventID, @PathVariable String ticketType, @ModelAttribute("ticket") EventTicket ticket, @ModelAttribute("cart") TicketCart cart, @ModelAttribute("client")Client client) {
+        ModelAndView mav = new ModelAndView();
         //EventTicketi päring ürituse id ja piletitüübi abil
         int event = Integer.parseInt(eventID);
         int type = Integer.parseInt(ticketType);
         ticket = ticketService.getByEventIdAndTicketType(event, type);
         //Model andmete formi abil täitmiseks ja edastamiseks.
+
         cart.setClient(client);
         cart.addToCart(ticket);
-        model.addAttribute("ticketCart", cart.getCart());
+        mav.setViewName("redirect:/cart");
+        return mav;
+    }
+    @GetMapping("/cart")
+    public String showCart(@SessionAttribute("cart") TicketCart cart, Model model){
+        model.addAttribute("ticketCart",cart.getCart());
         return "cart";
     }
 
 
-    @RequestMapping(value = "/cartview", method = RequestMethod.GET)
-    public String cartView(@SessionAttribute("client") Client client, Model model, @SessionAttribute("cart") TicketCart cart) {
-        if (client.getName() != null && client.getFamilyName() != null) {
-            model.addAttribute("ticketCart", cart.getCart());
-            return "cart";
-        } else {
-            return "error";
-        }
-    }
-
-    @RequestMapping(value = "/cartview/remove/{ticketIndex}", method = RequestMethod.GET)
-    public String removeTicket(@PathVariable("ticketIndex") String ticketIndex, @ModelAttribute("ticketCart") List<EventTicket> ticketCart, @SessionAttribute("client") Client client) {
-        try {
+    @RequestMapping(value = "cart/remove/{ticketIndex}", method = RequestMethod.GET)
+    public String removeTicket(@PathVariable("ticketIndex") String ticketIndex, @SessionAttribute("cart") TicketCart cart) {
             int index = Integer.parseInt(ticketIndex);
-            ticketCart.remove(index);
-            return "redirect:cartview";
-        } catch (NumberFormatException e) {
-            return "error";
-        }
+            cart.removeByIndex(index);
+            return "redirect:/cart";
 
     }
 

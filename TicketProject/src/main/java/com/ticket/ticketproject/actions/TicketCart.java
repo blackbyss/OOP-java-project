@@ -32,6 +32,11 @@ public class TicketCart {
         cartPrice-= ticket.getPrice();
         cart.remove(ticket);
     }
+    public void removeByIndex(int i){
+        EventTicket ticket = cart.get(i);
+        cartPrice-= ticket.getPrice();
+        cart.remove(i);
+    }
     public void clearCart(){
         cart.clear();
         cartPrice = 0;
