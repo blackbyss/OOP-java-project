@@ -21,7 +21,7 @@
         <p th:if="${e.getAgeLimit()>vanus}" style="color:red;" th:text="'Ebasobiv vanus!'">Ebasobiv vanus!</p>
         <p th:if="${e.getTicketsLeft()<=0}" style="color:red;" th:text="'Piletid otsas!'">Piletid otsas!</p>
      </div>
-
+    <a href="index.html" th:href="@{/}" class="button">Tagasi</a>
  </div>
  </body>
  </html>

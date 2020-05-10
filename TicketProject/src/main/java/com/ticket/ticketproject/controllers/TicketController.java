@@ -67,7 +67,7 @@ public class TicketController {
                 }
             }
         } else {
-            mav.setViewName("error");
+            mav.setViewName("");
         }
         return mav;
     }
