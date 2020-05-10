@@ -13,14 +13,12 @@ import java.util.List;
 public class TicketCart {
 
     private List<EventTicket> cart; //Ostukorv
-    private List<EventTicket>purchased; //FIXME: Ei tea veel kas läheb tarvis.
     private double cartPrice;
     @Autowired
     private Client client;
 
     public TicketCart(){
         this.cart = new ArrayList<>();
-        this.purchased = new ArrayList<>();
     }
 
 
@@ -49,7 +47,7 @@ public class TicketCart {
         double accountBalance = client.getAccountBalance();
         if(accountBalance >= sum){
             accountBalance -= sum;
-
+            owner.setAccountBalance(accountBalance);
             client.setAccountBalance(accountBalance);
             return true;
         }else{
@@ -60,16 +58,15 @@ public class TicketCart {
     public boolean buyAll(OwnerService os){
         double accountBalance = client.getAccountBalance();
         if (accountBalance >= cartPrice && !cart.isEmpty()) {
-            // Owner thisOwner = ownerService.getByEventID(cart.get(0).getEventID());
+            for (EventTicket ticket:cart) {
+                Owner owner= os.getByEventID(ticket.getEventID());
+                double sum= ticket.getPrice();
+                double ownerbalance = owner.getAccountBalance();
+                owner.setAccountBalance(ownerbalance+sum);
+
+            }
             accountBalance -= cartPrice;
             client.setAccountBalance(accountBalance);
-            // thisOwner.addToAccount(cartPrice);
-            StringBuilder cartSum = new StringBuilder();
-            for (int i = 0; i < cart.size(); i++) {
-                cartSum.append(cart.get(i).getName()).append("\t");
-                purchased.add(cart.get(i));
-            }
-            clearCart();
             return true;
         } else {
             if(cart.isEmpty()){

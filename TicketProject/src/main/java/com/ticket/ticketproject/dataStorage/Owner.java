@@ -25,5 +25,11 @@ public class Owner extends Person implements Storage {
     public void setEventID(long event_id) {
         this.eventID = event_id;
     }
+    public void setAccountBalance(double accountBalance){
+        this.accountBalance = accountBalance;
+    }
+    public double getAccountBalance(){
+        return accountBalance;
+    }
 
 }

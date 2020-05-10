@@ -36,3 +36,6 @@ VALUES (8,'early bird',79.99,2,4);
 INSERT INTO Owner (id,name,email,iban,eventID,family_name, address, age, county, index,ticket_count,account_balance)
 VALUES (10,'Peeter','peeter.moos@gmail.com','ee2345234',1,'Moos','address',18, 'county', '12345',1,125000);
 
+INSERT INTO Owner (id,name,email,iban,eventID,family_name, address, age, county, index,ticket_count,account_balance)
+VALUES (11,'Jaanus','jaanus.põld@gmail.com','ee555555',2,'jaanus','address',19, 'county', '67890',1,125000);
+

@@ -15,7 +15,6 @@ public class Event implements  Storage{
     private long capacity; // mitu inimest mahub kokku
     private int ageLimit;
     private long owner_id;
-    private long ticketsLeft;
    enum saveUserData{
        Yes,
        No
@@ -26,12 +25,11 @@ public class Event implements  Storage{
    private Owner owner;
 
 
-    public Event(String name,String location, int capacity/*, Date aeg */, Owner owner, long ticketsLeft) {
+    public Event(String name,String location, int capacity/*, Date aeg */, int ticketsLeft) {
         this.name=name;
         this.location = location;
         this.capacity = capacity;
         // this.aeg = aeg;
-        this.owner = owner;
         this.ticketsLeft = ticketsLeft;
     }
     public Event(){
@@ -42,13 +40,6 @@ public class Event implements  Storage{
         return id;
     }
 
-    public long getTicketsLeft() {
-        return ticketsLeft;
-    }
-
-    public void setTicketsLeft(long ticketsLeft) {
-        this.ticketsLeft = ticketsLeft;
-    }
 
     public void setId(long id) {
         this.id = id;

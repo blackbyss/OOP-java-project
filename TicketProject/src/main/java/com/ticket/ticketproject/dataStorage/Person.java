@@ -43,7 +43,7 @@ public class Person implements Storage {
     private long index;
     private int ticketCount;
     @NotNull
-    private double accountBalance;
+    double accountBalance;
 
 
     //Getters and Setters
