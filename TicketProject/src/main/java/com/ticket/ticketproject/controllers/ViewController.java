@@ -96,7 +96,11 @@ public class ViewController {
         //Päring vastava evendi kõikide valikus olevate piletite saamiseks.
         List<EventTicket> ticketList = ticketService.getAllByEventId(Integer.parseInt(eventID));
         model.addAttribute("ticketList", ticketList);
-
+        Event event = eventService.getByID(Long.parseLong(eventID));
+        if (event.getTicketsLeft() > 0) {
+            event.setTicketsLeft(event.getTicketsLeft() - 1);
+            eventService.saveThis(event);
+        }
         return "select-ticket";
     }
 
